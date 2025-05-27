@@ -126,59 +126,60 @@ const Navbar = () => {
 
         {/* Desktop Search & Auth */}
         <div className="hidden md:flex items-center gap-3">
-          {user ? (
-            <div className="flex items-center gap-4">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="rounded-full">
-                    {/* <Avatar className="h-8 w-8 border-2 border-streetgrub-orange cursor-pointer">
+          {/* {user ? (  ) : (  )} */}
+
+          <div className="flex items-center gap-4">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  {/* <Avatar className="h-8 w-8 border-2 border-streetgrub-orange cursor-pointer">
                       <AvatarImage src={user?.image || ""} alt="User" />
                       <AvatarFallback>JD</AvatarFallback>
                     </Avatar> */}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link
-                      href="/profile"
-                      className="flex items-center cursor-pointer"
-                    >
-                      <User className="mr-2 h-4 w-4" />
-                      Profile
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <p
-                      onClick={() => handleLogout()}
-                      className="  text-[#333333] flex items-center gap-1 hover:text-[#FF6b35] transition-colors cursor-pointer"
-                    >
-                      <LogOut className="mr-2 h-4 w-4" />
-                      Logout
-                    </p>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          ) : (
-            <div className="flex items-center gap-3">
-              <Link href={"login"}>
-                <Button
-                  variant="ghost"
-                  className="  text-[#333333]  transition-colors"
-                >
-                  Login
                 </Button>
-              </Link>
-              <Link href={"/signup"}>
-                <Button className="bg-[#FF6b35] text-white hover:bg-[#FF6b35]/90">
-                  Sign Up
-                </Button>
-              </Link>
-            </div>
-          )}
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/profile"
+                    className="flex items-center cursor-pointer"
+                  >
+                    <User className="mr-2 h-4 w-4" />
+                    Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <p
+                    onClick={() => handleLogout()}
+                    className="  text-[#333333] flex items-center gap-1 hover:text-[#FF6b35] transition-colors cursor-pointer"
+                  >
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </p>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          {/* <div className="flex items-center gap-3">
+            <Link href={"login"}>
+              <Button
+                variant="ghost"
+                className="  text-[#333333]  transition-colors"
+              >
+                Login
+              </Button>
+            </Link>
+            <Link href={"/signup"}>
+              <Button className="bg-[#FF6b35] text-white hover:bg-[#FF6b35]/90">
+                Sign Up
+              </Button>
+            </Link>
+          </div> */}
+          
         </div>
 
         {/* Mobile Menu Button */}

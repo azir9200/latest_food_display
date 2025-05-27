@@ -1,15 +1,17 @@
-import "../globals.css";
+import AdminHeader from "@/components/adminLayout/AdminHeader";
+import AdminSidebar from "@/components/adminLayout/AdminSidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
-export default function RootLayout({}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>
-        <div>
-          <p>Here is Root Layout</p>
+    <SidebarProvider>
+      <div className="flex min-h-screen w-full">
+        <AdminSidebar />
+        <div className="flex-1">
+          <AdminHeader />
+          <main className="p-6">{children}</main>
         </div>
-      </body>
-    </html>
+      </div>
+    </SidebarProvider>
   );
 }
