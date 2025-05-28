@@ -8,8 +8,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// import { getCurrentUser, logout } from "@/services/AuthService";
-// import { IUser } from "@/types";
+import { getCurrentUser, logout } from "@/services/AuthService";
+import { IUser } from "@/types";
 import { LogOut, Menu, User, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -17,8 +17,7 @@ import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const Navbar = () => {
-  const [user, setUser] = useState<"" | null>(null);
-  //   const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const router = useRouter();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,18 +48,18 @@ const Navbar = () => {
     }
   };
   const handleLogout = async () => {
-    // logout();
+    logout();
     setUser(null);
     router.push("/");
   };
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       const user = await getCurrentUser();
-  //       setUser(user);
-  //     };
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = await getCurrentUser();
+      setUser(user);
+    };
 
-  //     fetchData();
-  //   }, []);
+    fetchData();
+  }, []);
 
   return (
     <nav className="sticky top-0 bg-white shadow-md z-50 px-2 md:px-0">
@@ -114,72 +113,71 @@ const Navbar = () => {
           >
             Premium
           </Link>
-          {/* {user?.role === "ADMIN" && (
+          {user?.role === "ADMIN" && (
             <Link
               href="/dashboard"
               className="  text-[#333333] hover:text-[#FF6b35] transition-colors"
             >
               Dashboard
             </Link>
-          )} */}
+          )}
         </div>
 
         {/* Desktop Search & Auth */}
         <div className="hidden md:flex items-center gap-3">
-          {/* {user ? (  ) : (  )} */}
-
-          <div className="flex items-center gap-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  {/* <Avatar className="h-8 w-8 border-2 border-streetgrub-orange cursor-pointer">
+          {user ? (
+            <div className="flex items-center gap-4">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="rounded-full">
+                    <Avatar className="h-8 w-8 border-2 border-streetgrub-orange cursor-pointer">
                       <AvatarImage src={user?.image || ""} alt="User" />
                       <AvatarFallback>JD</AvatarFallback>
-                    </Avatar> */}
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/profile"
+                      className="flex items-center cursor-pointer"
+                    >
+                      <User className="mr-2 h-4 w-4" />
+                      Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <p
+                      onClick={() => handleLogout()}
+                      className="  text-[#333333] flex items-center gap-1 hover:text-[#FF6b35] transition-colors cursor-pointer"
+                    >
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Logout
+                    </p>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          ) : (
+            <div className="flex items-center gap-3">
+              <Link href={"login"}>
+                <Button
+                  variant="ghost"
+                  className="  text-[#333333]  transition-colors"
+                >
+                  Login
                 </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link
-                    href="/profile"
-                    className="flex items-center cursor-pointer"
-                  >
-                    <User className="mr-2 h-4 w-4" />
-                    Profile
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <p
-                    onClick={() => handleLogout()}
-                    className="  text-[#333333] flex items-center gap-1 hover:text-[#FF6b35] transition-colors cursor-pointer"
-                  >
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Logout
-                  </p>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-
-          {/* <div className="flex items-center gap-3">
-            <Link href={"login"}>
-              <Button
-                variant="ghost"
-                className="  text-[#333333]  transition-colors"
-              >
-                Login
-              </Button>
-            </Link>
-            <Link href={"/signup"}>
-              <Button className="bg-[#FF6b35] text-white hover:bg-[#FF6b35]/90">
-                Sign Up
-              </Button>
-            </Link>
-          </div> */}
-          
+              </Link>
+              <Link href={"/signup"}>
+                <Button className="bg-[#FF6b35] text-white hover:bg-[#FF6b35]/90">
+                  Sign Up
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -241,14 +239,14 @@ const Navbar = () => {
             >
               Contact
             </Link>
-            {/* {user?.role === "ADMIN" && (
+            {user?.role === "ADMIN" && (
               <Link
                 href="/dashboard"
                 className="  text-[#333333] hover:text-[#FF6b35] transition-colors"
               >
                 Dashboard
               </Link>
-            )} */}
+            )}
 
             <div className="pt-2 border-t border-gray-100">
               {user ? (

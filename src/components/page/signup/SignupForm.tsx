@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
-// import { SignUpUser } from "@/services/AuthService";
-// import { singleImageUpaload } from "@/utlity/cloudinary";
-import Image from "next/image";
+import { SignUpUser } from "@/services/AuthService";
+
+// import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -27,46 +27,46 @@ const SignupForm = () => {
   const password = watch("password");
 
   const router = useRouter();
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [uploading, setUploading] = useState(false);
+  // const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  //  const [uploading, setUploading] = useState(false);
   const [loading, setloading] = useState(false);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) setSelectedFile(file);
-  };
+  // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (file) setSelectedFile(file);
+  // };
 
   const onSubmit = async (data: FormData) => {
-    setUploading(true);
-    setloading(true);
+    //  setUploading(true);
+    //  setloading(true);
     // try {
     //   let imageUrl: string | null = null;
 
-    // //   if (selectedFile) {
-    // //     imageUrl = await singleImageUpaload(selectedFile);
-    // //     if (!imageUrl) {
-    // //       toast.error("Image upload failed.");
-    // //       return;
-    // //     }
-    // //   }
-
-    //   const payload = {
-    //     name: data.name || "", // Optional name
-    //     email: data.email,
-    //     password: data.password,
-    //     image: imageUrl || "", // Optional image
-    //   };
-
-    //   const res = await SignUpUser(payload);
-
-    //   if (res?.success) {
-    //     setloading(false);
-    //     toast.success(res.message);
-    //     router.push("/login");
-    //   } else {
-    //     setloading(false);
-    //     toast.error(res.message);
+    // if (selectedFile) {
+    //   imageUrl = await singleImageUpaloa(selectedFile);
+    //   if (!imageUrl) {
+    //     toast.error("Image upload failed.");
+    //     return;
     //   }
+    // }
+
+    const payload = {
+      name: data.name || "", // Optional name
+      email: data.email,
+      password: data.password,
+      // image: imageUrl || "", // Optional image
+    };
+
+    const res = await SignUpUser(payload);
+    console.log("signup page", res);
+    if (res?.success) {
+      setloading(false);
+      toast.success(res.message);
+      router.push("/login");
+    } else {
+      setloading(false);
+      toast.error(res.message);
+    }
     // } catch (err: any) {
     //   setloading(false);
     //   toast.error(err?.message || "Something went wrong!");
@@ -186,7 +186,7 @@ const SignupForm = () => {
               Profile Picture (Optional)
             </label>
 
-            <div className="flex flex-col gap-2">
+            {/* <div className="flex flex-col gap-2">
               <label
                 htmlFor="image"
                 className="w-full text-center cursor-pointer px-4 py-2 bg-[#FF6b35] text-white rounded-md hover:bg-[#FF6b35]/90 transition"
@@ -203,9 +203,9 @@ const SignupForm = () => {
               {uploading && (
                 <p className="text-sm text-blue-500">Uploading...</p>
               )}
-            </div>
+            </div> */}
 
-            {selectedFile && (
+            {/* {selectedFile && (
               <div className="mt-3">
                 <p className="text-sm font-medium text-gray-700 mb-1">
                   Selected Image:
@@ -221,7 +221,7 @@ const SignupForm = () => {
                   {selectedFile.name}
                 </p>
               </div>
-            )}
+            )} */}
           </div>
 
           {/* Terms */}

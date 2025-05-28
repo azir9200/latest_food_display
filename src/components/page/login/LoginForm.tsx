@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 // import { useUser } from "@/context/UserContext";
-// import { loginUser } from "@/services/AuthService";
+import { loginUser } from "@/services/AuthService";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -27,25 +27,28 @@ const LoginForm = () => {
   // const { setIsLoading } = useUser();
 
   const onSubmit = async (data: FormData) => {
-    // try {
-    //   setIsLoading(true);
-    //   const res = await loginUser(data);
-    //   if (res?.success) {
-    //     if (redirect) {
-    //       router.push(redirect);
-    //       toast.success(res?.message);
-    //     } else {
-    //       router.push("/");
-    //       toast.success(res?.message);
-    //     }
-    //   } else {
-    //     setIsLoading(false);
-    //     toast.error(res?.message);
-    //   }
-    // } catch (err: any) {
-    //   setIsLoading(false);
-    //   toast.error(err.message || "Something went wrong!");
-    // }
+    try {
+      // setIsLoading(true);
+      const res = await loginUser(data);
+      console.log("login form", loginUser);
+      console.log("login res", res);
+
+      if (res?.success) {
+        if (redirect) {
+          router.push(redirect);
+          toast.success(res?.message);
+        } else {
+          router.push("/");
+          toast.success(res?.message);
+        }
+      } else {
+        // setIsLoading(false);
+        toast.error(res?.message);
+      }
+    } catch (err: any) {
+      // setIsLoading(false);
+      toast.error(err.message || "Something went wrong!");
+    }
   };
 
   const handleDefaultLogin = (type: "admin" | "user" | "premium") => {
