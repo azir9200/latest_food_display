@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-// import { getCurrentUser } from "@/services/AuthService";
-// import { IUser } from "@/types";
+import { getCurrentUser } from "@/services/AuthService";
+import { IUser } from "@/types";
 import { FolderKanban, Home, ShieldCheck, Star, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,16 +10,15 @@ import { useEffect, useState } from "react";
 
 export function MobileNav() {
   const pathname = usePathname();
-  const [user, setUser] = useState(null);
-  //   const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       const currentUser = await getCurrentUser();
-  //       setUser(currentUser);
-  //     };
-  //     fetchData();
-  //   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const currentUser = await getCurrentUser();
+      setUser(currentUser);
+    };
+    fetchData();
+  }, []);
 
   const routes = [
     { name: "Home", href: "/", icon: Home },

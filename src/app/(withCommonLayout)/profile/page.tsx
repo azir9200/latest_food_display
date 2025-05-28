@@ -1,11 +1,13 @@
-import React from "react";
+import ProfilePage from "@/components/page/profile/ProfilePage";
+import { singleUserget } from "@/services/AuthService";
 
-const page = () => {
+const Profile = async () => {
+  const res = await singleUserget();
   return (
     <div>
-      <p> profile is here</p>
+      <ProfilePage userData={res?.data} />
     </div>
   );
 };
 
-export default page;
+export default Profile;
