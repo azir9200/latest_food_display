@@ -9,15 +9,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { useUser } from "@/context/UserContext";
-import { logout } from "@/services/AuthService";
+// import { useUser } from "@/context/UserContext";
+// import { logout } from "@/services/AuthService";
 import { Download, LogOut, Settings } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 const AdminHeader = () => {
   const pathname = usePathname();
-  const { setUser } = useUser();
+  // const { setUser } = useUser();
   const router = useRouter();
   const getPageTitle = () => {
     switch (pathname) {
@@ -38,8 +38,8 @@ const AdminHeader = () => {
     }
   };
   const handleLogout = async () => {
-    logout();
-    setUser(null);
+    // logout();
+    // setUser(null);
     router.push("/");
   };
 
