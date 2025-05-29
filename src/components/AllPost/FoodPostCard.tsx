@@ -28,7 +28,8 @@ import {
 import Image from "next/image";
 import React, { useState } from "react";
 import { toast } from "sonner";
-import PremiumBadge from "../share/PremiumBage";
+import PremiumBadge from "../share/PremiumBadge";
+// import PremiumBadge from "../share/PremiumBage";
 
 export interface IPost {
   id: string; // UUID from Prisma

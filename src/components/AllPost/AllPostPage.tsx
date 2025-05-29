@@ -23,7 +23,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useUser } from "@/context/UserContext";
 import { createPost } from "@/services/postService";
 import { Category } from "@/types";
-import { uploadImagesToCloudinary } from "@/utlity/cloudinary";
+// import { uploadImagesToCloudinary } from "@/utlity/cloudinary";
 import { Filter, MapPin, Search, Upload } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -31,9 +31,9 @@ import { toast } from "sonner";
 import FoodPostCard, { IPost } from "./FoodPostCard";
 interface IAllPostPros {
   posts: IPost[];
-  categoriess: Category[];
+  categories: Category[];
 }
-const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
+const AllPostPage: React.FC<IAllPostPros> = ({ posts, categories }) => {
   const { user } = useUser();
   const [title, setTitle] = useState("");
   const [newPostContent, setNewPostContent] = useState("");
@@ -104,16 +104,16 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
 
   const handleCreatePost = async () => {
     setloading(true);
-    const uploadedUrls = await uploadImagesToCloudinary(selectedFiles);
+    // const uploadedUrls = await uploadImagesToCloudinary(selectedFiles);
 
     const payload = {
       title,
       description: newPostContent,
       price: parseFloat(price) || 0,
       location: newPostLocation,
-      image:
-        uploadedUrls[0] ||
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300",
+      // image:
+      //   uploadedUrls[0] ||
+      //   "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300",
       categoryId: selectedCategoryId,
     };
 
@@ -149,7 +149,7 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
       selectedFilter === "All"
         ? true
         : selectedFilter === "Others"
-        ? !categoriess.some((cat) => cat.id === spot.categoryId)
+        ? !categories.some((cat) => cat.id === spot.categoryId)
         : spot.categoryId === selectedFilter;
 
     const matchesPremium = showPremium ? spot.isPremium : true;
@@ -222,7 +222,7 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
                 <SelectValue placeholder="Select Category" />
               </SelectTrigger>
               <SelectContent>
-                {categoriess?.map((cat) => (
+                {categories?.map((cat) => (
                   <SelectItem key={cat.id} value={cat.id}>
                     {cat.name}
                   </SelectItem>
@@ -329,7 +329,7 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
             >
               All
             </Button>
-            {categoriess?.map((cat) => (
+            {categories?.map((cat) => (
               <Button
                 key={cat.id}
                 onClick={() => setSelectedFilter(cat.id)}
