@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-// import { User } from "@/types";
+import { User } from "@/types";
 import OrderPage from "../order/OrderPage";
 import SubscriptionForm from "./SubscriptionForm";
 interface PremiumPageProps {

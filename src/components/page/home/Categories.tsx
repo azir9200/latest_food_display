@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-// import { getAllcategory } from "@/services/categoryservice";
+import { getAllCategory } from "@/services/categoryService";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,14 +18,14 @@ const Categories = () => {
   console.log(categories);
   const [loading, setLoading] = useState(true);
 
-  //   useEffect(() => {
-  //     const fetchCategories = async () => {
-  //       const result = await getAllcategory();
-  //       setCategories(result.data || []);
-  //       setLoading(false);
-  //     };
-  //     fetchCategories();
-  //   }, []);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const result = await getAllCategory();
+      setCategories(result.data || []);
+      setLoading(false);
+    };
+    fetchCategories();
+  }, []);
 
   const skeletons = Array.from({ length: 4 });
 
@@ -65,13 +65,13 @@ const Categories = () => {
                   key={category.id}
                   className="relative group overflow-hidden rounded-lg h-48"
                 >
-                  <Image
+                  {/* <Image
                     height={500}
                     width={500}
                     src={category.image || "/default.jpg"}
                     alt={category.name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
+                  /> */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                   <div className="absolute bottom-0 left-0 p-4 w-full">
                     <h3 className="text-white text-lg font-bold">

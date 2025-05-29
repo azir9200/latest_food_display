@@ -3,10 +3,11 @@ import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 //  get all posts
-export const getAllcategory = async () => {
+export const getAllCategory = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/category/all-retreive`,
+      "http://localhost:5000/api/v1/category/all-retrieve",
+      // `${process.env.NEXT_PUBLIC_BASE_API}/category/all-retrieve`,
       {
         method: "GET",
         next: {
