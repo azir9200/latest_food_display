@@ -74,7 +74,8 @@ export const createPost = async (
   const token = (await cookies()).get("accessToken")!.value;
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post/create`, {
+    const res = await fetch("http://localhost:5000/api/v1/post/create", {
+      // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post/create`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

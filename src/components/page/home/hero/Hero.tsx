@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Search } from "lucide-react";
-// import Image from "next/image";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
@@ -92,7 +92,7 @@ const HeroSection: React.FC = () => {
               currentBg === index ? "opacity-100" : "opacity-0"
             }`}
           >
-            {/* <div className="w-full h-full overflow-hidden">
+            <div className="w-full h-full overflow-hidden">
               <Image
                 src={bg.url}
                 height={700}
@@ -102,8 +102,7 @@ const HeroSection: React.FC = () => {
                   currentBg === index ? "animate-zoom" : ""
                 }`}
               />
-            </div> */}
-            
+            </div>
           </div>
         ))}
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80"></div>
