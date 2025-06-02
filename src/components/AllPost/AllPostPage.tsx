@@ -118,7 +118,7 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categories }) => {
     };
 
     const res = await createPost(payload); // এখন কোন error থাকবে না
-
+    console.log("all post page", res);
     if (res.success) {
       toast.success("Post created!");
       setloading(false);

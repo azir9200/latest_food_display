@@ -6,7 +6,8 @@ import { cookies } from "next/headers";
 export const getAllPost = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/post/all-retreive-user`,
+      // `${process.env.NEXT_PUBLIC_BASE_API}/post/all-retreive-user`,
+      "http://localhost:5000/api/v1/post/all-retreive-user",
       {
         method: "GET",
         headers: {
@@ -83,7 +84,9 @@ export const createPost = async (
       },
       body: JSON.stringify(postData),
     });
+    console.log(res);
     const result = await res.json();
+    console.log("result post", result);
     revalidateTag("post");
     return result;
   } catch (error: any) {

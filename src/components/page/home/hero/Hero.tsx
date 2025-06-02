@@ -9,7 +9,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 // Define background images with high-quality food photography
 const heroBackgrounds = [
   {
-    url: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&auto=format&fit=crop&q=80&ixlib=rb-4.0.3",
+    url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Flivejapan.com%2Fen%2Farticle-a0000370%2F&psig=AOvVaw3M3osaKMisdivxPIoxXhZk&ust=1748969353576000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCJiozOKY040DFQAAAAAdAAAAABAE",
     title: "Discover Authentic in Street Food",
   },
   {
@@ -17,7 +17,7 @@ const heroBackgrounds = [
     title: "Experience Local Culinary Treasures",
   },
   {
-    url: "https://res.cloudinary.com/dztxlecbe/image/upload/v1746883537/nxsba54u4jstbsyikbbx.jpg",
+    url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.foodnetwork.com%2Fhow-to%2Fpackages%2Ffood-network-essentials%2Fsashimi-vs-sushi&psig=AOvVaw3M3osaKMisdivxPIoxXhZk&ust=1748969353576000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCJiozOKY040DFQAAAAAdAAAAABAL",
     title: "Find Hidden Food Gems in StreetGrub",
   },
 ];
@@ -92,13 +92,13 @@ const HeroSection: React.FC = () => {
               currentBg === index ? "opacity-100" : "opacity-0"
             }`}
           >
-            <div className="w-full h-full overflow-hidden">
+            <div className=" w-full h-full overflow-hidden">
               <Image
                 src={bg.url}
                 height={700}
                 width={500}
                 alt={`Food Scene ${index + 1}`}
-                className={`w-full h-full object-cover ${
+                className={`w-full h-full object-cover border border-green-700 border-[20px] ${
                   currentBg === index ? "animate-zoom" : ""
                 }`}
               />
