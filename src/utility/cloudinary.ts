@@ -23,7 +23,7 @@ export const uploadImagesToCloudinary = async (files: any) => {
   return Promise.all(uploads);
 };
 
-export const singleImageUpload = async (file: any) => {
+export const singleImageUpaload = async (file: any) => {
   if (!file) return;
 
   const formData = new FormData();

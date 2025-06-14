@@ -1,5 +1,4 @@
 "use client";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -23,17 +22,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { useUser } from "@/context/UserContext";
 import { createPost } from "@/services/postService";
 import { Category } from "@/types";
-// import { uploadImagesToCloudinary } from "@/utlity/cloudinary";
 import { Filter, MapPin, Search, Upload } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import FoodPostCard, { IPost } from "./FoodPostCard";
+import { uploadImagesToCloudinary } from "@/utility/cloudinary";
 interface IAllPostPros {
   posts: IPost[];
-  categories: Category[];
+  categoriess: Category[];
 }
-const AllPostPage: React.FC<IAllPostPros> = ({ posts, categories }) => {
+const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
   const { user } = useUser();
   const [title, setTitle] = useState("");
   const [newPostContent, setNewPostContent] = useState("");
@@ -104,21 +103,22 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categories }) => {
 
   const handleCreatePost = async () => {
     setloading(true);
-    // const uploadedUrls = await uploadImagesToCloudinary(selectedFiles);
+    const uploadedUrls = await uploadImagesToCloudinary(selectedFiles);
 
     const payload = {
       title,
       description: newPostContent,
       price: parseFloat(price) || 0,
       location: newPostLocation,
-      // image:
-      //   uploadedUrls[0] ||
-      //   "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300",
+      image:
+        uploadedUrls[0] ||
+        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300",
       categoryId: selectedCategoryId,
     };
 
     const res = await createPost(payload); // এখন কোন error থাকবে না
-    console.log("all post page", res);
+    console.log("ressss", res);
+
     if (res.success) {
       toast.success("Post created!");
       setloading(false);
@@ -149,7 +149,7 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categories }) => {
       selectedFilter === "All"
         ? true
         : selectedFilter === "Others"
-        ? !categories.some((cat) => cat.id === spot.categoryId)
+        ? !categoriess.some((cat) => cat.id === spot.categoryId)
         : spot.categoryId === selectedFilter;
 
     const matchesPremium = showPremium ? spot.isPremium : true;
@@ -222,7 +222,7 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categories }) => {
                 <SelectValue placeholder="Select Category" />
               </SelectTrigger>
               <SelectContent>
-                {categories?.map((cat) => (
+                {categoriess?.map((cat) => (
                   <SelectItem key={cat.id} value={cat.id}>
                     {cat.name}
                   </SelectItem>
@@ -329,7 +329,7 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categories }) => {
             >
               All
             </Button>
-            {categories?.map((cat) => (
+            {categoriess?.map((cat) => (
               <Button
                 key={cat.id}
                 onClick={() => setSelectedFilter(cat.id)}
