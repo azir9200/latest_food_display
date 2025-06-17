@@ -1,4 +1,5 @@
-import Analytics from "@/components/page/Dashbaord/Analytics";
+
+import Analytics from "@/components/page/Dashboard/Analytics";
 import { analyticsOverview } from "@/services/AuthService";
 import { Metadata } from "next";
 export const metadata: Metadata = {

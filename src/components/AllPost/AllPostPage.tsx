@@ -1,4 +1,5 @@
 "use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -117,8 +118,7 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
     };
 
     const res = await createPost(payload); // এখন কোন error থাকবে না
-    console.log("ressss", res);
-
+    console.log("allPostCompo", res);
     if (res.success) {
       toast.success("Post created!");
       setloading(false);

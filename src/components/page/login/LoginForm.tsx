@@ -1,6 +1,5 @@
 "use client";
 import { Button } from "@/components/ui/button";
-// import { useUser } from "@/context/UserContext";
 import { loginUser } from "@/services/AuthService";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -21,8 +20,7 @@ const LoginForm = () => {
   } = useForm<FormData>();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("callbackUrl");
-  // const redirect = false;
-
+ 
   const router = useRouter();
   // const { setIsLoading } = useUser();
 
@@ -45,6 +43,7 @@ const LoginForm = () => {
         // setIsLoading(false);
         toast.error(res?.message);
       }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       // setIsLoading(false);
       toast.error(err.message || "Something went wrong!");

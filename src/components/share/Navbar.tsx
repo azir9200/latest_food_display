@@ -62,7 +62,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="sticky top-0 bg-white shadow-md z-50 px-2 md:px-0">
+    <nav className="sticky top-0 bg-slate-200 shadow-md z-50 px-2 md:px-0">
       <div className="max-w-7xl mx-auto py-3 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">

@@ -31,7 +31,7 @@ const Categories = () => {
 
   return (
     <div>
-      <div className="py-12">
+      <div className="py-12  bg-slate-100">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-[#333333]">
             Explore by Category

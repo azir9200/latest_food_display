@@ -6,12 +6,19 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-// Define background images with high-quality food photography
+
 const heroBackgrounds = [
   {
+    url: "https://i.ibb.co/ZwgsLk2/top-view-salad-eggplant-rolls-with-pomegranate-seeds-greens-white-plate.jpg",
+    title: "Street Food now available is in your hand",
+  },
+  {
     url: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1200&auto=format&fit=crop&q=80&ixlib=rb-4.0.3",
-
     title: "Discover Authentic in Street Food",
+  },
+  {
+    url: "https://i.ibb.co/nMGKX7kK/top-view-sliced-cooked-meat-with-greens-cherry-tomatoes-olive-oil-blue-desk.jpg",
+    title: "Explore best taste in StreetGrub",
   },
   {
     url: "https://i.ibb.co/PzDT7TKH/street-food-frame-wooden-background-1.jpg",
@@ -20,6 +27,19 @@ const heroBackgrounds = [
   {
     url: "https://i.ibb.co/S7NbPrJS/fantastic-composition-with-ingredients-italian-pasta.jpg",
     title: "Find Hidden Food Gems in StreetGrub",
+  },
+  {
+    url: "https://i.ibb.co/KzFtLBTk/front-view-delicious-meat-cutlets-baked-with-potatoes-tomatoes-black-plate-cutlery-set-spices-garlic.jpg",
+    title: "Explore best taste in StreetGrub",
+  },
+
+  {
+    url: "https://i.ibb.co/ZzpKvqzC/top-view-yummy-cutlets-with-onion-rings-grey-desk-dish-meat-meal-cuisine.jpg",
+    title: "Try every single way your taste in StreetGrub",
+  },
+  {
+    url: "https://i.ibb.co/bMQphKhd/top-view-cooked-eggplant-along-with-fresh-vegetables-inside-black-plate-dark-background.jpg",
+    title: "Explore best taste in StreetGrub",
   },
 ];
 
