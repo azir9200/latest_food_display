@@ -2,15 +2,20 @@
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
-//  get all posts
-export const getAllcategory = async () => {
+export const getComments = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/category/all-retreive`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/comment/getall`,
       {
         method: "GET",
+        headers: {
+          Authorization: `Bearer ${
+            (await cookies()).get("accessToken")!.value
+          }`,
+          "Content-Type": "application/json",
+        },
         next: {
-          tags: ["category"],
+          tags: ["post"], // Optional Next.js cache control
         },
       }
     );
@@ -21,63 +26,12 @@ export const getAllcategory = async () => {
     return Error(error.message);
   }
 };
-
-// create post
-export const createCategory = async (name: string): Promise<any> => {
+export  const deletedComment = async (id: string): Promise<any> => {
   const token = (await cookies()).get("accessToken")!.value;
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/category/create`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name }),
-      }
-    );
-    const result = await res.json();
-    revalidateTag("category");
-    return result;
-  } catch (error: any) {
-    throw new Error(error.message || "Something went wrong");
-  }
-};
-export const updateCategory = async (
-  id: string,
-  data: string
-): Promise<any> => {
-  console.log(data, id, "servere");
-  const token = (await cookies()).get("accessToken")!.value;
-
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/category/update/${id}`,
-      {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data }),
-      }
-    );
-    const result = await res.json();
-    revalidateTag("category");
-    return result;
-  } catch (error: any) {
-    throw new Error(error.message || "Something went wrong");
-  }
-};
-
-export const deletedCategory = async (id: string): Promise<any> => {
-  const token = (await cookies()).get("accessToken")!.value;
-
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/category/deleted/${id}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/comment/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -87,7 +41,32 @@ export const deletedCategory = async (id: string): Promise<any> => {
       }
     );
     const result = await res.json();
-    revalidateTag("category");
+    revalidateTag("post");
+    return result;
+  } catch (error: any) {
+    throw new Error(error.message || "Something went wrong");
+  }
+};
+export const updateComment = async (
+  id: string,
+  commentText: string
+): Promise<any> => {
+  const token = (await cookies()).get("accessToken")!.value;
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/comment/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ commentText }),
+      }
+    );
+    const result = await res.json();
+    revalidateTag("post");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");

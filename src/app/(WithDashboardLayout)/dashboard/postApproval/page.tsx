@@ -1,6 +1,7 @@
-// import Posts from "@/components/page/Dashbaord/Posts";
-// import { getAllcategory } from "@/services/categoryservice";
-// import { getAllPostForAdmin } from "@/services/postService";
+
+import Posts from "@/components/page/Dashboard/Posts";
+import { getAllCategory } from "@/services/categoryService";
+import { getAllPostForAdmin } from "@/services/postService";
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: " StreetGrub | Dashboard - Post Approval",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 const postApproval = async () => {
   const result = await getAllPostForAdmin();
-  const category = await getAllcategory();
+  const category = await getAllCategory();
   return (
     <div>
       <Posts posts={result?.data} categories={category?.data} />

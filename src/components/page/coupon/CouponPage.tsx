@@ -16,7 +16,12 @@ import {
   createcoupon,
   deletedcoupon,
   updatecoupon,
-} from "@/services/CouponService";
+} from "@/services/couponService";
+// import {
+//   createcoupon,
+//   deletedcoupon,
+//   updatecoupon,
+// } from "@/services/CouponService";
 import { useState } from "react";
 import { toast } from "sonner";
 type Coupon = {
@@ -77,7 +82,7 @@ const CouponManagement = ({ coupons }: Props) => {
     setIsLoading(true);
     const result = await createcoupon(coupon);
     if (result.success) {
-      toast.success("Successfull added Coupon");
+      toast.success("Successful added Coupon");
       setNewCoupon({
         code: "",
         discountPercentage: 10,

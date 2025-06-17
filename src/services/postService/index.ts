@@ -94,7 +94,7 @@ export const createPost = async (
   }
 };
 
-export const premiumAprroved = async (id: string): Promise<any> => {
+export const premiumApproved = async (id: string): Promise<any> => {
   const token = (await cookies()).get("accessToken")!.value;
 
   try {
@@ -115,7 +115,7 @@ export const premiumAprroved = async (id: string): Promise<any> => {
     throw new Error(error.message || "Something went wrong");
   }
 };
-export const postAprroved = async (
+export const postApproved = async (
   id: string,
   status: string
 ): Promise<any> => {
