@@ -59,7 +59,9 @@ export const loginUser = async (userData: FieldValues) => {
 export const verifyUser = async (id: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/user/verify?order_id=${id}`,
+      // `${process.env.NEXT_PUBLIC_BASE_API}/user/verify?order_id=${id}`,
+      "http://localhost:5000/api/v1/user/verify?order_id=${id}",
+
       {
         method: "GET",
         headers: {
@@ -89,7 +91,8 @@ export const premiumUser = async (
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/user/premium`,
+      "http://localhost:5000/api/v1//user/premium",
+      // `${process.env.NEXT_PUBLIC_BASE_API}/user/premium`,
       {
         method: "POST",
         headers: {
@@ -111,7 +114,8 @@ export const dashbaordOverview = async (): Promise<any> => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/user/admin/metadata`,
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/user/admin/metadata`,
+
       {
         method: "GET",
         headers: {

@@ -3,11 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import {
-  createCategory,
-  deletedCategory,
-  updateCategory,
-} from "@/services/categoryservice";
+import { createCategory, deletedCategory, updateCategory } from "@/services/categoryService";
 import { Category } from "@/types";
 import { Edit, Trash2 } from "lucide-react";
 import React, { useState } from "react";

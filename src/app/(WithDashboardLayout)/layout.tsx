@@ -6,10 +6,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full">
-        <AdminSidebar />
+        <div className="w-[190px]">
+          <AdminSidebar />
+        </div>
         <div className="flex-1">
           <AdminHeader />
-          <main className="p-6">{children}</main>
+          <main className="p-6 ">{children}</main>
         </div>
       </div>
     </SidebarProvider>

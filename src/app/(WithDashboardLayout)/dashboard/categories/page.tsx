@@ -1,4 +1,3 @@
-
 import Categories from "@/components/page/Dashboard/Categories";
 import { getAllCategory } from "@/services/categoryService";
 import { Metadata } from "next";
@@ -11,7 +10,6 @@ const Category = async () => {
   const result = await getAllCategory();
   return (
     <div>
-      <div>categories here</div>
       <Categories initialCategories={result?.data} />
     </div>
   );

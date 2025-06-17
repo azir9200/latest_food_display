@@ -9,15 +9,16 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 // Define background images with high-quality food photography
 const heroBackgrounds = [
   {
-    url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Flivejapan.com%2Fen%2Farticle-a0000370%2F&psig=AOvVaw3M3osaKMisdivxPIoxXhZk&ust=1748969353576000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCJiozOKY040DFQAAAAAdAAAAABAE",
+    url: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1200&auto=format&fit=crop&q=80&ixlib=rb-4.0.3",
+
     title: "Discover Authentic in Street Food",
   },
   {
-    url: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1200&auto=format&fit=crop&q=80&ixlib=rb-4.0.3",
+    url: "https://i.ibb.co/PzDT7TKH/street-food-frame-wooden-background-1.jpg",
     title: "Experience Local Culinary Treasures",
   },
   {
-    url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.foodnetwork.com%2Fhow-to%2Fpackages%2Ffood-network-essentials%2Fsashimi-vs-sushi&psig=AOvVaw3M3osaKMisdivxPIoxXhZk&ust=1748969353576000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCJiozOKY040DFQAAAAAdAAAAABAL",
+    url: "https://i.ibb.co/S7NbPrJS/fantastic-composition-with-ingredients-italian-pasta.jpg",
     title: "Find Hidden Food Gems in StreetGrub",
   },
 ];

@@ -27,7 +27,7 @@ const Categories = () => {
     fetchCategories();
   }, []);
 
-  const skeletons = Array.from({ length: 4 });
+  const skeletons = Array.from({ length: 8 });
 
   return (
     <div>
@@ -60,7 +60,7 @@ const Categories = () => {
                   </div>
                 </div>
               ))
-            : categories.map((category: CategoryType) => (
+            : categories?.slice(0, 8).map((category: CategoryType) => (
                 <div
                   key={category.id}
                   className="relative group overflow-hidden rounded-lg h-48"

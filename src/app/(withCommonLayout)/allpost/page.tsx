@@ -12,7 +12,7 @@ const AllProduct = async () => {
   return (
     <div>
       {/* <AllPosts /> */}
-      <AllPostPage posts={data} categories={Categories} />
+      <AllPostPage posts={data} categoriess={Categories} />
     </div>
   );
 };

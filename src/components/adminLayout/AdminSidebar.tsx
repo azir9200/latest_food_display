@@ -9,7 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-// import { useUser } from "@/context/UserContext";
+import { useUser } from "@/context/UserContext";
 import {
   BarChart2,
   CheckCircle,
@@ -24,8 +24,8 @@ import { usePathname } from "next/navigation";
 
 const AdminSidebar = () => {
   const pathname = usePathname();
-  // const { user } = useUser();
-  // console.log(user, "dasdharod user");
+  const { user } = useUser();
+  console.log(user, "dasdharod user");
 
   const isActive = (path: string) => {
     return pathname === path;
@@ -106,10 +106,10 @@ const AdminSidebar = () => {
       <div className="mt-auto p-4 border-t">
         <div className="flex items-center gap-3">
           <div className="h-8 w-8 rounded-full bg-gray-300"></div>
-          {/* <div>
+          <div>
             <p className="text-sm font-medium">{user?.name}</p>
             <p className="text-xs text-muted-foreground">{user?.email}</p>
-          </div> */}
+          </div>
         </div>
       </div>
     </Sidebar>
