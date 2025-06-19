@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 const Dashbaord = async () => {
   const res = await getAllPostForAdmin();
+  
   const result = await dashbaordOverview();
   return (
     <div>

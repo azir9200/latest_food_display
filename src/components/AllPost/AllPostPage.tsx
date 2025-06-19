@@ -53,6 +53,7 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
   const [popularOnly, setPopularOnly] = useState(false);
   const [loading, setloading] = useState(false);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleFileSelect = (e: any) => {
     const filesArray = Array.from(e.target.files) as File[];
     if (filesArray.length > 4) {

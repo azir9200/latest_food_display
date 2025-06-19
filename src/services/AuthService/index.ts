@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 import { jwtDecode } from "jwt-decode";
 import { revalidateTag } from "next/cache";
@@ -56,7 +57,7 @@ export const loginUser = async (userData: FieldValues) => {
     return Error(error);
   }
 };
-export const verifyUser = async (id: string) => {
+export const verifyUser = async () => {
   try {
     const res = await fetch(
       // `${process.env.NEXT_PUBLIC_BASE_API}/user/verify?order_id=${id}`,

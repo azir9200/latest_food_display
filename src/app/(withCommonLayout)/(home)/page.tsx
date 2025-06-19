@@ -19,8 +19,9 @@ export default async function Home() {
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow">
         <HeroSection />
+
+        <Categories  />
         <div className=" max-w-7xl md:mx-auto mx-2 py-12">
-          <Categories />
           <FeaturedSpots posts={Post?.data} user={res.data} />
           <Category />
           {/* <FoodSpotList /> */}

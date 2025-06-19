@@ -1,5 +1,5 @@
 import AllPostPage from "@/components/AllPost/AllPostPage";
-import AllPosts from "@/components/AllPost/PostPage";
+// import AllPosts from "@/components/AllPost/PostPage";
 import { getAllCategory } from "@/services/categoryService";
 import { getAllPost } from "@/services/postService";
 import { Metadata } from "next";
@@ -12,7 +12,7 @@ const AllProduct = async () => {
   const { data: Categories } = await getAllCategory();
   return (
     <div>
-      <AllPosts />
+      {/* <AllPosts /> */}
       <AllPostPage posts={data} categoriess={Categories} />
     </div>
   );

@@ -30,8 +30,8 @@ const Categories = () => {
   const skeletons = Array.from({ length: 8 });
 
   return (
-    <div>
-      <div className="py-12  bg-slate-100">
+    <div className="py-12  bg-slate-100">
+      <div className=" max-w-7xl md:mx-auto mx-2 py-12">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-[#333333]">
             Explore by Category
