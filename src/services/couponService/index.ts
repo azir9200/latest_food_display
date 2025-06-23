@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 export const getAllcoupon = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/coupon/all-retreive`,
+      `https://latest-food-backend.vercel.app/api/v1/coupon/all-retreive`,
       {
         method: "GET",
         headers: {
@@ -36,7 +36,7 @@ export const createcoupon = async (
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/coupon/create`,
+      `https://latest-food-backend.vercel.app/api/v1/coupon/create`,
       {
         method: "POST",
         headers: {
@@ -58,7 +58,7 @@ export const updatecoupon = async (id: string): Promise<any> => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/coupon/update/${id}`,
+      `https://latest-food-backend.vercel.app/api/v1/coupon/update/${id}`,
       {
         method: "PATCH",
         headers: {
@@ -80,7 +80,7 @@ export const deletedcoupon = async (id: string): Promise<any> => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/coupon/deleted/${id}`,
+      `https://latest-food-backend.vercel.app/api/v1/coupon/deleted/${id}`,
       {
         method: "DELETE",
         headers: {

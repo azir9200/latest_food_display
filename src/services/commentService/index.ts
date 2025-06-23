@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
@@ -5,7 +6,7 @@ import { cookies } from "next/headers";
 export const getComments = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/comment/getall`,
+      `https://latest-food-backend.vercel.app/api/v1/comment/getall`,
       {
         method: "GET",
         headers: {
@@ -26,12 +27,12 @@ export const getComments = async () => {
     return Error(error.message);
   }
 };
-export  const deletedComment = async (id: string): Promise<any> => {
+export const deletedComment = async (id: string): Promise<any> => {
   const token = (await cookies()).get("accessToken")!.value;
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/comment/${id}`,
+      `https://latest-food-backend.vercel.app/api/v1/comment/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -55,7 +56,7 @@ export const updateComment = async (
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/comment/${id}`,
+      `https://latest-food-backend.vercel.app/api/v1/comment/${id}`,
       {
         method: "PATCH",
         headers: {

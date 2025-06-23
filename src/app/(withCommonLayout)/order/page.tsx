@@ -25,9 +25,6 @@ const Order = async ({ searchParams }: PageProps) => {
   const payment = await subscription();
   return (
     <div>
-      <div className="py-12">
-        <p>order page </p>
-      </div>
       <OrderPage subscription={payment.data} />
     </div>
   );

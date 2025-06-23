@@ -1,5 +1,4 @@
 import AllPostPage from "@/components/AllPost/AllPostPage";
-// import AllPosts from "@/components/AllPost/PostPage";
 import { getAllCategory } from "@/services/categoryService";
 import { getAllPost } from "@/services/postService";
 import { Metadata } from "next";

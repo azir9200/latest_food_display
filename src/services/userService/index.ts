@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
@@ -5,7 +6,7 @@ import { cookies } from "next/headers";
 export const getAllusers = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/user/all-retreive`,
+      `https://latest-food-backend.vercel.app/user/all-retreive`,
       {
         method: "GET",
         headers: {
@@ -31,7 +32,7 @@ export const deletedUser = async (id: string): Promise<any> => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/user/deleted/${id}`,
+      `https://latest-food-backend.vercel.app/api/v1/user/deleted/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -52,7 +53,7 @@ export const roleUpate = async (id: string, role: string): Promise<any> => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/user/role/${id}`,
+      `https://latest-food-backend.vercel.app/api/v1/user/role/${id}`,
       {
         method: "PATCH",
         headers: {

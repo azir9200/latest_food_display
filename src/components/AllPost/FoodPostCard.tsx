@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -372,6 +373,8 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
 
         {showComments && (
           <div className="w-full">
+
+            
             {(post.comments || []).map((comment: any) => (
               <div key={comment.id} className="py-3 border-t">
                 <div className="flex gap-3">

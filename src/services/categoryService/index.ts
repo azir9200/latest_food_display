@@ -7,8 +7,8 @@ import { cookies } from "next/headers";
 export const getAllCategory = async () => {
   try {
     const res = await fetch(
-      "http://localhost:5000/api/v1/category/all-retrieve",
-      // `${process.env.NEXT_PUBLIC_BASE_API}/category/all-retrieve`,
+      "https://latest-food-backend.vercel.app/api/v1/category/all-retrieve",
+      // `https://latest-food-backend.vercel.app/category/all-retrieve`,
       {
         method: "GET",
         next: {
@@ -30,7 +30,7 @@ export const createCategory = async (name: string): Promise<any> => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/category/create`,
+      `https://latest-food-backend.vercel.app/api/v1/category/create`,
       {
         method: "POST",
         headers: {
@@ -56,7 +56,7 @@ export const updateCategory = async (
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/category/update/${id}`,
+      `https://latest-food-backend.vercel.app/api/v1/category/update/${id}`,
       {
         method: "PATCH",
         headers: {
@@ -79,7 +79,7 @@ export const deletedCategory = async (id: string): Promise<any> => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/category/deleted/${id}`,
+      `https://latest-food-backend.vercel.app/api/v1/category/deleted/${id}`,
       {
         method: "DELETE",
         headers: {

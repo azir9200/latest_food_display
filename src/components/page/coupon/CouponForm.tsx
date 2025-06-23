@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { getAllcoupon } from "@/services/CouponService";
+import { getAllcoupon } from "@/services/couponService";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -33,6 +33,7 @@ const CouponForm: React.FC<CouponFormProps> = ({
 
     fetchCoupons();
   }, []);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleApplyCoupon = async (e: any) => {
     e.stopPropagation();
     if (!couponCode.trim()) {
