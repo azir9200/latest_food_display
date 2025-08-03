@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { useUser } from "@/context/UserContext";
 import { loginUser } from "@/services/AuthService";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -20,15 +21,15 @@ const LoginForm = () => {
   } = useForm<FormData>();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("callbackUrl");
- 
+
   const router = useRouter();
-  // const { setIsLoading } = useUser();
+  const { setIsLoading } = useUser();
 
   const onSubmit = async (data: FormData) => {
     try {
-      // setIsLoading(true);
+      setIsLoading(true);
       const res = await loginUser(data);
-      console.log("login form", loginUser);
+
       console.log("login res", res);
 
       if (res?.success) {
@@ -40,12 +41,11 @@ const LoginForm = () => {
           toast.success(res?.message);
         }
       } else {
-        // setIsLoading(false);
+        setIsLoading(false);
         toast.error(res?.message);
       }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      // setIsLoading(false);
+      setIsLoading(false);
       toast.error(err.message || "Something went wrong!");
     }
   };
@@ -53,8 +53,8 @@ const LoginForm = () => {
   const handleDefaultLogin = (type: "admin" | "user" | "premium") => {
     const presets = {
       admin: { email: "admin1@gmail.com", password: "123456" },
-      user: { email: "user10@gmail.com", password: "123456" },
-      premium: { email: "premium@gmail.com", password: "123456" },
+      user: { email: "user1@gmail.com", password: "123456" },
+      premium: { email: "premium1@gmail.com", password: "123456" },
     };
 
     const selected = presets[type];
@@ -73,6 +73,12 @@ const LoginForm = () => {
           >
             Back to Home
           </Link>
+        </div>
+        <div>
+          <p>
+            {" "}
+            <p>*Please select an option from below for auto login</p>
+          </p>
         </div>
 
         {/* === Role Buttons === */}
