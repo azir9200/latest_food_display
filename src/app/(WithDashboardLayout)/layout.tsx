@@ -4,14 +4,12 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <SidebarProvider>
+     <SidebarProvider>
       <div className="flex min-h-screen w-full">
-        <div className="w-[190px]">
-          <AdminSidebar />
-        </div>
+        <AdminSidebar />
         <div className="flex-1">
           <AdminHeader />
-          <main className="p-6 ">{children}</main>
+          <main className="p-6">{children}</main>
         </div>
       </div>
     </SidebarProvider>

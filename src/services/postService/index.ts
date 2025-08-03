@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
@@ -7,8 +6,7 @@ import { cookies } from "next/headers";
 export const getAllPost = async () => {
   try {
     const res = await fetch(
-      // `https://latest-food-backend.vercel.app/post/all-retreive-user`,
-      "https://latest-food-backend.vercel.app/api/v1/post/all-retreive-user",
+      `${process.env.NEXT_PUBLIC_BASE_API}/post/all-retreive-user`,
       {
         method: "GET",
         headers: {
@@ -31,15 +29,12 @@ export const getAllPost = async () => {
 };
 export const getAllPostForGest = async () => {
   try {
-    const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/post/gest`,
-      {
-        next: {
-          revalidate: 60, // Revalidates after 60 seconds
-          tags: ["post"], // Optional: for on-demand revalidation
-        },
-      }
-    );
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post/gest`, {
+      next: {
+        revalidate: 60, // Revalidates after 60 seconds
+        tags: ["post"], // Optional: for on-demand revalidation
+      },
+    });
 
     const data = await res.json();
     return data;
@@ -50,7 +45,7 @@ export const getAllPostForGest = async () => {
 export const getAllPostForAdmin = async () => {
   try {
     const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/post/all-retreive-admin`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/post/all-retreive-admin`,
       {
         method: "GET",
         headers: {
@@ -79,20 +74,15 @@ export const createPost = async (
   const token = (await cookies()).get("accessToken")!.value;
 
   try {
-    const res = await fetch(
-      "https://latest-food-backend.vercel.app/api/v1/post/create",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-      }
-    );
-    console.log(res);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post/create`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postData),
+    });
     const result = await res.json();
-    console.log("result post", result);
     revalidateTag("post");
     return result;
   } catch (error: any) {
@@ -100,12 +90,12 @@ export const createPost = async (
   }
 };
 
-export const premiumApproved = async (id: string): Promise<any> => {
+export const premiumAprroved = async (id: string): Promise<any> => {
   const token = (await cookies()).get("accessToken")!.value;
 
   try {
     const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/post/premium/${id}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/post/premium/${id}`,
       {
         method: "PATCH",
         headers: {
@@ -121,7 +111,7 @@ export const premiumApproved = async (id: string): Promise<any> => {
     throw new Error(error.message || "Something went wrong");
   }
 };
-export const postApproved = async (
+export const postAprroved = async (
   id: string,
   status: string
 ): Promise<any> => {
@@ -129,7 +119,7 @@ export const postApproved = async (
 
   try {
     const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/post/approve/${id}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/post/approve/${id}`,
       {
         method: "PATCH",
         headers: {
@@ -151,17 +141,14 @@ export const createVote = async (data: Record<string, any>): Promise<any> => {
   const token = (await cookies()).get("accessToken")!.value;
 
   try {
-    const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/vote/create`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/vote/create`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
     revalidateTag("post");
     return res.json();
@@ -174,7 +161,7 @@ export const createRating = async (data: Record<string, any>): Promise<any> => {
 
   try {
     const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/rating/create`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/rating/create`,
       {
         method: "POST",
         headers: {
@@ -198,7 +185,7 @@ export const createComment = async (
 
   try {
     const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/comment/create`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/comment/create`,
       {
         method: "POST",
         headers: {

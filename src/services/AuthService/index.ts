@@ -9,7 +9,7 @@ export const SignUpUser = async (userData: FieldValues) => {
   console.log(userData);
   try {
     const res = await fetch(
-      "https://latest-food-backend.vercel.app/api/v1/user/register",
+      `${process.env.NEXT_PUBLIC_BASE_API}/user/register`,
       {
         method: "POST",
         headers: {
@@ -32,16 +32,13 @@ export const SignUpUser = async (userData: FieldValues) => {
 
 export const loginUser = async (userData: FieldValues) => {
   try {
-    const res = await fetch(
-      "https://latest-food-backend.vercel.app/api/v1/user/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      }
-    );
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/user/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
 
     const result = await res.json();
     console.log(res);
@@ -62,7 +59,7 @@ export const verifyUser = async (id: string) => {
   try {
     const res = await fetch(
       // `https://latest-food-backend.vercel.app/user/verify?order_id=${id}`,
-      `https://latest-food-backend.vercel.app/api/v1/user/verify?order_id=${id}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/user/verify?order_id=${id}`,
 
       {
         method: "GET",
@@ -93,8 +90,8 @@ export const premiumUser = async (
 
   try {
     const res = await fetch(
-      "https://latest-food-backend.vercel.app/api/v1/user/premium",
-      // `https://latest-food-backend.vercel.app/user/premium`,
+      // "https://latest-food-backend.vercel.app/api/v1/user/premium",
+      `${process.env.NEXT_PUBLIC_BASE_API}/user/premium`,
       {
         method: "POST",
         headers: {
@@ -116,7 +113,7 @@ export const dashbaordOverview = async (): Promise<any> => {
 
   try {
     const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/user/admin/metadata`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/user/admin/metadata`,
 
       {
         method: "GET",
@@ -141,7 +138,8 @@ export const analyticsOverview = async (): Promise<any> => {
 
   try {
     const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/post/admin/analytics`,
+      // `https://latest-food-backend.vercel.app/api/v1/post/admin/analytics`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/post/admin/analytics`,
       {
         method: "GET",
         headers: {
@@ -164,7 +162,8 @@ export const analyticsOverview = async (): Promise<any> => {
 export const subscription = async () => {
   try {
     const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/user/subscription`,
+      // `https://latest-food-backend.vercel.app/api/v1/user/subscription`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/user/subscription`,
       {
         method: "GET",
         headers: {
@@ -188,7 +187,7 @@ export const subscription = async () => {
 export const singleUserget = async () => {
   try {
     const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/user/single-retreive`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/user/single-retreive`,
       {
         method: "GET",
         headers: {
@@ -230,7 +229,7 @@ export const logout = async () => {
 export const getNewToken = async () => {
   try {
     const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/user/refreshToken`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/user/refreshToken`,
       {
         method: "POST",
         headers: {

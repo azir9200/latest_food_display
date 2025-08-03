@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 export const getComments = async () => {
   try {
     const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/comment/getall`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/comment/getall`,
       {
         method: "GET",
         headers: {
@@ -32,7 +32,7 @@ export const deletedComment = async (id: string): Promise<any> => {
 
   try {
     const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/comment/${id}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/comment/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -56,7 +56,7 @@ export const updateComment = async (
 
   try {
     const res = await fetch(
-      `https://latest-food-backend.vercel.app/api/v1/comment/${id}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/comment/${id}`,
       {
         method: "PATCH",
         headers: {

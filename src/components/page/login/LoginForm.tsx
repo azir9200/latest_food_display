@@ -21,6 +21,7 @@ const LoginForm = () => {
   } = useForm<FormData>();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("callbackUrl");
+  // const redirect = false;
 
   const router = useRouter();
   const { setIsLoading } = useUser();
@@ -29,8 +30,6 @@ const LoginForm = () => {
     try {
       setIsLoading(true);
       const res = await loginUser(data);
-
-      console.log("login res", res);
 
       if (res?.success) {
         if (redirect) {
@@ -53,8 +52,8 @@ const LoginForm = () => {
   const handleDefaultLogin = (type: "admin" | "user" | "premium") => {
     const presets = {
       admin: { email: "admin1@gmail.com", password: "123456" },
-      user: { email: "user1@gmail.com", password: "123456" },
-      premium: { email: "premium1@gmail.com", password: "123456" },
+      user: { email: "user10@gmail.com", password: "123456" },
+      premium: { email: "premium@gmail.com", password: "123456" },
     };
 
     const selected = presets[type];
@@ -73,12 +72,6 @@ const LoginForm = () => {
           >
             Back to Home
           </Link>
-        </div>
-        <div>
-          <p>
-            {" "}
-            <p>*Please select an option from below for auto login</p>
-          </p>
         </div>
 
         {/* === Role Buttons === */}
