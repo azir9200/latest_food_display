@@ -6,7 +6,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-
 const heroBackgrounds = [
   {
     url: "https://i.ibb.co/ZwgsLk2/top-view-salad-eggplant-rolls-with-pomegranate-seeds-greens-white-plate.jpg",
@@ -119,7 +118,7 @@ const HeroSection: React.FC = () => {
                 height={700}
                 width={500}
                 alt={`Food Scene ${index + 1}`}
-                className={`w-full h-full object-cover border border-green-700 border-[20px] ${
+                className={`w-full h-full object-cover ${
                   currentBg === index ? "animate-zoom" : ""
                 }`}
               />
@@ -135,7 +134,7 @@ const HeroSection: React.FC = () => {
           <button
             key={index}
             onClick={() => handleSlideChange(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            className={`w-3 h-3 rounded-full transition-all duration-200 ${
               currentBg === index
                 ? "bg-orange-500 w-10"
                 : "bg-white/50 hover:bg-white"
