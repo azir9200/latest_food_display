@@ -1,7 +1,7 @@
 "use client";
 
-import { Plus } from "lucide-react";
-import { Button } from "../ui/button";
+import { Edit } from "lucide-react";
+import { Button } from "../../ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,28 +9,28 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
+} from "../../ui/dialog";
+import { Label } from "../../ui/label";
+import { Input } from "../../ui/input";
 import { useState } from "react";
 
-const CreatePost = () => {
+const EditProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       {/* ---- Trigger Button ---- */}
       <DialogTrigger asChild>
-        <Button className="w-full bg-slate-600 text-white">
-          <Plus className="mr-2 h-4 w-4" />
-          Create Post
+        <Button className="bg-orange-400 text-white">
+          <Edit className="mr-2 h-4 w-4" />
+          Edit Profile
         </Button>
       </DialogTrigger>
 
       {/* ---- Dialog Content ---- */}
       <DialogContent className="max-w-xl">
         <DialogHeader>
-          <DialogTitle>Create a New Post</DialogTitle>
+          <DialogTitle>Edit your profile</DialogTitle>
           <DialogDescription>Fill the form below.</DialogDescription>
         </DialogHeader>
 
@@ -61,4 +61,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default EditProfile;

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import CreatePost from "@/components/page/profile/EditProfile";
 import { IPost } from "@/components/AllPost/FoodPostCard";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -195,7 +196,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userData }) => {
                 </div>
                 <div className="w-2/12 overflow-x-auto md:overflow-visible">
                   {" "}
-                  Edit here
+                  <CreatePost />
                 </div>
               </div>
 
