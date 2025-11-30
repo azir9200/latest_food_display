@@ -70,7 +70,7 @@ const AdminSidebar = () => {
   ];
 
   return (
-    <Sidebar>
+    <Sidebar className=" ">
       <Link href={"/"}>
         <div className="p-4 flex items-center gap-2">
           <div className="w-8 h-8 rounded-full bg-[#FF6b35]/50 flex items-center justify-center">

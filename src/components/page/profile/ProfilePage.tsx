@@ -44,7 +44,7 @@ interface ProfilePageProps {
 }
 const ProfilePage: React.FC<ProfilePageProps> = ({ userData }) => {
   const [activeTab, setActiveTab] = useState("overview");
-  console.log(userData);
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -81,9 +81,11 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userData }) => {
                   </p>
                 </div>
               </div>
-              <Button className="bg-[#EB6535] hover:bg-[#EB6535]/90 w-full sm:w-auto">
-                Upgrade Now
-              </Button>
+              <Link href={"/premium"}>
+                <Button className="bg-[#EB6535] hover:bg-[#EB6535]/90 w-full sm:w-auto">
+                  Upgrade Now
+                </Button>
+              </Link>
             </div>
           </div>
         )}
@@ -149,9 +151,11 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userData }) => {
                 </div>
 
                 <div className="w-full mt-6 flex">
-                  <Button className="w-full bg-[#EB6535] hover:bg-[#EB6535]/90">
-                    Edit Profile
-                  </Button>
+                  <Link href={"/signup"}>
+                    <Button className="w-full bg-[#EB6535] hover:bg-[#EB6535]/90">
+                      Edit here
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -164,8 +168,8 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userData }) => {
               onValueChange={setActiveTab}
               className="w-full"
             >
-              <div className="bg-white rounded-lg shadow-sm border p-4 mb-6">
-                <div className="w-full overflow-x-auto md:overflow-visible">
+              <div className="bg-white flex justify-between rounded-lg shadow-sm border p-4 mb-6">
+                <div className="w-9/12 overflow-x-auto md:overflow-visible">
                   <TabsList className="grid grid-cols-4 min-w-[360px] md:min-w-full">
                     <TabsTrigger
                       value="overview"
@@ -188,6 +192,10 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userData }) => {
                       Comments ({userData?.comments?.length})
                     </TabsTrigger>
                   </TabsList>
+                </div>
+                <div className="w-2/12 overflow-x-auto md:overflow-visible">
+                  {" "}
+                  Edit here
                 </div>
               </div>
 

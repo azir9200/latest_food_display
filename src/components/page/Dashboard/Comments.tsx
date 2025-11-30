@@ -4,7 +4,6 @@ import NotFoundProudct from "@/components/dashboard/NotFoundProudct";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { deletedComment, updateComment } from "@/services/commentService";
-// import { deletedComment, updateComment } from "@/services/commentservice";
 import { Comment } from "@/types";
 import { MessageSquare, Search } from "lucide-react";
 import { useState } from "react";

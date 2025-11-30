@@ -12,9 +12,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { premiumUser } from "@/services/AuthService";
+import { premiumUser, singleUserget } from "@/services/AuthService";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -26,21 +26,38 @@ const formSchema = z.object({
   email: z.string().email("Please enter a valid email"),
   phone: z
     .string()
-    .regex(/^01\d{9}$/, "Please enter a valid Bangladeshi phone number"),
+    .min(8, "Phone number is too short")
+    .max(20, "Phone number is too long")
+    .regex(
+      /^\+?[1-9]\d{7,19}$/,
+      "Please enter a valid international phone number"
+    ),
   address: z.string().min(5, "Address must be at least 5 characters"),
   city: z.string().min(2, "City must be at least 2 characters"),
   agreeTerms: z.boolean().refine((val) => val === true, {
     message: "You must agree to the terms and conditions",
   }),
 });
-
+interface IOwner {
+  name: string;
+  email: string;
+  mobile: string;
+  address: string;
+}
 type FormValues = z.infer<typeof formSchema>;
 
 const SubscriptionForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [discount, setDiscount] = useState(0);
-  console.log(discount, "discount");
-
+  const [owner, setOwner] = useState<IOwner | null>(null);
+  useEffect(() => {
+    const loginUser = async () => {
+      const res = await singleUserget();
+      setOwner(res?.data);
+    };
+    loginUser();
+  }, []);
+  console.log("subscription page", owner);
   const amount = 1000;
   const finalAmount = Number(amount - (amount * discount) / 100);
 
@@ -55,6 +72,18 @@ const SubscriptionForm = () => {
       agreeTerms: false,
     },
   });
+  useEffect(() => {
+    if (owner) {
+      methods.reset({
+        name: owner.name,
+        email: owner.email,
+        phone: "12345678990",
+        address: "S.Circular road",
+        city: "Dublin, Ireland",
+        agreeTerms: false,
+      });
+    }
+  }, [owner]);
 
   const onSubmit = async (data: FormValues) => {
     setIsLoading(true);
@@ -69,8 +98,9 @@ const SubscriptionForm = () => {
       };
 
       const res = await premiumUser(payloadData);
-
+      console.log("premium data", res);
       if (res.success) {
+        methods.reset();
         toast.success("Redirecting to payment gateway...", {
           description: "You'll be redirected to ShurjoPay to complete payment",
         });
@@ -128,7 +158,7 @@ const SubscriptionForm = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField
+          {/* <FormField
             name="phone"
             render={({ field }) => (
               <FormItem>
@@ -138,6 +168,22 @@ const SubscriptionForm = () => {
                 </FormControl>
                 <FormDescription>
                   Enter a valid Bangladeshi phone number starting with 01
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          /> */}
+          <FormField
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <FormControl>
+                  <Input placeholder="+1234567890" {...field} />
+                </FormControl>
+                <FormDescription>
+                  Enter a valid international phone number with country code
+                  (e.g., +1, +44, +880)
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -199,10 +245,10 @@ const SubscriptionForm = () => {
             </div>
             <div className="text-right">
               <p className="font-bold text-xl">
-                {finalAmount}৳{" "}
+                {finalAmount}${" "}
                 {discount > 0 && (
                   <span className="text-sm text-muted-foreground line-through ml-2">
-                    1000৳
+                    $ 29.00
                   </span>
                 )}
               </p>

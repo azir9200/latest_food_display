@@ -8,7 +8,7 @@ export const getAllCategory = async () => {
   try {
     const res = await fetch(
       // `https://latest-food-backend.vercel.app/category/all-retrieve`,
-      `${process.env.NEXT_PUBLIC_BASE_API}/category/all-retreive`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/category/all-retrieve`,
       {
         method: "GET",
         next: {
@@ -18,6 +18,7 @@ export const getAllCategory = async () => {
     );
 
     const data = await res.json();
+  
     return data;
   } catch (error: any) {
     return Error(error.message);

@@ -29,6 +29,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import FoodPostCard, { IPost } from "./FoodPostCard";
 import { uploadImagesToCloudinary } from "@/utility/cloudinary";
+import { getCurrentLocation } from "@/lib/getCurrentLocation";
 interface IAllPostPros {
   posts: IPost[];
   categoriess: Category[];
@@ -65,40 +66,17 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
     setImagePreviewUrls(newImageUrls);
   };
 
-  const getCurrentLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setCoordinates({ lat: latitude, lng: longitude });
+  const handleGetLocation = async () => {
+    try {
+      const location = await getCurrentLocation();
 
-          fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-          )
-            .then((res) => res.json())
-            .then((data) => {
-              const locationName =
-                data.address.city ||
-                data.address.town ||
-                data.address.suburb ||
-                "Current location";
-              setNewPostLocation(locationName);
-              toast.success(`Location detected: ${locationName}`);
-            })
-            .catch(() => {
-              setNewPostLocation(
-                `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`
-              );
-              toast.success("Coordinates detected");
-            });
-        },
-        () => {
-          toast.error("Couldn't access your location");
-          setLocationDialogOpen(true);
-        }
-      );
-    } else {
-      toast.error("Geolocation is not supported");
+      setCoordinates({ lat: location.lat, lng: location.lng });
+      setNewPostLocation(location.locationName);
+
+      toast.success(`Location detected: ${location.locationName}`);
+    } catch (error) {
+      console.log(error);
+      toast.error("Couldn't get your location");
       setLocationDialogOpen(true);
     }
   };
@@ -174,6 +152,114 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
         <h1 className="text-3xl font-bold mb-8 text-center">
           Food Discoveries Feed
         </h1>
+
+        {/* Filter Bar */}
+        <div className="mb-6 space-y-4 bg-white p-6 rounded-lg border">
+          <div className="flex justify-end gap-4">
+            <div className="relative w-5/6">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+              <input
+                type="text"
+                placeholder="Search for food..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg"
+              />
+            </div>
+            <div className="w-1/6">
+              <Button className="bg-slate-500">Add New Food </Button>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            <Button
+              onClick={() => setSelectedFilter("All")}
+              variant={selectedFilter === "All" ? "default" : "outline"}
+            >
+              All
+            </Button>
+            {categoriess?.map((cat) => (
+              <Button
+                key={cat.id}
+                onClick={() => setSelectedFilter(cat.id)}
+                variant={selectedFilter === cat.id ? "default" : "outline"}
+              >
+                {cat.name}
+              </Button>
+            ))}
+          </div>
+
+          <div>
+            <label className="text-sm">Price Range:</label>
+            <input
+              type="range"
+              min="0"
+              max="1000"
+              value={priceRange[1]}
+              onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
+              className="w-full"
+            />
+            <span>
+              ${priceRange[0]} - ${priceRange[1]}
+            </span>
+          </div>
+
+          <div className="flex gap-2 mt-2">
+            <Button
+              variant={popularOnly ? "default" : "outline"}
+              onClick={() => setPopularOnly(!popularOnly)}
+              size="sm"
+            >
+              🔥 Popular Only 5+
+            </Button>
+            <Button
+              onClick={() => setShowPremium(!showPremium)}
+              variant={showPremium ? "default" : "outline"}
+              size="sm"
+            >
+              <Filter className="w-4 h-4 mr-1" />
+              Premium Only
+            </Button>
+          </div>
+        </div>
+
+        {/* Posts Feed */}
+        {filteredSpots?.length > 0 ? (
+          <div className="space-y-6">
+            {filteredSpots.map((post) => (
+              <FoodPostCard key={post.id} post={post} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <h3 className="text-lg font-medium text-gray-900">
+              No food spots found
+            </h3>
+            <p className="mt-2 text-sm text-gray-500">
+              Try adjusting your search or filter criteria.
+            </p>
+          </div>
+        )}
+
+        {/* Manual Location Dialog */}
+        <Dialog open={locationDialogOpen} onOpenChange={setLocationDialogOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Enter Your Location</DialogTitle>
+              <DialogDescription>
+                Couldn&apos;t detect location. Please enter manually.
+              </DialogDescription>
+            </DialogHeader>
+            <Input
+              value={newPostLocation}
+              onChange={(e) => setNewPostLocation(e.target.value)}
+              placeholder="e.g. New Market, Dhaka"
+            />
+            <DialogFooter>
+              <Button onClick={() => setLocationDialogOpen(false)}>Done</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
         {/* Create Post Card */}
         <Card className="mb-8">
@@ -281,11 +367,7 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
                 >
                   <Upload className="mr-2 h-4 w-4" /> Photo
                 </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={getCurrentLocation}
-                >
+                <Button variant="outline" size="sm" onClick={handleGetLocation}>
                   📍 Use Current Location
                 </Button>
                 <Button
@@ -309,109 +391,6 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
             </div>
           </CardContent>
         </Card>
-
-        {/* Filter Bar */}
-        <div className="mb-6 space-y-4 bg-white p-6 rounded-lg border">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-            <input
-              type="text"
-              placeholder="Search for food..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg"
-            />
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            <Button
-              onClick={() => setSelectedFilter("All")}
-              variant={selectedFilter === "All" ? "default" : "outline"}
-            >
-              All
-            </Button>
-            {categoriess?.map((cat) => (
-              <Button
-                key={cat.id}
-                onClick={() => setSelectedFilter(cat.id)}
-                variant={selectedFilter === cat.id ? "default" : "outline"}
-              >
-                {cat.name}
-              </Button>
-            ))}
-          </div>
-
-          <div>
-            <label className="text-sm">Price Range:</label>
-            <input
-              type="range"
-              min="0"
-              max="1000"
-              value={priceRange[1]}
-              onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
-              className="w-full"
-            />
-            <span>
-              ${priceRange[0]} - ${priceRange[1]}
-            </span>
-          </div>
-
-          <div className="flex gap-2 mt-2">
-            <Button
-              variant={popularOnly ? "default" : "outline"}
-              onClick={() => setPopularOnly(!popularOnly)}
-              size="sm"
-            >
-              🔥 Popular Only 5+
-            </Button>
-            <Button
-              onClick={() => setShowPremium(!showPremium)}
-              variant={showPremium ? "default" : "outline"}
-              size="sm"
-            >
-              <Filter className="w-4 h-4 mr-1" />
-              Premium Only
-            </Button>
-          </div>
-        </div>
-
-        {/* Posts Feed */}
-        {filteredSpots?.length > 0 ? (
-          <div className="space-y-6">
-            {filteredSpots.map((post) => (
-              <FoodPostCard key={post.id} post={post} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-12">
-            <h3 className="text-lg font-medium text-gray-900">
-              No food spots found
-            </h3>
-            <p className="mt-2 text-sm text-gray-500">
-              Try adjusting your search or filter criteria.
-            </p>
-          </div>
-        )}
-
-        {/* Manual Location Dialog */}
-        <Dialog open={locationDialogOpen} onOpenChange={setLocationDialogOpen}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Enter Your Location</DialogTitle>
-              <DialogDescription>
-                Couldn&apos;t detect location. Please enter manually.
-              </DialogDescription>
-            </DialogHeader>
-            <Input
-              value={newPostLocation}
-              onChange={(e) => setNewPostLocation(e.target.value)}
-              placeholder="e.g. New Market, Dhaka"
-            />
-            <DialogFooter>
-              <Button onClick={() => setLocationDialogOpen(false)}>Done</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
       </div>
     </div>
   );

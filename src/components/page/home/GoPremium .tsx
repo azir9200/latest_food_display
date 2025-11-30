@@ -24,12 +24,14 @@ const GoPremium = () => {
                   Go Premium
                 </Button>
               </Link>
-              <Button
-                variant="outline"
-                className="bg-[#FF6B35] text-white hover:bg-white/10 px-8 py-6 text-lg"
-              >
-                Learn More
-              </Button>
+              <Link href={"/faq"}>
+                <Button
+                  variant="outline"
+                  className="bg-[#FF6B35] text-white hover:bg-white/10 px-8 py-6 text-lg"
+                >
+                  Learn More
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

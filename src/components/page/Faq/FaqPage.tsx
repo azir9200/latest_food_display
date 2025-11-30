@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 import { useState } from "react";
 
 const FaqPage = () => {
@@ -232,10 +233,15 @@ const FaqPage = () => {
               concerns you may have.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button className="bg-[#EB6535] hover:bg-[#EB6535]/90">
-                Contact Support
-              </Button>
-              <Button variant="outline">Submit a Request</Button>
+              <Link href="/contact" passHref>
+                <Button className="bg-[#EB6535] hover:bg-[#EB6535]/90">
+                  Contact Support
+                </Button>
+              </Link>
+
+              <Link href="/contact" passHref>
+                <Button variant="outline">Submit a Request</Button>
+              </Link>
             </div>
           </div>
         </div>

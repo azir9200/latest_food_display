@@ -22,11 +22,13 @@ export const getAllPost = async () => {
     );
 
     const data = await res.json();
+    console.log("Post service", data);
     return data;
   } catch (error: any) {
     return Error(error.message);
   }
 };
+
 export const getAllPostForGest = async () => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post/gest`, {

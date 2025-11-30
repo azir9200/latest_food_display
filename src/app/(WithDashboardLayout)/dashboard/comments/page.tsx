@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Comments from "@/components/page/Dashboard/Comments";
 import { getComments } from "@/services/commentService";
 import { Metadata } from "next";
@@ -8,6 +10,10 @@ export const metadata: Metadata = {
 const Comment = async () => {
   const comments = await getComments();
   console.log(comments);
+
+  if (!comments?.data) {
+    return <div>No comments found or failed to load.</div>;
+  }
   return (
     <div>
       <Comments Postcomments={comments?.data} />

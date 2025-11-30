@@ -37,7 +37,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/explore"
+                  href="/faq"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Explore
@@ -68,7 +68,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/help"
+                  href="/contact"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Help Center
@@ -92,7 +92,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/terms"
+                  href="/contact"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Terms & Conditions

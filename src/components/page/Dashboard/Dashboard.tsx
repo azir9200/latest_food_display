@@ -5,7 +5,7 @@ import RecentActivity from "@/components/dashboard/RecentActivity";
 import StatCard from "@/components/dashboard/StartCard";
 import { mockActivity } from "@/components/data/mockData";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { postApproved, premiumApproved } from "@/services/postService";
+import { postAprroved, premiumAprroved } from "@/services/postService";
 import { PostStatus } from "@/types";
 import { Post } from "@/types/user";
 import { FileText, MessageSquare, Star, Users } from "lucide-react";
@@ -19,14 +19,6 @@ import {
   YAxis,
 } from "recharts";
 
-// const data = [
-//   { name: "Jan", posts: 24, users: 40 },
-//   { name: "Feb", posts: 30, users: 45 },
-//   { name: "Mar", posts: 28, users: 48 },
-//   { name: "Apr", posts: 32, users: 51 },
-//   { name: "May", posts: 40, users: 66 },
-//   { name: "Jun", posts: 38, users: 62 },
-// ];
 interface IData {
   name: string;
   posts: number;
@@ -45,12 +37,12 @@ interface IDashbaordProps {
 }
 const Dashboard: React.FC<IDashbaordProps> = ({ posts, data, mockStats }) => {
   const handleStatusChange = async (id: string, status: PostStatus) => {
-    await postApproved(id, status);
+    await postAprroved(id, status);
   };
   console.log("dashboard", posts, data, mockStats);
 
   const handlePremiumToggle = async (id: string) => {
-    await premiumApproved(id);
+    await premiumAprroved(id);
   };
   const pendingPost: Post[] =
     posts

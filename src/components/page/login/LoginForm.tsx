@@ -30,6 +30,7 @@ const LoginForm = () => {
     try {
       setIsLoading(true);
       const res = await loginUser(data);
+      console.log("object res", res);
 
       if (res?.success) {
         if (redirect) {
@@ -52,7 +53,7 @@ const LoginForm = () => {
   const handleDefaultLogin = (type: "admin" | "user" | "premium") => {
     const presets = {
       admin: { email: "admin1@gmail.com", password: "123456" },
-      user: { email: "user10@gmail.com", password: "123456" },
+      user: { email: "user1@gmail.com", password: "123456" },
       premium: { email: "premium@gmail.com", password: "123456" },
     };
 

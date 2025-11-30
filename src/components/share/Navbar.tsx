@@ -55,13 +55,13 @@ const Navbar = () => {
   useEffect(() => {
     const fetchData = async () => {
       const user = await getCurrentUser();
-    
+
       setUser(user);
     };
 
     fetchData();
   }, []);
-console.log(  "user", user)
+ 
   return (
     <nav className="sticky top-0 bg-slate-200 shadow-md z-50 px-2 md:px-0">
       <div className="max-w-7xl mx-auto py-3 flex items-center justify-between">
@@ -133,7 +133,7 @@ console.log(  "user", user)
                   <Button variant="ghost" size="icon" className="rounded-full">
                     <Avatar className="h-8 w-8 border-2 border-streetgrub-orange cursor-pointer">
                       <AvatarImage src={user?.image || ""} alt="User" />
-                      <AvatarFallback>JD</AvatarFallback>
+                      <AvatarFallback>NB </AvatarFallback>
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
@@ -258,7 +258,8 @@ console.log(  "user", user)
                     className="flex items-center gap-2"
                   >
                     <div className="w-8 h-8 rounded-full bg-[#FFC15E]   text-[#333333] flex items-center justify-center">
-                      JD
+                      {/* {user.name} */}
+                      NB
                     </div>
                   </Link>
                   <Button

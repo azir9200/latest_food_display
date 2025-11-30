@@ -1,4 +1,3 @@
-// import Users from "@/components/page/Dashbaord/Users";
 import Users from "@/components/page/Dashboard/Users";
 import { getAllusers } from "@/services/userService";
 import { Metadata } from "next";
@@ -8,6 +7,7 @@ export const metadata: Metadata = {
 };
 const User = async () => {
   const result = await getAllusers();
+  console.log("user here", result);
   return (
     <div>
       <Users users={result?.data} />

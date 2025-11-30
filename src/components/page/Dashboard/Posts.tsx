@@ -12,8 +12,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { deletedComment, updateComment } from "@/services/commentService";
-import { postApproved, premiumApproved } from "@/services/postService";
+import { updateComment, deletedComment } from "@/services/commentService";
+import { postAprroved, premiumAprroved } from "@/services/postService";
 import { Comment, PostStatus } from "@/types";
 import { Category, Post } from "@/types/user";
 import { Download, Filter, Search } from "lucide-react";
@@ -33,11 +33,11 @@ const Posts: React.FC<PostsProps> = ({ posts, categories }) => {
   const [sortBy, setSortBy] = useState("date-desc");
 
   const handleStatusChange = async (id: string, status: PostStatus) => {
-    await postApproved(id, status);
+    await postAprroved(id, status);
   };
 
   const handlePremiumToggle = async (id: string) => {
-    await premiumApproved(id);
+    await premiumAprroved(id);
   };
 
   const handleEditComment = async (id: string, commentText: string) => {
@@ -163,7 +163,6 @@ const Posts: React.FC<PostsProps> = ({ posts, categories }) => {
 
         <Tabs
           defaultValue="all"
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onValueChange={(value) => setSelectedTab(value as any)}
         >
           <TabsList>
