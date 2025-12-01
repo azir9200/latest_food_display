@@ -16,7 +16,7 @@ export const getAllPost = async () => {
           "Content-Type": "application/json",
         },
         next: {
-          tags: ["post"], // Optional Next.js cache control
+          tags: ["post"], 
         },
       }
     );
@@ -33,8 +33,8 @@ export const getAllPostForGest = async () => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post/gest`, {
       next: {
-        revalidate: 60, // Revalidates after 60 seconds
-        tags: ["post"], // Optional: for on-demand revalidation
+        revalidate: 60, 
+        tags: ["post"], 
       },
     });
 

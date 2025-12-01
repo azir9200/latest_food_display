@@ -3,6 +3,7 @@ import Category from "@/components/page/home/Category";
 import GoPremium from "@/components/page/home/GoPremium ";
 import FeaturedSpots from "@/components/page/home/hero/FeatureSpot";
 import HeroSection from "@/components/page/home/hero/Hero";
+import { Hero } from "@/components/page/home/openAi/OpenAi";
 import { singleUserget } from "@/services/AuthService";
 import { getAllPostForGest } from "@/services/postService";
 import { Metadata } from "next";
@@ -19,12 +20,12 @@ export default async function Home() {
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow">
         <HeroSection />
-
-        <Categories  />
+        <Hero />
+        <Categories />
         <div className=" max-w-7xl md:mx-auto mx-2 py-12">
           <FeaturedSpots posts={Post?.data} user={res.data} />
           <Category />
-    
+
           <GoPremium />
         </div>
       </main>

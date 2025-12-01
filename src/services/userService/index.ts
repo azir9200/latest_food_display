@@ -6,7 +6,10 @@ import { cookies } from "next/headers";
 export const getAllusers = async () => {
   try {
     const res = await fetch(
-      `https://latest-food-backend.vercel.app/user/all-retreive`,
+      "http://localhost:5000/api/user/all-retreive",
+
+      // `https://latest-food-backend.vercel.app/user/all-retreive`,
+
       {
         method: "GET",
         headers: {
@@ -16,7 +19,7 @@ export const getAllusers = async () => {
           "Content-Type": "application/json",
         },
         next: {
-          tags: ["loginUser"], // Optional Next.js cache control
+          tags: ["loginUser"],
         },
       }
     );
