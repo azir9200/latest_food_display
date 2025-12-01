@@ -42,7 +42,6 @@ type Props = {
 };
 
 const CouponManagement = ({ coupons }: Props) => {
-  console.log(coupons);
   const [newCoupon, setNewCoupon] = useState<{
     code: string;
     discountPercentage: number;

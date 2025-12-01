@@ -37,8 +37,9 @@ const ContactPage = () => {
     },
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onSubmit = (data: ContactFormValues) => {
-    console.log(data);
+ 
     toast.success(
       "Your message has been sent. We'll get back with spicy updates soon!"
     );

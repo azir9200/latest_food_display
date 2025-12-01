@@ -39,8 +39,7 @@ const Dashboard: React.FC<IDashbaordProps> = ({ posts, data, mockStats }) => {
   const handleStatusChange = async (id: string, status: PostStatus) => {
     await postAprroved(id, status);
   };
-  console.log("dashboard", posts, data, mockStats);
-
+  
   const handlePremiumToggle = async (id: string) => {
     await premiumAprroved(id);
   };

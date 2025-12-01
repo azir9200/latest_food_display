@@ -1,25 +1,7 @@
-import PremiumBadge from "@/components/share/PremiumBadge";
-import { Category } from "@/types";
+import PremiumBadge from "@/components/premium/PremiumBage";
+import { FoodSpotCardProps } from "@/types/foodPost";
 import { ArrowDown, ArrowUp, Star } from "lucide-react";
 import Image from "next/image";
-
-export interface FoodSpotCardProps {
-  spot: {
-    id: string;
-    title: string;
-    description: string;
-    image: string;
-    averageRating: number;
-    price: number;
-    category?: Category;
-    location: string;
-    isPremium?: boolean;
-    upVotes: number;
-    downVotes: number;
-    totalComments: number;
-    className?: string;
-  };
-}
 
 const FoodSpotCard: React.FC<FoodSpotCardProps> = ({ spot }) => {
   const {

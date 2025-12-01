@@ -27,7 +27,7 @@ const CouponForm: React.FC<CouponFormProps> = ({
         const res = await getAllcoupon();
         setCoupons(res.data);
       } catch (error) {
-        console.error("Failed to fetch coupons", error);
+        console.error("Failed", error);
       }
     };
 

@@ -30,8 +30,7 @@ const LoginForm = () => {
     try {
       setIsLoading(true);
       const res = await loginUser(data);
-      console.log("object res", res);
-
+    
       if (res?.success) {
         if (redirect) {
           router.push(redirect);

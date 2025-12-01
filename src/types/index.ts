@@ -1,23 +1,20 @@
 
-import { IUser } from "./user";
-
- export * from "./user";
-
-export type PostStatus = "pending" | "approved" | "rejected";
-
 export type UserRole = "ADMIN" | "USER";
 
 export type UserStatus = "active" | "suspended" | "banned";
 
-export type User = {
+export interface IUser {
   id: string;
   name: string;
   email: string;
+  image: string | null;
   role: UserRole;
   status: UserStatus | string;
-  joined: string;
-  posts: number;
-};
+  joined?: string;
+  posts?: number;
+  createdAt: string;
+  isPremium: boolean;
+}
 
 export type ActivityItemType =
   | "approve"
@@ -31,25 +28,4 @@ export type ActivityItem = {
   type: ActivityItemType;
   title: string;
   time: string;
-};
-
-export type Comment = {
-  id: string;
-  user: IUser;
-  commentText: string;
-  createdAt: Date | string;
-  post: Post;
-};
-
-export type Post = {
-  id: string;
-  title: string;
-  author: string;
-  category: string;
-  imageUrl: string;
-  excerpt: string;
-  status: PostStatus;
-  isPremium: boolean;
-  date: string;
-  content?: string;
 };

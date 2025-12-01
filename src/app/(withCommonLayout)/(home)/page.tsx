@@ -24,7 +24,7 @@ export default async function Home() {
         <div className=" max-w-7xl md:mx-auto mx-2 py-12">
           <FeaturedSpots posts={Post?.data} user={res.data} />
           <Category />
-          {/* <FoodSpotList /> */}
+    
           <GoPremium />
         </div>
       </main>

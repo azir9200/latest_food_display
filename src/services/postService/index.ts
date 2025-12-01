@@ -22,7 +22,7 @@ export const getAllPost = async () => {
     );
 
     const data = await res.json();
-    console.log("Post service", data);
+  
     return data;
   } catch (error: any) {
     return Error(error.message);

@@ -3,14 +3,18 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { createCategory, deletedCategory, updateCategory } from "@/services/categoryService";
-import { Category } from "@/types";
+import {
+  createCategory,
+  deletedCategory,
+  updateCategory,
+} from "@/services/categoryService";
+import { ICategory } from "@/types";
 import { Edit, Trash2 } from "lucide-react";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
 interface CategoryManagerProps {
-  initialCategories: Category[];
+  initialCategories: ICategory[];
 }
 
 const CategoryManager: React.FC<CategoryManagerProps> = ({
@@ -20,7 +24,6 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const handleSubmit = async () => {
-    console.log("handle submit");
     if (!categoryName.trim()) return;
 
     if (editingId) {
@@ -79,7 +82,7 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({
               </tr>
             </thead>
             <tbody>
-              {initialCategories?.map((category: Category) => (
+              {initialCategories?.map((category: ICategory) => (
                 <tr key={category.id}>
                   <td className="px-4 py-2">{category.name}</td>
                   <td className="px-4 py-2">{category?._count?.posts}</td>

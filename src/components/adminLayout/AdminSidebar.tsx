@@ -25,7 +25,6 @@ import { usePathname } from "next/navigation";
 const AdminSidebar = () => {
   const pathname = usePathname();
   const { user } = useUser();
-  console.log(user, "dasdharod user");
 
   const isActive = (path: string) => {
     return pathname === path;
