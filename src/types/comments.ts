@@ -5,8 +5,8 @@ export type IComments = {
   id: string;
   user: IUser;
   commentText: string;
-  createdAt: Date | string;
-  post: IPost;
+  createdAt: string;
+  post?: IPost;
 };
 
 export interface ICategory {

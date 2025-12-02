@@ -1,4 +1,3 @@
-
 export type UserRole = "ADMIN" | "USER";
 
 export type UserStatus = "active" | "suspended" | "banned";
@@ -7,13 +6,16 @@ export interface IUser {
   id: string;
   name: string;
   email: string;
-  image: string | null;
+  image?: string | null;
   role: UserRole;
   status: UserStatus | string;
   joined?: string;
   posts?: number;
   createdAt: string;
-  isPremium: boolean;
+  isPremium?: boolean;
+  bio: string;
+  phone: string;
+  location: string;
 }
 
 export type ActivityItemType =

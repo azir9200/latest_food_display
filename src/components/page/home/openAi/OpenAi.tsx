@@ -4,7 +4,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { HeroProps } from "@/types/heroProps";
 import { LargeSparkleIcon, SparkleIcon } from "@/assets/SparkleIcon";
-import HeroForm from "./AiForm";
+import AiForm from "./AiForm";
+// import HeroForm from "./AiForm";
 
 export function Hero({
   badge = {
@@ -39,14 +40,14 @@ export function Hero({
   formCard = {
     title: "AI Food Finder",
     symptomLabel: "What are your Food choice?",
-    symptomPlaceholder: "e.g., vegeterian, fish, spanish",
+    symptomPlaceholder: "e.g., vegetarian, fish, spanish",
     specialtyLabel: "Preferred ",
     specialtyOptions: [
       "Starter",
       "Dessert Course",
       "Kebab",
       "Fish Dish",
-      "Vegeterian",
+      "Vegetarian",
     ],
     defaultSpecialty: "Starters",
     submitText: "Get AI Recommendations",
@@ -138,7 +139,7 @@ export function Hero({
                   <h2 className="text-[20.4px] leading-6">AI Food Finder</h2>
                   <LargeSparkleIcon />
                 </div>
-                <HeroForm />
+                <AiForm />
 
                 <div className="mt-6 border-t border-gray-200 pt-4">
                   <p className="text-center text-[11.9px] leading-5 text-gray-600">
@@ -148,9 +149,7 @@ export function Hero({
                 </div>
                 {/* Form */}
 
-                
                 <form className="space-y-6">
-                 
                   <div className="space-y-2">
                     <Label
                       htmlFor="symptoms"

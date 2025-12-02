@@ -27,6 +27,7 @@ export interface IPost {
     rating: number;
   }[];
   comments?: IComments[];
+  status?: string;
   upVotes: number;
   downVotes: number;
   averageRating: number;

@@ -3,53 +3,46 @@
 import { openAi } from "@/services/openAiService";
 import { useState } from "react";
 
-export default function HeroForm() {
+export default function AiForm() {
+  // const [loading, setLoading] = useState(false);
+  // const [aiResult, setAiResult] = useState(null);
+  const [preference, setPreference] = useState("");
+  const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [aiResult, setAiResult] = useState(null);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
 
-    const formData = new FormData(e.target);
-    const symptoms = formData.get("symptoms");
-
-    const data = {
-      symptoms,
-    };
-
-    const result = await openAi(data); 
-    setAiResult(result);
+    const res = await openAi({ preference });
+    console.log("AI form", res);
+    setResult(res.data);
     setLoading(false);
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="space-y-2">
-          <label className="text-[11.9px] text-gray-700">
-            What are your Food choice?
-          </label>
-          <input
-            name="symptoms"
-            placeholder="e.g., vegeterian, fish, spanish"
-            className="h-[49.787px] w-full rounded-xl border-gray-300 p-3"
-          />
-        </div>
+    <div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          className="border p-2 rounded w-full"
+          placeholder="e.g., vegetarian, spicy, kebab"
+          value={preference}
+          onChange={(e) => setPreference(e.target.value)}
+        />
 
         <button
           type="submit"
-          className="h-[59.986px] w-full rounded-xl bg-blue-600 text-[15.3px] hover:bg-blue-700"
+          className="bg-blue-600 text-white p-2 rounded w-full"
         >
-          {loading ? "Generating..." : "Get AI Recommendations"}
+          {loading ? "Finding..." : "Find Dish"}
         </button>
       </form>
 
-      {aiResult && (
-        <div className="mt-4 rounded-xl bg-gray-100 p-4 text-sm">
-          <pre>{JSON.stringify(aiResult, null, 2)}</pre>
+      {result && (
+        <div className="mt-4 p-4 bg-gray-100 rounded">
+          <pre>{JSON.stringify(result, null, 2)}</pre>
         </div>
       )}
-    </>
+    </div>
   );
 }
