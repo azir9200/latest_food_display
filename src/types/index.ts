@@ -1,3 +1,6 @@
+import { IComments } from "./comments";
+import { IPost } from "./foodPost";
+
 export type UserRole = "ADMIN" | "USER";
 
 export type UserStatus = "active" | "suspended" | "banned";
@@ -10,12 +13,13 @@ export interface IUser {
   role: UserRole;
   status: UserStatus | string;
   joined?: string;
-  posts?: number;
+  posts?: IPost[];
   createdAt: string;
   isPremium?: boolean;
-  bio: string;
-  phone: string;
-  location: string;
+  bio?: string;
+  phone?: string;
+  location?: string;
+  comments?: IComments;
 }
 
 export type ActivityItemType =

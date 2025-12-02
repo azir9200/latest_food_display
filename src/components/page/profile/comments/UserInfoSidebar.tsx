@@ -40,11 +40,11 @@ import { toast } from "sonner";
 //   location?: string;
 // }
 
-interface UserInfoSidebarProps {
-  userData: IUser;
-}
+// interface UserInfoSidebarProps {
+//   userData: IUser;
+// }
 
-const UserInfoSidebar: React.FC<UserInfoSidebarProps> = ({ userData }) => {
+const UserInfoSidebar: React.FC<{ userData: IUser }> = ({ userData }) => {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editName, setEditName] = useState(userData.name);
   const [editBio, setEditBio] = useState(userData.bio || "");
@@ -120,7 +120,11 @@ const UserInfoSidebar: React.FC<UserInfoSidebarProps> = ({ userData }) => {
           <div className="flex flex-col items-center text-center">
             <div className="relative">
               <Avatar className="h-32 w-32 border-4 border-primary/10">
-                <AvatarImage src={userData.image} alt={userData.name} />
+                <AvatarImage
+                  src={userData.image || undefined}
+                  alt={userData.name}
+                />
+
                 <AvatarFallback className="text-3xl">
                   {userData.name.charAt(0)}
                 </AvatarFallback>
@@ -207,7 +211,8 @@ const UserInfoSidebar: React.FC<UserInfoSidebarProps> = ({ userData }) => {
               <Label>Profile Photo</Label>
               <div className="flex flex-col items-center gap-4">
                 <Avatar className="h-24 w-24 border-2 border-primary/20">
-                  <AvatarImage src={imagePreview} alt="Preview" />
+                  <AvatarImage src={imagePreview || undefined} alt="Preview" />
+
                   <AvatarFallback>{editName.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <input

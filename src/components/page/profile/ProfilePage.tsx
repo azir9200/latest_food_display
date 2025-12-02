@@ -1,33 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
 import { Crown, Lock } from "lucide-react";
 import { useState } from "react";
-
 import PostsTab from "./comments/PostsTab";
 import { ICategory } from "@/types/comments";
-import { IPost } from "@/types/foodPost";
 import UserInfoSidebar from "./comments/UserInfoSidebar";
-import OverviewTab from "./comments/OverviewTab";
-import CommentsTab from "./comments/CommentsTab";
 import { IUser } from "@/types";
-// interface IComment {
-//   id: string;
-//   commentText: string;
-//   createdAt: string;
-//   postTitle: string;
-// }
-
-// interface IUserData {
-//   id: string;
-//   name: string;
-//   image: string;
-//   isPremium: boolean;
-//   createdAt: string;
-//   posts: IPost[];
-//   comments: IComment[];
-// }
+import OverviewTab from "./comments/OverviewTab";
 
 interface ProfilePageProps {
   userData: IUser;
@@ -126,7 +106,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
             </TabsContent>
 
             <TabsContent value="comments" className="animate-scale-in">
-              <CommentsTab userData={userData} />
+              {/* <CommentsTab userData={userData} /> */}
             </TabsContent>
           </Tabs>
         </div>

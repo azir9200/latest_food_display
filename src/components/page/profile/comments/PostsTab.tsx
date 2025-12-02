@@ -36,7 +36,6 @@ import { ICategory } from "@/types/comments";
 import { IUser } from "@/types";
 import { deletedPost, updatePost } from "@/services/postService";
 
-
 const PostsTab: React.FC<{ userData: IUser; categories: ICategory[] }> = ({
   userData,
   categories,
@@ -63,7 +62,7 @@ const PostsTab: React.FC<{ userData: IUser; categories: ICategory[] }> = ({
   const handleSaveEdit = async () => {
     try {
       setLoading(true);
-       await updatePost(selectedPost!.id, {
+      await updatePost(selectedPost!.id, {
         title: editTitle,
         description: editDescription,
         price: Number(editPrice),
@@ -85,11 +84,11 @@ const PostsTab: React.FC<{ userData: IUser; categories: ICategory[] }> = ({
     if (!confirm("Are you sure you want to delete this post?")) return;
 
     try {
-       await deletedPost(postId);
+      await deletedPost(postId);
 
       toast.success("Post deleted successfully!");
     } catch (error) {
-        console.log(error)
+      console.log(error);
       toast.error("Failed to delete post");
     }
   };
@@ -101,7 +100,10 @@ const PostsTab: React.FC<{ userData: IUser; categories: ICategory[] }> = ({
           <CardTitle>Create a New Post</CardTitle>
         </CardHeader>
         <CardContent>
-          <CreatePostForm categories={categories} userImage={userData?.image} />
+          <CreatePostForm
+            categories={categories}
+            userImage={userData?.image ?? undefined}
+          />
         </CardContent>
       </Card>
 

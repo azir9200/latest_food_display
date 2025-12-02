@@ -5,7 +5,7 @@ import { Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import FilterBar from "../share/FilterBar";
 import PostsFeed from "../share/PostsFeed";
-import { ICategory } from "@/types";
+import { ICategory } from "@/types/comments";
 
 interface IAllPostPros {
   posts: IPost[];
