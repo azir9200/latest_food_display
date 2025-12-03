@@ -1,33 +1,18 @@
-import { Search, Calendar, Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import { Star } from "lucide-react";
 import { HeroProps } from "@/types/heroProps";
-import { LargeSparkleIcon, SparkleIcon } from "@/assets/SparkleIcon";
 import AiForm from "./AiForm";
-// import HeroForm from "./AiForm";
 
 export function Hero({
-  badge = {
-    text: "AI-Powered Food Finder",
-  },
   heading = {
     line1: "Find Your Perfect",
     line2: "Delicious Food Dish",
   },
   description = [
     "Our advanced AI technology analyzes your taste and demand",
-    "apetite, and choice to match you with the best Delicious Dish",
+    "appetite, and choice to match you with the best Delicious Dish",
     "in seconds.",
   ],
-  buttons = {
-    primary: {
-      text: "Find Your Dish",
-    },
-    secondary: {
-      text: "Search Restaurant",
-    },
-  },
+
   stats = [
     { value: "50K+", label: "Dish Display" },
     { value: "1000+", label: "User and Premium" },
@@ -37,23 +22,6 @@ export function Hero({
       icon: <Star className="size-6 fill-yellow-400 stroke-yellow-400" />,
     },
   ],
-  formCard = {
-    title: "AI Food Finder",
-    symptomLabel: "What are your Food choice?",
-    symptomPlaceholder: "e.g., vegetarian, fish, spanish",
-    specialtyLabel: "Preferred ",
-    specialtyOptions: [
-      "Starter",
-      "Dessert Course",
-      "Kebab",
-      "Fish Dish",
-      "Vegetarian",
-    ],
-    defaultSpecialty: "Starters",
-    submitText: "Get AI Recommendations",
-    footerText:
-      "✨ Powered by advanced AI algorithms for accurate food matching",
-  },
 }: HeroProps) {
   return (
     <div className="w-full relative">
@@ -62,7 +30,7 @@ export function Hero({
         className="absolute inset-0 z-0 "
         style={{
           background:
-            "radial-gradient(125% 125% at 50% 90%, #fff 30%, #155DFC 100%)",
+            "radial-gradient(125% 125% at 50% 90%, #ffffff 30%, #9ca3af 100%)",
         }}
       />
       {/* Content Container */}
@@ -71,14 +39,6 @@ export function Hero({
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
             {/* Left Column - Hero Content */}
             <div className="flex flex-col justify-center space-y-6">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-3 self-start rounded-full bg-white px-4 py-2">
-                <SparkleIcon />
-                <span className="text-[11.9px] font-medium text-blue-700">
-                  {badge.text}
-                </span>
-              </div>
-
               {/* Heading */}
               <div className="space-y-2">
                 <h1 className="text-[51px] leading-[60px]">{heading.line1}</h1>
@@ -90,29 +50,6 @@ export function Hero({
                 {description.map((line, index) => (
                   <p key={index}>{line}</p>
                 ))}
-              </div>
-
-              {/* Buttons */}
-              <div className="flex flex-col gap-4 sm:flex-row">
-                {buttons.primary && (
-                  <Button
-                    onClick={buttons.primary.onClick}
-                    className="h-[63.622px] gap-3 rounded-xl bg-blue-600 px-8 text-[15.3px] hover:bg-blue-700"
-                  >
-                    <Search className="size-5" />
-                    {buttons.primary.text}
-                  </Button>
-                )}
-                {buttons.secondary && (
-                  <Button
-                    onClick={buttons.secondary.onClick}
-                    variant="outline"
-                    className="h-[63.622px] gap-3 rounded-xl border-blue-600 px-8 text-[15.3px] text-blue-600 hover:bg-blue-50"
-                  >
-                    <Calendar className="size-5" />
-                    {buttons.secondary.text}
-                  </Button>
-                )}
               </div>
 
               {/* Stats */}
@@ -133,51 +70,19 @@ export function Hero({
 
             {/* Right Column - Form Card */}
             <div className="flex items-center justify-center lg:justify-end">
-              <div className="w-full max-w-[559.929px] rounded-2xl bg-white p-8 shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)]">
+              <div className="w-full max-w-[559.929px] rounded-2xl ">
                 {/* Card Header */}
-                <div className="mb-6 flex items-center justify-between">
-                  <h2 className="text-[20.4px] leading-6">AI Food Finder</h2>
-                  <LargeSparkleIcon />
+                <div className="inline-flex items-center gap-3 self-start rounded-full px-4 py-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-md">
+                  <span className="text-[22.9px] font-semibold">
+                    AI-Powered Food Finder
+                  </span>
                 </div>
                 <AiForm />
 
                 <div className="mt-6 border-t border-gray-200 pt-4">
-                  <p className="text-center text-[11.9px] leading-5 text-gray-600">
+                  <p className="text-center text-sm leading-5 text-gray-600">
                     ✨ Powered by advanced AI algorithms for accurate food
                     matching
-                  </p>
-                </div>
-                {/* Form */}
-
-                <form className="space-y-6">
-                  <div className="space-y-2">
-                    <Label
-                      htmlFor="symptoms"
-                      className="text-[11.9px] text-gray-700"
-                    >
-                      {formCard.symptomLabel}
-                    </Label>
-                    <Input
-                      id="symptoms"
-                      name="symptoms"
-                      placeholder={formCard.symptomPlaceholder}
-                      className="h-[49.787px] rounded-xl border-gray-300"
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <Button
-                    type="submit"
-                    className="h-[59.986px] w-full rounded-xl bg-blue-600 text-[15.3px] hover:bg-blue-700"
-                  >
-                    {formCard.submitText}
-                  </Button>
-                </form>
-
-                {/* Footer */}
-                <div className="mt-6 border-t border-gray-200 pt-4">
-                  <p className="text-center text-[11.9px] leading-5 text-gray-600">
-                    {formCard.footerText}
                   </p>
                 </div>
               </div>

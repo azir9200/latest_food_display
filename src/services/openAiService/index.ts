@@ -1,7 +1,9 @@
 "use server";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
-export const openAi = async (postData: Record<string, any>): Promise<any> => {
+export const openAiService = async (
+  postData: Record<string, any>
+): Promise<any> => {
   const token = (await cookies()).get("accessToken")!.value;
 
   try {

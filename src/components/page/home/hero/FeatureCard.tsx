@@ -1,9 +1,9 @@
-import { IPost } from "@/components/AllPost/FoodPostCard";
 import { Button } from "@/components/ui/button";
 import { IUser } from "@/types";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import FoodSpotCard from "../foodSpotList/FoodSpotCard";
+import { IPost } from "@/types/foodPost";
 interface FeaturedSpotsProps {
   user: IUser;
   posts: IPost[];
@@ -24,7 +24,7 @@ const FeaturedSpots: React.FC<FeaturedSpotsProps> = ({ user, posts }) => {
       .slice(0, 3) || [];
 
   return (
-    <div className="py-16">
+    <div className="">
       {/* Regular Featured Spots Section */}
       <div className="mb-16">
         <div className="flex items-center justify-between mb-6">

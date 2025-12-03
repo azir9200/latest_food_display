@@ -1,11 +1,10 @@
 "use client";
 
-import { openAi } from "@/services/openAiService";
+import { Label } from "@/components/ui/label";
+import { openAiService } from "@/services/openAiService";
 import { useState } from "react";
 
 export default function AiForm() {
-  // const [loading, setLoading] = useState(false);
-  // const [aiResult, setAiResult] = useState(null);
   const [preference, setPreference] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -14,7 +13,7 @@ export default function AiForm() {
     e.preventDefault();
     setLoading(true);
 
-    const res = await openAi({ preference });
+    const res = await openAiService({ preference });
     console.log("AI form", res);
     setResult(res.data);
     setLoading(false);
@@ -23,6 +22,12 @@ export default function AiForm() {
   return (
     <div>
       <form onSubmit={handleSubmit} className="space-y-4">
+        <Label
+          htmlFor="symptoms"
+          className="text-[18.9px] text-gray-700 px-4 py-2"
+        >
+          What are your Food choice?
+        </Label>
         <input
           className="border p-2 rounded w-full"
           placeholder="e.g., vegetarian, spicy, kebab"
@@ -32,7 +37,7 @@ export default function AiForm() {
 
         <button
           type="submit"
-          className="bg-blue-600 text-white p-2 rounded w-full"
+          className="bg-yellow-500 text-white p-2 rounded w-full"
         >
           {loading ? "Finding..." : "Find Dish"}
         </button>
