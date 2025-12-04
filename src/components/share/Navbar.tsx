@@ -61,7 +61,7 @@ const Navbar = () => {
 
     fetchData();
   }, []);
- 
+
   return (
     <nav className="sticky top-0 bg-slate-200 shadow-md z-50 px-2 md:px-0">
       <div className="max-w-7xl mx-auto py-3 flex items-center justify-between">
@@ -88,6 +88,12 @@ const Navbar = () => {
             className="  text-[#333333] hover:text-[#FF6b35] transition-colors"
           >
             AllPost
+          </Link>
+          <Link
+            href="/restaurant"
+            className="  text-[#333333] hover:text-[#FF6b35] transition-colors"
+          >
+            Restaurant
           </Link>
 
           <Link
