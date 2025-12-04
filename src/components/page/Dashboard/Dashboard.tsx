@@ -6,8 +6,9 @@ import StatCard from "@/components/dashboard/StartCard";
 import { mockActivity } from "@/components/data/mockData";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { postAprroved, premiumAprroved } from "@/services/postService";
-import { PostStatus } from "@/types";
-import { Post } from "@/types/user";
+// import { PostStatus } from "@/types";
+import { IPost, PostStatus } from "@/types/foodPost";
+
 import { FileText, MessageSquare, Star, Users } from "lucide-react";
 import {
   CartesianGrid,
@@ -31,7 +32,7 @@ interface ImockStats {
   comments: number;
 }
 interface IDashbaordProps {
-  posts: Post[];
+  posts: IPost[];
   data: IData[];
   mockStats: ImockStats;
 }
@@ -39,13 +40,13 @@ const Dashboard: React.FC<IDashbaordProps> = ({ posts, data, mockStats }) => {
   const handleStatusChange = async (id: string, status: PostStatus) => {
     await postAprroved(id, status);
   };
-  
+
   const handlePremiumToggle = async (id: string) => {
     await premiumAprroved(id);
   };
-  const pendingPost: Post[] =
+  const pendingPost: IPost[] =
     posts
-      ?.filter((post: Post) => post.status === "pending")
+      ?.filter((post: IPost) => post.status === "pending")
       .sort(
         (a, b) =>
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -140,18 +141,21 @@ const Dashboard: React.FC<IDashbaordProps> = ({ posts, data, mockStats }) => {
             {pendingPost.map((post) => (
               <PostCard
                 key={post.id}
-                id={post.id}
+                id={post?.id || ""}
                 title={post.title}
                 comments={post.comments}
                 user={post.user || "Unknown author"}
-                category={post.category || "Food"}
-                imageUrl={post.imageUrl || post.image || ""}
+                category={post.category || { id: "", name: "Food" }}
+                image={post?.image || post.image || ""}
                 excerpt={post.excerpt || post.description || ""}
                 status={post.status as PostStatus}
                 isPremium={post.isPremium}
-                createdAt={post.createdAt.toString()}
+                // createdAt={post.createdAt.toString()}
+                createdAt={
+                  post.createdAt ? new Date(post.createdAt) : new Date()
+                }
                 date={
-                  post.date ||
+                  post.createdAt ||
                   new Date(post.createdAt || "").toLocaleDateString()
                 }
                 onStatusChange={handleStatusChange}

@@ -13,13 +13,14 @@ export interface IPost {
   description: string;
   location: string;
   price: number;
-  image: string;
+  image?: string;
+  excerpt?: string;
   categoryId: string;
   isPremium: boolean;
   approved: boolean;
   updatedAt: string;
   userId: string;
-  user?: IUser;
+  user?: IUser | string;
   category?: ICategory;
   votes?: {
     vote: "UP" | "DOWN";
@@ -29,7 +30,7 @@ export interface IPost {
   }[];
   comments?: IComments[];
   restaurant?: IRestaurant;
-  status?: string;
+  status?: PostStatus;
   upVotes: number;
   downVotes: number;
   averageRating: number;

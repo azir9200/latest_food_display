@@ -7,15 +7,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Post } from "@/types/user";
+import { IPost, PostStatus } from "@/types/foodPost";
 import { Check, MoreVertical, Star, X } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
-export type PostStatus = "pending" | "approved" | "rejected";
-
-interface PostCardProps extends Post {
+interface PostCardProps extends IPost {
   onStatusChange?: (id: string, status: PostStatus) => void;
   onPremiumToggle?: (id: string, isPremium: boolean) => void;
   onClick?: () => void;
@@ -26,17 +24,19 @@ const PostCard: React.FC<PostCardProps> = ({
   title,
   user,
   category,
-  imageUrl,
+  image,
   excerpt,
   status,
   isPremium,
-  date,
+  createdAt,
   comments,
   onStatusChange,
   onPremiumToggle,
   onClick,
 }) => {
-  const [currentStatus, setCurrentStatus] = useState<PostStatus>(status);
+  const [currentStatus, setCurrentStatus] = useState<PostStatus>(
+    status || "pending"
+  );
   const [premium, setPremium] = useState<boolean>(isPremium);
 
   const handleStatusChange = (newStatus: PostStatus) => {
@@ -98,7 +98,7 @@ const PostCard: React.FC<PostCardProps> = ({
           <Image
             width={500}
             height={500}
-            src={imageUrl || ""}
+            src={image || ""}
             alt={title}
             className="object-cover w-full h-full"
           />
@@ -159,9 +159,13 @@ const PostCard: React.FC<PostCardProps> = ({
           <div className="flex items-center text-xs text-muted-foreground mb-2">
             <span>{category?.name}</span>
             <span className="mx-1">•</span>
-            <span>By {user?.name}</span>
+            By {typeof user === "string" ? "Unknown User" : user?.name}
             <span className="mx-1">•</span>
-            <span>{date}</span>
+            <span>
+              {createdAt instanceof Date
+                ? createdAt.toLocaleDateString()
+                : createdAt}
+            </span>
           </div>
           <p className="font-semibold text-sm line-clamp-1">
             comment: {comments?.length}

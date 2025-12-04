@@ -35,6 +35,7 @@ import Image from "next/image";
 import { FoodPostCardProps } from "@/types/foodPost";
 import PremiumLockOverlay from "../premium/PremiumOverlay";
 import PremiumBadge from "../premium/PremiumBage";
+import Link from "next/link";
 
 const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
   const [showComments, setShowComments] = useState(false);
@@ -116,7 +117,7 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
     if (navigator.share) {
       navigator
         .share({
-          title: `Food Discovery by ${post?.user?.name || "JUNAYET"}`,
+          title: `Food Discovery by ${post?.user?.name || "Azir"}`,
           text: post?.description?.substring(0, 100) + "...",
           url: shareUrl,
         })
@@ -196,9 +197,6 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
                   {post.user?.name?.charAt(0) || "U"}
                 </AvatarFallback>
               </Avatar>
-              {/* <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-card">
-                azir klkjkjl
-              </div> */}
             </div>
             <div className="flex-1 min-w-0">
               <div className="font-semibold text-foreground truncate hover:text-primary transition-colors cursor-pointer">
@@ -254,7 +252,7 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
                 : post.description}
             </p>
           </div>
-          <div>restaurant {post?.restaurant?.name}</div>
+          <Link href="/restaurant">Find Restaurant</Link>
         </div>
         <div className="relative rounded-2xl overflow-hidden group/image shadow-md">
           <Image
@@ -417,7 +415,12 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
             {comments?.map((comment) => (
               <div key={comment.id} className="flex gap-3 group/comment">
                 <Avatar className="h-9 w-9 ring-2 ring-transparent group-hover/comment:ring-primary/10 transition-all">
-                  <AvatarImage src={comment.user?.image} />
+                  <AvatarImage
+                    src={
+                      post.user?.image ??
+                      `https://api.dicebear.com/7.x/avataaars/svg?seed=${post.user?.email}`
+                    }
+                  />
                   <AvatarFallback className="text-xs bg-primary/10 text-primary font-semibold">
                     {comment.user?.name?.charAt(0) || "U"}
                   </AvatarFallback>

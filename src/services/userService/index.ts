@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 export const getAllusers = async () => {
   try {
     const res = await fetch(
-      "http://localhost:5000/api/user/all-retreive",
+      "http://localhost:5000/api/v1/user/all-retreive",
 
       // `https://latest-food-backend.vercel.app/user/all-retreive`,
 
@@ -25,6 +25,7 @@ export const getAllusers = async () => {
     );
 
     const data = await res.json();
+    console.log("user service", data);
     return data;
   } catch (error: any) {
     return Error(error.message);
@@ -51,7 +52,7 @@ export const deletedUser = async (id: string): Promise<any> => {
     throw new Error(error.message || "Something went wrong");
   }
 };
-export const roleUpate = async (id: string, role: string): Promise<any> => {
+export const roleUpdate = async (id: string, role: string): Promise<any> => {
   const token = (await cookies()).get("accessToken")!.value;
 
   try {

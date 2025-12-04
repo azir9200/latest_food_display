@@ -1,9 +1,10 @@
 "use client";
 import NotFoundProudct from "@/components/dashboard/NotFoundProudct";
 import UserTable from "@/components/dashboard/UserTable";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { deletedUser, roleUpate } from "@/services/userService";
+import { deletedUser, roleUpdate } from "@/services/userService";
 import { IUser, UserRole } from "@/types";
 import { Search, ShieldCheck, Star, User as UserIcon } from "lucide-react";
 import { useState } from "react";
@@ -16,6 +17,9 @@ interface IusersProps {
 const Users: React.FC<IusersProps> = ({ users }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentPagePremium, setCurrentPagePremium] = useState(1);
+  const [currentPageAdmin, setCurrentPageAdmin] = useState(1);
+  const [currentPageUser, setCurrentPageUser] = useState(1);
   const usersPerPage = 5;
 
   const handleDeleteUser = async (id: string) => {
@@ -28,7 +32,7 @@ const Users: React.FC<IusersProps> = ({ users }) => {
   };
 
   const handleUpdateRole = async (id: string, role: UserRole) => {
-    await roleUpate(id, role);
+    await roleUpdate(id, role);
     toast.success(`User role updated to ${role}`);
   };
 
@@ -40,7 +44,7 @@ const Users: React.FC<IusersProps> = ({ users }) => {
             user.name.toLowerCase().includes(searchQuery.toLowerCase()))
       )
     : users;
-
+  console.log("users page", filteredUsers);
   const premiumUsers: IUser[] = filteredUsers?.filter((user) => user.isPremium);
   const AdminUsers: IUser[] = filteredUsers?.filter(
     (user) => user.role === "ADMIN"
@@ -53,6 +57,22 @@ const Users: React.FC<IusersProps> = ({ users }) => {
   const paginatedUsers = filteredUsers?.slice(
     (currentPage - 1) * usersPerPage,
     currentPage * usersPerPage
+  );
+
+  const premiumTotalPages = Math.ceil(premiumUsers?.length / usersPerPage) || 1;
+  const adminTotalPages = Math.ceil(AdminUsers?.length / usersPerPage) || 1;
+  const userTotalPages = Math.ceil(NormalUser?.length / usersPerPage) || 1;
+  const paginatedPremium = premiumUsers?.slice(
+    (currentPagePremium - 1) * usersPerPage,
+    currentPagePremium * usersPerPage
+  );
+  const paginatedAdmin = AdminUsers?.slice(
+    (currentPageAdmin - 1) * usersPerPage,
+    currentPageAdmin * usersPerPage
+  );
+  const paginatedNormal = NormalUser?.slice(
+    (currentPageUser - 1) * usersPerPage,
+    currentPageUser * usersPerPage
   );
 
   const handlePageChange = (page: number) => {
@@ -79,7 +99,10 @@ const Users: React.FC<IusersProps> = ({ users }) => {
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
-              setCurrentPage(1); // reset to first page on search
+              setCurrentPage(1);
+              setCurrentPagePremium(1);
+              setCurrentPageAdmin(1);
+              setCurrentPageUser(1);
             }}
           />
         </div>
@@ -125,32 +148,40 @@ const Users: React.FC<IusersProps> = ({ users }) => {
                   onDeleteUser={handleDeleteUser}
                   onUpdateRole={handleUpdateRole}
                 />
-                <div className="mt-4 flex justify-center gap-2">
-                  <button
-                    onClick={() => handlePageChange(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    className="px-3 py-1 border rounded disabled:opacity-50"
-                  >
-                    Prev
-                  </button>
-                  {Array.from({ length: totalPages }, (_, i) => (
-                    <button
-                      key={i + 1}
-                      onClick={() => handlePageChange(i + 1)}
-                      className={`px-3 py-1 border rounded ${
-                        currentPage === i + 1 ? "bg-primary text-white" : ""
-                      }`}
+                <div className="mt-4 flex items-center justify-between">
+                  <div className="text-sm text-muted-foreground">
+                    {(currentPage - 1) * usersPerPage + 1}-
+                    {Math.min(currentPage * usersPerPage, filteredUsers.length)}{" "}
+                    of {filteredUsers.length}
+                  </div>
+                  <div className="flex justify-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
                     >
-                      {i + 1}
-                    </button>
-                  ))}
-                  <button
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                    className="px-3 py-1 border rounded disabled:opacity-50"
-                  >
-                    Next
-                  </button>
+                      Previous
+                    </Button>
+                    {Array.from({ length: totalPages }, (_, i) => (
+                      <Button
+                        key={i + 1}
+                        variant={currentPage === i + 1 ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => handlePageChange(i + 1)}
+                      >
+                        {i + 1}
+                      </Button>
+                    ))}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                    >
+                      Next
+                    </Button>
+                  </div>
                 </div>
               </>
             ) : (
@@ -163,12 +194,62 @@ const Users: React.FC<IusersProps> = ({ users }) => {
 
           {/* Premium Users */}
           <TabsContent value="premium" className="mt-6">
-            {premiumUsers?.length > 0 ? (
-              <UserTable
-                users={premiumUsers}
-                onDeleteUser={handleDeleteUser}
-                onUpdateRole={handleUpdateRole}
-              />
+            {paginatedPremium?.length > 0 ? (
+              <>
+                <UserTable
+                  users={paginatedPremium}
+                  onDeleteUser={handleDeleteUser}
+                  onUpdateRole={handleUpdateRole}
+                />
+                {premiumUsers?.length > 0 && premiumTotalPages > 1 && (
+                  <div className="mt-4 flex items-center justify-between">
+                    <div className="text-sm text-muted-foreground">
+                      {(currentPagePremium - 1) * usersPerPage + 1}-
+                      {Math.min(
+                        currentPagePremium * usersPerPage,
+                        premiumUsers.length
+                      )}{" "}
+                      of {premiumUsers.length}
+                    </div>
+                    <div className="flex justify-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          setCurrentPagePremium((p) => Math.max(1, p - 1))
+                        }
+                        disabled={currentPagePremium === 1}
+                      >
+                        Previous
+                      </Button>
+                      {Array.from({ length: premiumTotalPages }, (_, i) => (
+                        <Button
+                          key={i + 1}
+                          variant={
+                            currentPagePremium === i + 1 ? "default" : "outline"
+                          }
+                          size="sm"
+                          onClick={() => setCurrentPagePremium(i + 1)}
+                        >
+                          {i + 1}
+                        </Button>
+                      ))}
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          setCurrentPagePremium((p) =>
+                            Math.min(premiumTotalPages, p + 1)
+                          )
+                        }
+                        disabled={currentPagePremium === premiumTotalPages}
+                      >
+                        Next
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </>
             ) : (
               <NotFoundProudct
                 title="No premium users"
@@ -179,12 +260,62 @@ const Users: React.FC<IusersProps> = ({ users }) => {
 
           {/* Admin Users */}
           <TabsContent value="admin" className="mt-6">
-            {AdminUsers?.length > 0 ? (
-              <UserTable
-                users={AdminUsers}
-                onDeleteUser={handleDeleteUser}
-                onUpdateRole={handleUpdateRole}
-              />
+            {paginatedAdmin?.length > 0 ? (
+              <>
+                <UserTable
+                  users={paginatedAdmin}
+                  onDeleteUser={handleDeleteUser}
+                  onUpdateRole={handleUpdateRole}
+                />
+                {AdminUsers?.length > 0 && adminTotalPages > 1 && (
+                  <div className="mt-4 flex items-center justify-between">
+                    <div className="text-sm text-muted-foreground">
+                      {(currentPageAdmin - 1) * usersPerPage + 1}-
+                      {Math.min(
+                        currentPageAdmin * usersPerPage,
+                        AdminUsers.length
+                      )}{" "}
+                      of {AdminUsers.length}
+                    </div>
+                    <div className="flex justify-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          setCurrentPageAdmin((p) => Math.max(1, p - 1))
+                        }
+                        disabled={currentPageAdmin === 1}
+                      >
+                        Previous
+                      </Button>
+                      {Array.from({ length: adminTotalPages }, (_, i) => (
+                        <Button
+                          key={i + 1}
+                          variant={
+                            currentPageAdmin === i + 1 ? "default" : "outline"
+                          }
+                          size="sm"
+                          onClick={() => setCurrentPageAdmin(i + 1)}
+                        >
+                          {i + 1}
+                        </Button>
+                      ))}
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          setCurrentPageAdmin((p) =>
+                            Math.min(adminTotalPages, p + 1)
+                          )
+                        }
+                        disabled={currentPageAdmin === adminTotalPages}
+                      >
+                        Next
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </>
             ) : (
               <NotFoundProudct
                 title="No admin users"
@@ -195,12 +326,62 @@ const Users: React.FC<IusersProps> = ({ users }) => {
 
           {/* Normal Users */}
           <TabsContent value="user" className="mt-6">
-            {NormalUser?.length > 0 ? (
-              <UserTable
-                users={NormalUser}
-                onDeleteUser={handleDeleteUser}
-                onUpdateRole={handleUpdateRole}
-              />
+            {paginatedNormal?.length > 0 ? (
+              <>
+                <UserTable
+                  users={paginatedNormal}
+                  onDeleteUser={handleDeleteUser}
+                  onUpdateRole={handleUpdateRole}
+                />
+                {NormalUser?.length > 0 && userTotalPages > 1 && (
+                  <div className="mt-4 flex items-center justify-between">
+                    <div className="text-sm text-muted-foreground">
+                      {(currentPageUser - 1) * usersPerPage + 1}-
+                      {Math.min(
+                        currentPageUser * usersPerPage,
+                        NormalUser.length
+                      )}{" "}
+                      of {NormalUser.length}
+                    </div>
+                    <div className="flex justify-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          setCurrentPageUser((p) => Math.max(1, p - 1))
+                        }
+                        disabled={currentPageUser === 1}
+                      >
+                        Previous
+                      </Button>
+                      {Array.from({ length: userTotalPages }, (_, i) => (
+                        <Button
+                          key={i + 1}
+                          variant={
+                            currentPageUser === i + 1 ? "default" : "outline"
+                          }
+                          size="sm"
+                          onClick={() => setCurrentPageUser(i + 1)}
+                        >
+                          {i + 1}
+                        </Button>
+                      ))}
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          setCurrentPageUser((p) =>
+                            Math.min(userTotalPages, p + 1)
+                          )
+                        }
+                        disabled={currentPageUser === userTotalPages}
+                      >
+                        Next
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </>
             ) : (
               <NotFoundProudct
                 title="No regular users"
