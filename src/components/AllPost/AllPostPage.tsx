@@ -28,7 +28,9 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
     ? posts.filter((spot) => {
         const matchesSearch =
           spot.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          spot.description.toLowerCase().includes(searchQuery.toLowerCase());
+          (spot.description ?? "")
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase());
 
         const matchesCategory =
           selectedFilter === "All"
@@ -52,7 +54,7 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
         );
       })
     : [];
-  
+
   return (
     <main className="container mx-auto py-8 px-4 max-w-4xl">
       <div className="text-center mb-10 space-y-4 animate-slide-up">

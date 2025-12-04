@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-const bubbles = Array.from({ length: 12 }).map((_, i) => ({
+const bubbles = Array.from({ length: 12 }).map(() => ({
   size: 40 + Math.random() * 70,
   x: `${Math.random() * 100}%`,
   y: `${Math.random() * 100}%`,

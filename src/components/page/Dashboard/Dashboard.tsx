@@ -49,7 +49,8 @@ const Dashboard: React.FC<IDashbaordProps> = ({ posts, data, mockStats }) => {
       ?.filter((post: IPost) => post.status === "pending")
       .sort(
         (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          new Date(b.createdAt ?? 0).getTime() -
+          new Date(a.createdAt ?? 0).getTime()
       ) || [];
 
   return (
@@ -150,13 +151,8 @@ const Dashboard: React.FC<IDashbaordProps> = ({ posts, data, mockStats }) => {
                 excerpt={post.excerpt || post.description || ""}
                 status={post.status as PostStatus}
                 isPremium={post.isPremium}
-                // createdAt={post.createdAt.toString()}
                 createdAt={
                   post.createdAt ? new Date(post.createdAt) : new Date()
-                }
-                date={
-                  post.createdAt ||
-                  new Date(post.createdAt || "").toLocaleDateString()
                 }
                 onStatusChange={handleStatusChange}
                 onPremiumToggle={handlePremiumToggle}

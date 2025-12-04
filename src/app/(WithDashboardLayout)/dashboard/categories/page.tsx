@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 };
 const Category = async () => {
   const result = await getAllCategory();
+  
   return (
     <div>
       <Categories initialCategories={result?.data} />

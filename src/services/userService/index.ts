@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use server";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
@@ -6,9 +6,9 @@ import { cookies } from "next/headers";
 export const getAllusers = async () => {
   try {
     const res = await fetch(
-      "http://localhost:5000/api/v1/user/all-retreive",
+      // "http://localhost:5000/api/v1/user/all-retreive",
 
-      // `https://latest-food-backend.vercel.app/user/all-retreive`,
+      `https://latest-food-backend.vercel.app/user/all-retreive`,
 
       {
         method: "GET",

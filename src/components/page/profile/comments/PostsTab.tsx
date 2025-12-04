@@ -51,11 +51,11 @@ const PostsTab: React.FC<{ userData: IUser; categories: ICategory[] }> = ({
 
   const handleEditClick = (post: IPost) => {
     setSelectedPost(post);
-    setEditTitle(post.title);
-    setEditDescription(post.description);
-    setEditPrice(post.price.toString());
-    setEditLocation(post.location);
-    setEditCategoryId(post.categoryId);
+    setEditTitle(post.title ?? "");
+    setEditDescription(post.description ?? "");
+    setEditPrice(post.price?.toString() ?? "");
+    setEditLocation(post.location ?? "");
+    setEditCategoryId(post.categoryId ?? "");
     setEditDialogOpen(true);
   };
 
@@ -188,9 +188,11 @@ const PostsTab: React.FC<{ userData: IUser; categories: ICategory[] }> = ({
                         {post?.status}
                       </TableCell>
                       <TableCell className="hidden md:table-cell text-xs text-muted-foreground">
-                        {formatDistanceToNow(new Date(post.createdAt), {
-                          addSuffix: true,
-                        })}
+                        {post.createdAt
+                          ? formatDistanceToNow(new Date(post.createdAt), {
+                              addSuffix: true,
+                            })
+                          : "N/A"}
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex gap-1 justify-end">

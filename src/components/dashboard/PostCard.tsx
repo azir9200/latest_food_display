@@ -37,7 +37,7 @@ const PostCard: React.FC<PostCardProps> = ({
   const [currentStatus, setCurrentStatus] = useState<PostStatus>(
     status || "pending"
   );
-  const [premium, setPremium] = useState<boolean>(isPremium);
+  const [premium, setPremium] = useState<boolean>(isPremium  ?? false);
 
   const handleStatusChange = (newStatus: PostStatus) => {
     setCurrentStatus(newStatus);

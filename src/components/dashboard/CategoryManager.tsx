@@ -9,12 +9,6 @@ import {
   updateCategory,
 } from "@/services/categoryService";
 import { ICategory } from "@/types/comments";
-// import {
-//   createCategory,
-//   deletedCategory,
-//   updateCategory,
-// } from "@/services/categoryservice";
-// import { Category } from "@/types";
 import { Edit, Trash2 } from "lucide-react";
 import React, { useState } from "react";
 import { toast } from "sonner";
@@ -34,15 +28,21 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({
   const handleSubmit = async () => {
     console.log("handle submit");
     if (!categoryName.trim()) return;
+    try {
+      if (editingId) {
+        await updateCategory(editingId, categoryName);
+        toast.success("Category updated successfully");
+      } else {
+        await createCategory(categoryName);
+        toast.success("Category created successfully");
+      }
 
-    if (editingId) {
-      await updateCategory(editingId, categoryName);
-    } else {
-      await createCategory(categoryName);
+      setCategoryName("");
+      setEditingId(null);
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong!");
     }
-
-    setCategoryName("");
-    setEditingId(null);
   };
 
   const handleEdit = (id: string, name: string) => {

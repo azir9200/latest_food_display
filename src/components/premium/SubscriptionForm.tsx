@@ -83,6 +83,7 @@ const SubscriptionForm = () => {
         agreeTerms: false,
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [owner]);
 
   const onSubmit = async (data: FormValues) => {

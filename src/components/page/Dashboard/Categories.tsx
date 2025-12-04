@@ -1,8 +1,9 @@
 "use client";
 import CategoryManager from "@/components/dashboard/CategoryManager";
-import { Category } from "@/types";
+import { ICategory } from "@/types/comments";
+
 interface CategoryManagerProps {
-  initialCategories: Category[];
+  initialCategories: ICategory[];
 }
 const Categories: React.FC<CategoryManagerProps> = ({ initialCategories }) => {
   return (

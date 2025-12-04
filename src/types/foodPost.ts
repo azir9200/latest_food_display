@@ -10,16 +10,16 @@ export type PostStatus = "pending" | "approved" | "rejected";
 export interface IPost {
   id: string;
   title: string;
-  description: string;
-  location: string;
-  price: number;
+  description?: string;
+  location?: string;
+  price?: number;
   image?: string;
   excerpt?: string;
-  categoryId: string;
-  isPremium: boolean;
-  approved: boolean;
-  updatedAt: string;
-  userId: string;
+  categoryId?: string;
+  isPremium?: boolean;
+  approved?: boolean;
+  updatedAt?: string;
+  userId?: string;
   user?: IUser | string;
   category?: ICategory;
   votes?: {
@@ -31,11 +31,11 @@ export interface IPost {
   comments?: IComments[];
   restaurant?: IRestaurant;
   status?: PostStatus;
-  upVotes: number;
-  downVotes: number;
-  averageRating: number;
-  totalComments: number;
-  createdAt: Date;
+  upVotes?: number;
+  downVotes?: number;
+  averageRating?: number;
+  totalComments?: number;
+  createdAt?: Date;
 }
 
 export interface FoodSpotCardProps {
