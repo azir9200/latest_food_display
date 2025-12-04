@@ -1,4 +1,3 @@
-
 "use client";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
@@ -15,7 +14,7 @@ export default function Hero() {
         {/* Left: copy */}
         <div className="space-y-6">
           <div className="inline-flex items-center gap-3 self-start rounded-full bg-transparent">
-            <Sparkles className="w-7 h-7 text-[color:var(--accent,#F7C948)]" />
+            <Sparkles className="w-7 h-7 text-yellow-500" />
             <span
               className="text-2xl font-medium"
               style={{ color: "var(--accent,#F7C948)" }}
@@ -37,7 +36,7 @@ export default function Hero() {
           <div className="flex gap-4 items-center">
             <a
               className="inline-flex items-center gap-3 rounded-full px-6 py-3 bg-[color:var(--accent,#F7C948)] text-black font-semibold shadow-md hover:shadow-lg transition"
-              href="/discover"
+              href="/allpost"
             >
               Explore dishes
             </a>

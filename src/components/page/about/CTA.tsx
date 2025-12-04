@@ -1,4 +1,3 @@
-// components/CTA.tsx
 "use client";
 import { motion } from "framer-motion";
 
@@ -26,13 +25,13 @@ export default function CTA() {
           <div className="flex gap-4">
             <a
               className="inline-block px-6 py-3 bg-[color:var(--accent,#F7C948)] rounded-full font-semibold"
-              href="/request-demo"
+              href="/contact"
             >
               Request demo
             </a>
             <a
               className="inline-block px-6 py-3 border rounded-full"
-              href="/pricing"
+              href="/allpost"
             >
               See pricing
             </a>
