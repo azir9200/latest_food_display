@@ -1,36 +1,26 @@
-
-import Image from "next/image";
 import { getAllRestaurant } from "@/services/restaurantService";
+import Image from "next/image";
 
-export default async function RestaurantPage() {
+export default async function AllRestaurantsPage() {
   const response = await getAllRestaurant();
-  const restaurants = response?.data?.slice(0, 6) || [];
-  console.log("restaurant page", response);
-  console.log("restaurant page", restaurants);
+  const restaurants = response?.data || [];
 
   return (
-    <section className="py-10">
-      {/* <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold">Popular Restaurants</h2>
-        <Link
-          href="/restaurants"
-          className="text-blue-600 hover:underline font-medium"
-        >
-          Show All →
-        </Link>
-      </div> */}
+    <section className="py-10 container mx-auto">
+      <h1 className="text-2xl font-semibold mb-6">All Restaurants</h1>
 
-      {/* Grid — 2 per row (mobile), 3 per row on medium screens */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {restaurants.map((item: any) => (
           <div
             key={item.id}
             className="bg-white rounded-lg shadow-sm border p-3 hover:shadow-md transition"
           >
-            <div className="relative w-full h-32 rounded-md overflow-hidden">
+            <div className="relative w-full h-36 rounded-md overflow-hidden">
               <Image
                 src={item.image}
                 alt={item.name}
+                width={500}
+                height={500}
                 fill
                 className="object-cover"
               />

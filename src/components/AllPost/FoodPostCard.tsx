@@ -196,7 +196,9 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
                   {post.user?.name?.charAt(0) || "U"}
                 </AvatarFallback>
               </Avatar>
-              <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-card"></div>
+              {/* <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-card">
+                azir klkjkjl
+              </div> */}
             </div>
             <div className="flex-1 min-w-0">
               <div className="font-semibold text-foreground truncate hover:text-primary transition-colors cursor-pointer">
@@ -237,21 +239,23 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
       </CardHeader>
 
       <CardContent className="space-y-4 relative">
-        <div
-          className={
-            isContentLocked ? "blur-sm select-none pointer-events-none" : ""
-          }
-        >
-          <h2 className="text-2xl font-display font-bold text-foreground mb-3 leading-tight hover:text-primary transition-colors cursor-pointer">
-            {post.title}
-          </h2>
-          <p className="text-muted-foreground whitespace-pre-line leading-relaxed text-base">
-            {isContentLocked
-              ? post.description.substring(0, 50) + "..."
-              : post.description}
-          </p>
+        <div className="flex justify-between">
+          <div
+            className={
+              isContentLocked ? "blur-sm select-none pointer-events-none" : ""
+            }
+          >
+            <h2 className="text-2xl font-display font-bold text-foreground mb-3 leading-tight hover:text-primary transition-colors cursor-pointer">
+              {post.title}
+            </h2>
+            <p className="text-muted-foreground whitespace-pre-line leading-relaxed text-base">
+              {isContentLocked
+                ? post.description.substring(0, 50) + "..."
+                : post.description}
+            </p>
+          </div>
+          <div>restaurant {post?.restaurant?.name}</div>
         </div>
-
         <div className="relative rounded-2xl overflow-hidden group/image shadow-md">
           <Image
             src={

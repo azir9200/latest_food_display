@@ -52,8 +52,7 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
         );
       })
     : [];
-  console.log("all post page", filteredSpots);
-
+  
   return (
     <main className="container mx-auto py-8 px-4 max-w-4xl">
       <div className="text-center mb-10 space-y-4 animate-slide-up">

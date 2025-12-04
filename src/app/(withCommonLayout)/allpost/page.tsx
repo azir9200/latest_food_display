@@ -11,7 +11,7 @@ const AllProduct = async () => {
   const { data: Categories } = await getAllCategory();
   return (
     <div>
-      {/* <AllPosts /> */}
+     
       <AllPostPage posts={data} categoriess={Categories} />
     </div>
   );

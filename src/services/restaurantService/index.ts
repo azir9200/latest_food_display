@@ -8,7 +8,6 @@ export const getAllRestaurant = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/restaurant/`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${(await cookies()).get("accessToken")!.value}`,
         "Content-Type": "application/json",
       },
       next: {
@@ -17,7 +16,6 @@ export const getAllRestaurant = async () => {
     });
 
     const data = await res.json();
-    console.log("restaurant service", data);
     return data;
   } catch (error: any) {
     return Error(error.message);

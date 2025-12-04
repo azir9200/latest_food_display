@@ -1,9 +1,15 @@
-import { IUser } from ".";
+
 import { IPost } from "./foodPost";
+
+export type ICommentUser = {
+  id: string;
+  name: string;
+  image?: string | null;
+};
 
 export type IComments = {
   id: string;
-  user: IUser;
+   user: ICommentUser;
   commentText: string;
   createdAt: string;
   post?: IPost;

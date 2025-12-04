@@ -1,5 +1,6 @@
 import { IUser } from ".";
 import { ICategory, IComments } from "./comments";
+import { IRestaurant } from "./restaurant";
 
 export interface FoodPostCardProps {
   post: IPost;
@@ -27,6 +28,7 @@ export interface IPost {
     rating: number;
   }[];
   comments?: IComments[];
+  restaurant?: IRestaurant;
   status?: string;
   upVotes: number;
   downVotes: number;
