@@ -6,20 +6,21 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { User } from "@/types";
+import { IUser } from "@/types";
 import OrderPage from "../order/OrderPage";
 import SubscriptionForm from "./SubscriptionForm";
+
 interface PremiumPageProps {
   payment: {
     paymentStatus: boolean;
-    user: User;
+    user: IUser;
     paymentMethod: string;
     subscriptedAt: string | number | Date;
     price: number;
     plan?: string;
   };
 }
-const PremiumPage: React.FC<PremiumPageProps> = ({ payment }) => {
+const Subscription: React.FC<PremiumPageProps> = ({ payment }) => {
   return (
     <div>
       {payment?.paymentStatus ? (
@@ -135,4 +136,4 @@ const PremiumPage: React.FC<PremiumPageProps> = ({ payment }) => {
   );
 };
 
-export default PremiumPage;
+export default Subscription;
