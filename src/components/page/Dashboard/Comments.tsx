@@ -4,16 +4,16 @@ import NotFoundProudct from "@/components/dashboard/NotFoundProudct";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { deletedComment, updateComment } from "@/services/commentService";
-import { Comment } from "@/types";
+import { IComments } from "@/types/comments";
 import { MessageSquare, Search } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-interface commentsPros {
-  Postcomments: Comment[];
+interface CommentsProps {
+  postComments: IComments[];
 }
 
-const Comments: React.FC<commentsPros> = ({ Postcomments }) => {
+const Comments: React.FC<CommentsProps> = ({ postComments }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleDelete = async (id: string) => {
@@ -26,10 +26,9 @@ const Comments: React.FC<commentsPros> = ({ Postcomments }) => {
     toast.success("Comment updated");
   };
 
-  // Filtered comments based on search query
-  const filteredComments: Comment[] =
-    Postcomments?.filter((comment: Comment) =>
-      comment.commentText.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredComments: IComments[] =
+    postComments?.filter((comment: IComments) =>
+      comment.commentText?.toLowerCase().includes(searchQuery.toLowerCase())
     ) || [];
 
   return (
@@ -65,14 +64,14 @@ const Comments: React.FC<commentsPros> = ({ Postcomments }) => {
 
           <TabsContent value="All" className="mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {filteredComments.map((comment: Comment) => (
+              {filteredComments.map((comment) => (
                 <CommentCard
                   key={comment.id}
                   id={comment.id}
-                  author={comment.user.email}
+                  user={comment.user}
                   content={comment.commentText}
-                  postTitle={comment.post.title}
-                  date={comment.createdAt.toString()}
+                  postTitle={comment.post?.title}
+                  createdAt={comment.createdAt.toString()}
                   onDelete={handleDelete}
                   onEdit={handleEdit}
                 />

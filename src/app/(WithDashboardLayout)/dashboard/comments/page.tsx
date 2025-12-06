@@ -10,13 +10,12 @@ export const metadata: Metadata = {
 const Comment = async () => {
   const comments = await getComments();
 
-
   if (!comments?.data) {
     return <div>No comments found or failed to load.</div>;
   }
   return (
     <div>
-      <Comments Postcomments={comments?.data} />
+      <Comments postComments={comments.data} />
     </div>
   );
 };

@@ -1,25 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import { IComments } from "@/types/comments";
 import { Check, Edit, Trash2, X } from "lucide-react";
 import React, { useState } from "react";
 
-interface CommentCardProps {
-  id: string;
-  author: string;
-  content: string;
-  postTitle?: string;
-  date: string;
-  onDelete: (id: string) => void;
-  onEdit?: (id: string, newContent: string) => void;
-}
-
-const CommentCard: React.FC<CommentCardProps> = ({
+const CommentCard: React.FC<IComments> = ({
   id,
-  author,
+  user,
   content,
   postTitle,
-  date,
+  createdAt,
   onDelete,
   onEdit,
 }) => {
@@ -41,7 +32,7 @@ const CommentCard: React.FC<CommentCardProps> = ({
 
   const handleSaveEdit = () => {
     if (onEdit) {
-      onEdit(id, editedContent);
+      onEdit(id, editedContent ?? "");
       setIsEditing(false);
     }
   };
@@ -61,7 +52,7 @@ const CommentCard: React.FC<CommentCardProps> = ({
       <CardContent className="p-4">
         <div className="flex justify-between items-start mb-2">
           <div>
-            <span className="font-medium">{author}</span>
+            <span className="font-medium">{user.name}</span>
             {postTitle && (
               <>
                 <span className="mx-1 text-muted-foreground">on</span>
@@ -72,7 +63,7 @@ const CommentCard: React.FC<CommentCardProps> = ({
             )}
           </div>
           <span className="text-xs text-muted-foreground">
-            {formatDate(date)}
+            {formatDate(createdAt)}
           </span>
         </div>
 

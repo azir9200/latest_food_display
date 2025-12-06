@@ -13,7 +13,7 @@ export interface IPost {
   description: string;
   location?: string;
   price?: number;
-  image?: string;
+  image?: string | null;
   excerpt?: string;
   categoryId?: string;
   isPremium?: boolean;
@@ -34,7 +34,7 @@ export interface IPost {
   status?: PostStatus;
   upVotes?: number;
   downVotes?: number;
-  averageRating?: number;
+  averageRating?: number | 0;
   totalComments?: number;
   createdAt?: Date;
 }
@@ -44,8 +44,8 @@ export interface FoodSpotCardProps {
     id: string;
     title: string;
     description: string;
-    image: string;
-    averageRating: number;
+    image?: string | null;
+    averageRating ?: number | 0;
     price: number;
     category?: ICategory;
     location: string;
@@ -56,3 +56,5 @@ export interface FoodSpotCardProps {
     className?: string;
   };
 }
+
+

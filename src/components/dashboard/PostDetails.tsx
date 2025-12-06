@@ -9,16 +9,17 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Comment } from "@/types";
-import { Post } from "@/types/user";
+import { IComments } from "@/types/comments";
+import { IPost } from "@/types/foodPost";
+
 import { MessageSquare, Star } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 
 interface PostDetailProps {
-  post: Post;
+  post: IPost;
   open: boolean;
-  comments: Comment[];
+  comments: IComments[];
   onOpenChange: (open: boolean) => void;
   onApprove: (id: string) => void;
   onReject: (id: string) => void;
@@ -92,11 +93,20 @@ const PostDetail: React.FC<PostDetailProps> = ({
           </div>
 
           <div className="flex items-center text-sm text-muted-foreground mt-2">
-            <span>By {post?.user?.name}</span>
+            <span>
+              By{" "}
+              {post.user && typeof post.user !== "string"
+                ? post.user.name
+                : "Unknown User"}
+            </span>
             <span className="mx-2">•</span>
             <span>{post?.category?.name}</span>
             <span className="mx-2">•</span>
-            <span>{post.date}</span>
+            <span>
+              {post.createdAt
+                ? new Date(post.createdAt).toLocaleString()
+                : "Unknown date"}
+            </span>
           </div>
         </DialogHeader>
 
@@ -129,7 +139,7 @@ const PostDetail: React.FC<PostDetailProps> = ({
                   <Image
                     height={500}
                     width={500}
-                    src={post?.imageUrl || ""}
+                    src={post?.image || ""}
                     alt={post.title}
                     className="w-full h-full object-cover rounded-md"
                   />
@@ -150,7 +160,7 @@ const PostDetail: React.FC<PostDetailProps> = ({
                 className="mt-0 h-[200px] overflow-y-auto space-y-4 pr-2"
               >
                 {comments.length > 0 ? (
-                  comments.map((comment: Comment) => (
+                  comments.map((comment: IComments) => (
                     <Card key={comment.id} className="border">
                       <CardContent className="pt-4">
                         <div className="flex justify-between items-start mb-2">
@@ -197,7 +207,7 @@ const PostDetail: React.FC<PostDetailProps> = ({
                                 size="sm"
                                 onClick={() => {
                                   setEditingCommentId(comment.id);
-                                  setEditedText(comment.commentText);
+                                  setEditedText(comment.commentText ?? "");
                                 }}
                               >
                                 Edit

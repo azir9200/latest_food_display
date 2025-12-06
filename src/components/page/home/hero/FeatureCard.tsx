@@ -3,7 +3,7 @@ import { IUser } from "@/types";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import FoodSpotCard from "../foodSpotList/FoodSpotCard";
-import { IPost, normalizePost } from "@/types/foodPost";
+import { IPost } from "@/types/foodPost";
 interface FeaturedSpotsProps {
   user: IUser;
   posts: IPost[];
@@ -43,7 +43,23 @@ const FeaturedSpots: React.FC<FeaturedSpotsProps> = ({ user, posts }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {nonPremiumPosts?.map((spot) => (
-            <FoodSpotCard key={spot.id} spot={normalizePost(spot)} />
+            <FoodSpotCard
+              key={spot.id}
+              spot={{
+                id: spot.id,
+                title: spot.title,
+                description: spot.description ?? "",
+                image: spot.image ?? null,
+                averageRating: spot.averageRating ?? 0,
+                price: spot.price ?? 0,
+                category: spot.category,
+                location: spot.location ?? "Unknown",
+                isPremium: spot.isPremium ?? false,
+                upVotes: spot.upVotes ?? 0,
+                downVotes: spot.downVotes ?? 0,
+                totalComments: spot.totalComments ?? 0,
+              }}
+            />
           ))}
         </div>
       </div>
@@ -77,7 +93,23 @@ const FeaturedSpots: React.FC<FeaturedSpotsProps> = ({ user, posts }) => {
             {premiumPosts?.map((spot: IPost) => (
               <div key={spot.id} className="relative group overflow-hidden">
                 {/* Show the card normally */}
-                <FoodSpotCard key={spot.id} spot={normalizePost(spot)} />
+                <FoodSpotCard
+                  key={spot.id}
+                  spot={{
+                    id: spot.id,
+                    title: spot.title,
+                    description: spot.description ?? "",
+                    image: spot.image ?? null,
+                    averageRating: spot.averageRating ?? 0,
+                    price: spot.price ?? 0,
+                    category: spot.category,
+                    location: spot.location ?? "Unknown",
+                    isPremium: spot.isPremium ?? false,
+                    upVotes: spot.upVotes ?? 0,
+                    downVotes: spot.downVotes ?? 0,
+                    totalComments: spot.totalComments ?? 0,
+                  }}
+                />
 
                 {/* Overlay with blur effect - only covers the card content */}
                 {!user?.isPremium && (

@@ -144,6 +144,7 @@ const Dashboard: React.FC<IDashbaordProps> = ({ posts, data, mockStats }) => {
                 key={post.id}
                 id={post?.id || ""}
                 title={post.title}
+                description={post.description}
                 comments={post.comments}
                 user={post.user || "Unknown author"}
                 category={post.category || { id: "", name: "Food" }}

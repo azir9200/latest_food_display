@@ -201,16 +201,15 @@ const Posts: React.FC<PostsProps> = ({ posts, categories }) => {
                   key={post.id}
                   id={post.id}
                   title={post.title}
+                  description={post.description}
                   comments={post.comments}
                   user={post.user || "Unknown author"}
-                 category={post.category ?? { id: "unknown", name: "Food" }}
-
+                  category={post.category ?? { id: "unknown", name: "Food" }}
                   image={post.image || ""}
                   excerpt={post.excerpt || post.description || ""}
                   status={post.status as PostStatus}
                   isPremium={post.isPremium}
-                 createdAt={new Date(post.createdAt ?? "")}
-
+                  createdAt={new Date(post.createdAt ?? "")}
                   onStatusChange={handleStatusChange}
                   onPremiumToggle={handlePremiumToggle}
                   onClick={() => openPostDetail(post.id)}
@@ -267,7 +266,7 @@ const Posts: React.FC<PostsProps> = ({ posts, categories }) => {
             excerpt: selectedPost.excerpt || selectedPost.description || "",
             status: selectedPost.status as PostStatus,
             isPremium: selectedPost.isPremium,
-                      date: new Date(selectedPost.createdAt ?? "").toLocaleDateString(),
+            date: new Date(selectedPost.createdAt ?? "").toLocaleDateString(),
           }}
           comments={postComments}
           onApprove={(id) => handleStatusChange(id, "approved")}
