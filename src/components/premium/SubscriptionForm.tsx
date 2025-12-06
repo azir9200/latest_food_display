@@ -57,7 +57,7 @@ const SubscriptionForm = () => {
     };
     loginUser();
   }, []);
-  console.log("subscription page", owner);
+ 
   const amount = 1000;
   const finalAmount = Number(amount - (amount * discount) / 100);
 
@@ -99,7 +99,7 @@ const SubscriptionForm = () => {
       };
 
       const res = await premiumUser(payloadData);
-      console.log("premium data", res);
+    
       if (res.success) {
         methods.reset();
         toast.success("Redirecting to payment gateway...", {

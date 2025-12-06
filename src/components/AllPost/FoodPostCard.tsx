@@ -36,7 +36,10 @@ import { FoodPostCardProps } from "@/types/foodPost";
 import PremiumLockOverlay from "../premium/PremiumOverlay";
 import PremiumBadge from "../premium/PremiumBage";
 import Link from "next/link";
-
+function safeUser(user: any) {
+  if (typeof user === "object" && user !== null) return user;
+  return { name: "Unknown", email: "", image: "" };
+}
 const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
   const [showComments, setShowComments] = useState(false);
   const router = useRouter();
@@ -44,11 +47,11 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
   const [newComment, setNewComment] = useState("");
   const [showRatingPanel, setShowRatingPanel] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-  const [localLikes, setLocalLikes] = useState(post.upVotes);
+  const [localLikes, setLocalLikes] = useState(post.upVotes ?? 0);
   const [isSaved, setIsSaved] = useState(false);
   const [selectedRating, setSelectedRating] = useState(0);
   const [comments, setComments] = useState(post.comments || []);
-  const [totalComments, setTotalComments] = useState(post.totalComments);
+  const [totalComments, setTotalComments] = useState(post.totalComments || 0);
 
   const handleVote = async (type: "UP" | "DOWN") => {
     const payload = {
@@ -117,7 +120,7 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
     if (navigator.share) {
       navigator
         .share({
-          title: `Food Discovery by ${post?.user?.name || "Azir"}`,
+          title: `Food Discovery by ${safeUser(post.user).name || "Azir"}`,
           text: post?.description?.substring(0, 100) + "...",
           url: shareUrl,
         })
@@ -143,7 +146,7 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
   };
 
   const handleLocationClick = () => {
-    const query = encodeURIComponent(post.location);
+    const query = encodeURIComponent(post.location ?? "");
     window.open(
       `https://www.google.com/maps/search/?api=1&query=${query}`,
       "_blank"
@@ -188,22 +191,26 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
               <Avatar className="h-12 w-12 ring-2 ring-primary/10 group-hover:ring-primary/20 transition-all">
                 <AvatarImage
                   src={
-                    post.user?.image ||
-                    `https://api.dicebear.com/7.x/avataaars/svg?seed=${post.user?.email}`
+                    safeUser(post.user)?.image ||
+                    `https://api.dicebear.com/7.x/avataaars/svg?seed=${
+                      typeof post.user === "object" && post.user !== null
+                        ? post.user.email
+                        : "unknown"
+                    }`
                   }
-                  alt={post.user?.name}
+                  alt={safeUser(post.user)?.name}
                 />
                 <AvatarFallback className="bg-gradient-to-br from-primary/20 to-accent/20 text-primary font-bold">
-                  {post.user?.name?.charAt(0) || "U"}
+                  {safeUser(post.user)?.name?.charAt(0) || "U"}
                 </AvatarFallback>
               </Avatar>
             </div>
             <div className="flex-1 min-w-0">
               <div className="font-semibold text-foreground truncate hover:text-primary transition-colors cursor-pointer">
-                {post.user?.name}
+                {safeUser(post.user)?.name}
               </div>
               <div className="text-xs text-muted-foreground">
-                {formatDistanceToNow(new Date(post.createdAt), {
+                {formatDistanceToNow(new Date(post.createdAt ?? new Date()), {
                   addSuffix: true,
                 })}
               </div>
@@ -222,7 +229,7 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
 
           <div className="flex flex-col items-end gap-2">
             <div className="flex items-center gap-2">
-              {renderRating(post.averageRating)}
+              {renderRating(post?.averageRating ?? 0)}
               <Button
                 variant="ghost"
                 size="icon"

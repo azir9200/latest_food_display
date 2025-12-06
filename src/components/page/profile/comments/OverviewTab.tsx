@@ -1,12 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { IUser } from "@/types";
 import { FileText, MessageCircle, Star, ThumbsUp } from "lucide-react";
 
-interface IUserData {
-  posts: any[];
-  comments: any[];
-}
 
-const OverviewTab: React.FC<{ userData: IUserData }> = ({ userData }) => {
+const OverviewTab: React.FC<{ userData: IUser }> = ({ userData }) => {
   const totalPosts = userData?.posts?.length || 0;
   const totalComments = userData?.comments?.length || 0;
   const totalLikes =

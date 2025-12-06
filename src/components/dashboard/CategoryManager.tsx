@@ -26,7 +26,7 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({
   const pageSize = 10;
 
   const handleSubmit = async () => {
-    console.log("handle submit");
+   
     if (!categoryName.trim()) return;
     try {
       if (editingId) {

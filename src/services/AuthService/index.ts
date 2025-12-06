@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 
 export const SignUpUser = async (userData: FieldValues) => {
-  console.log(userData);
+ 
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/user/register`,
@@ -19,11 +19,8 @@ export const SignUpUser = async (userData: FieldValues) => {
       }
     );
     const result = await res.json();
-    console.log(result);
-    // if (result.success) {
-    //   (await cookies()).set("accessToken", result.data.accessToken);
-    //   //   (await cookies()).set("refreshToken", result?.data?.refreshToken);
-    // }
+  
+    
     return result;
   } catch (error: any) {
     return Error(error);
@@ -41,7 +38,7 @@ export const loginUser = async (userData: FieldValues) => {
     });
 
     const result = await res.json();
-    console.log(res);
+
 
     if (result?.success) {
       (await cookies()).set("accessToken", result?.data?.accessToken);

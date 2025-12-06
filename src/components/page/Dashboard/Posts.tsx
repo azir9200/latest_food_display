@@ -14,15 +14,15 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { updateComment, deletedComment } from "@/services/commentService";
 import { postAprroved, premiumAprroved } from "@/services/postService";
-import { Comment, PostStatus } from "@/types";
-import { Category, Post } from "@/types/user";
+import { ICategory } from "@/types/comments";
+import { IPost, PostStatus } from "@/types/foodPost";
 import { Download, Filter, Search } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
 interface PostsProps {
-  posts: Post[];
-  categories: Category[];
+  posts: IPost[];
+  categories: ICategory[];
 }
 
 const Posts: React.FC<PostsProps> = ({ posts, categories }) => {
@@ -72,12 +72,14 @@ const Posts: React.FC<PostsProps> = ({ posts, categories }) => {
     .sort((a, b) => {
       if (sortBy === "date-desc") {
         return (
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          new Date(b.createdAt ?? 0).getTime() -
+          new Date(a.createdAt ?? 0).getTime()
         );
       }
       if (sortBy === "date-asc") {
         return (
-          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+          new Date(a.createdAt ?? 0).getTime() -
+          new Date(b.createdAt ?? 0).getTime()
         );
       }
       if (sortBy === "title-asc") {
@@ -92,7 +94,7 @@ const Posts: React.FC<PostsProps> = ({ posts, categories }) => {
   const selectedPost = selectedPostId
     ? posts.find((post) => post.id === selectedPostId)
     : null;
-  const postComments: Comment[] = selectedPost?.comments || [];
+  const postComments = selectedPost?.comments || [];
 
   return (
     <div>
@@ -201,16 +203,14 @@ const Posts: React.FC<PostsProps> = ({ posts, categories }) => {
                   title={post.title}
                   comments={post.comments}
                   user={post.user || "Unknown author"}
-                  category={post.category || "Food"}
-                  imageUrl={post.imageUrl || post.image || ""}
+                 category={post.category ?? { id: "unknown", name: "Food" }}
+
+                  image={post.image || ""}
                   excerpt={post.excerpt || post.description || ""}
                   status={post.status as PostStatus}
                   isPremium={post.isPremium}
-                  createdAt={post.createdAt.toString()}
-                  date={
-                    post.date ||
-                    new Date(post.createdAt || "").toLocaleDateString()
-                  }
+                 createdAt={new Date(post.createdAt ?? "")}
+
                   onStatusChange={handleStatusChange}
                   onPremiumToggle={handlePremiumToggle}
                   onClick={() => openPostDetail(post.id)}
@@ -262,14 +262,12 @@ const Posts: React.FC<PostsProps> = ({ posts, categories }) => {
             user: selectedPost.user || "Unknown author",
             createdAt: selectedPost.createdAt,
             category: selectedPost.category || "Food",
-            imageUrl: selectedPost.imageUrl || selectedPost.image || "",
-            content: selectedPost.content || selectedPost.description,
+            imageUrl: selectedPost.image || "",
+            content: selectedPost.description,
             excerpt: selectedPost.excerpt || selectedPost.description || "",
             status: selectedPost.status as PostStatus,
             isPremium: selectedPost.isPremium,
-            date:
-              selectedPost.date ||
-              new Date(selectedPost.createdAt || "").toLocaleDateString(),
+                      date: new Date(selectedPost.createdAt ?? "").toLocaleDateString(),
           }}
           comments={postComments}
           onApprove={(id) => handleStatusChange(id, "approved")}

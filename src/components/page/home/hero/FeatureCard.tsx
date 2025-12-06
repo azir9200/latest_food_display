@@ -3,7 +3,7 @@ import { IUser } from "@/types";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import FoodSpotCard from "../foodSpotList/FoodSpotCard";
-import { IPost } from "@/types/foodPost";
+import { IPost, normalizePost } from "@/types/foodPost";
 interface FeaturedSpotsProps {
   user: IUser;
   posts: IPost[];
@@ -13,14 +13,14 @@ const FeaturedSpots: React.FC<FeaturedSpotsProps> = ({ user, posts }) => {
 
   const premiumPosts =
     safePosts
-      .filter((post) => post.isPremium)
-      .sort((a, b) => b.upVotes - a.upVotes)
+      .filter((post) => post?.isPremium)
+      .sort((a, b) => (b.upVotes ?? 0) - (a.upVotes ?? 0))
       .slice(0, 2) || [];
 
   const nonPremiumPosts =
     safePosts
       .filter((post) => !post.isPremium)
-      .sort((a, b) => b.upVotes - a.upVotes)
+      .sort((a, b) => (b.upVotes ?? 0) - (a.upVotes ?? 0))
       .slice(0, 3) || [];
 
   return (
@@ -43,7 +43,7 @@ const FeaturedSpots: React.FC<FeaturedSpotsProps> = ({ user, posts }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {nonPremiumPosts?.map((spot) => (
-            <FoodSpotCard key={spot.id} spot={spot} />
+            <FoodSpotCard key={spot.id} spot={normalizePost(spot)} />
           ))}
         </div>
       </div>
@@ -77,7 +77,7 @@ const FeaturedSpots: React.FC<FeaturedSpotsProps> = ({ user, posts }) => {
             {premiumPosts?.map((spot: IPost) => (
               <div key={spot.id} className="relative group overflow-hidden">
                 {/* Show the card normally */}
-                <FoodSpotCard spot={spot} />
+                <FoodSpotCard key={spot.id} spot={normalizePost(spot)} />
 
                 {/* Overlay with blur effect - only covers the card content */}
                 {!user?.isPremium && (

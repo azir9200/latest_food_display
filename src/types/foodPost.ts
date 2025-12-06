@@ -10,7 +10,7 @@ export type PostStatus = "pending" | "approved" | "rejected";
 export interface IPost {
   id: string;
   title: string;
-  description?: string;
+  description: string;
   location?: string;
   price?: number;
   image?: string;
@@ -20,7 +20,8 @@ export interface IPost {
   approved?: boolean;
   updatedAt?: string;
   userId?: string;
-  user?: IUser | string;
+  user?: IUser | string | null;
+
   category?: ICategory;
   votes?: {
     vote: "UP" | "DOWN";

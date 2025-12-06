@@ -1,4 +1,3 @@
-
 "use server";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
@@ -18,7 +17,7 @@ export const getAllCategory = async () => {
     );
 
     const data = await res.json();
-  
+
     return data;
   } catch (error: any) {
     return Error(error.message);
@@ -52,7 +51,6 @@ export const updateCategory = async (
   id: string,
   data: string
 ): Promise<any> => {
-  
   const token = (await cookies()).get("accessToken")!.value;
 
   try {

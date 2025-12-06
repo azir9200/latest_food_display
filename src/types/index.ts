@@ -19,7 +19,7 @@ export interface IUser {
   bio?: string;
   phone?: string;
   location?: string;
-  comments?: IComments;
+  comments?: IComments[];
 }
 
 export type ActivityItemType =
@@ -35,3 +35,4 @@ export type ActivityItem = {
   title: string;
   time: string;
 };
+

@@ -5,8 +5,7 @@ import { getAllRestaurant } from "@/services/restaurantService";
 export default async function RestaurantPage() {
   const response = await getAllRestaurant();
   const restaurants = response?.data?.slice(0, 6) || [];
-  console.log("restaurant page", response);
-  console.log("restaurant page", restaurants);
+
 
   return (
     <section className="py-10">

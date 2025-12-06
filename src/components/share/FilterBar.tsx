@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
-import { ICategory } from "@/types";
+import { ICategory } from "@/types/comments";
 
 import { Award, Flame, Search, SlidersHorizontal } from "lucide-react";
 import { useState } from "react";

@@ -1,4 +1,3 @@
-
 "use server";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
@@ -25,7 +24,7 @@ export const getAllusers = async () => {
     );
 
     const data = await res.json();
-    console.log("user service", data);
+
     return data;
   } catch (error: any) {
     return Error(error.message);

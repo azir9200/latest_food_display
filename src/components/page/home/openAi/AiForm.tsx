@@ -14,7 +14,7 @@ export default function AiForm() {
     setLoading(true);
 
     const res = await openAiService({ preference });
-    console.log("AI form", res);
+    // console.log("AI form", res);
     setResult(res.data);
     setLoading(false);
   };

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 const User = async () => {
   const result = await getAllusers();
-  console.log("user here", result);
+ 
   return (
     <div>
       <Users users={result?.data} />

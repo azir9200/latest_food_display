@@ -44,7 +44,7 @@ const Users: React.FC<IusersProps> = ({ users }) => {
             user.name.toLowerCase().includes(searchQuery.toLowerCase()))
       )
     : users;
-  console.log("users page", filteredUsers);
+
   const premiumUsers: IUser[] = filteredUsers?.filter((user) => user.isPremium);
   const AdminUsers: IUser[] = filteredUsers?.filter(
     (user) => user.role === "ADMIN"

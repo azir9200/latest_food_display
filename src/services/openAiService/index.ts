@@ -20,7 +20,6 @@ export const openAiService = async (
     );
 
     const result = await res.json();
-    console.log("open ai service", result);
     revalidateTag("post");
     return result;
   } catch (error: any) {

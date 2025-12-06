@@ -9,7 +9,7 @@ interface IUserData {
 }
 
 const CommentsTab: React.FC<{ userData: IUserData }> = ({ userData }) => {
-  console.log(userData, "sdfjsdf");
+
   return (
     <Card>
       <CardHeader>
