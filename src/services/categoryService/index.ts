@@ -41,7 +41,7 @@ export const createCategory = async (name: string): Promise<any> => {
       }
     );
     const result = await res.json();
-    revalidateTag("category");
+    revalidateTag("category",  "page");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -66,7 +66,7 @@ export const updateCategory = async (
       }
     );
     const result = await res.json();
-    revalidateTag("category");
+    revalidateTag("category",  "page");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -88,7 +88,7 @@ export const deletedCategory = async (id: string): Promise<any> => {
       }
     );
     const result = await res.json();
-    revalidateTag("category");
+    revalidateTag("category",  "page");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");

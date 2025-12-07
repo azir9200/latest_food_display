@@ -20,7 +20,7 @@ export const openAiService = async (
     );
 
     const result = await res.json();
-    revalidateTag("post");
+    revalidateTag("post",  "page");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");

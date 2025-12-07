@@ -18,6 +18,13 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
   categories = [],
 }) => {
   const [activeTab, setActiveTab] = useState("overview");
+  if (!userData) {
+    return (
+      <main className="container mx-auto py-8 px-4 max-w-7xl">
+        <p className="text-center text-red-500 text-lg">User not found.</p>
+      </main>
+    );
+  }
 
   return (
     <main className="container mx-auto py-8 px-4 max-w-7xl">

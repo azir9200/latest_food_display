@@ -47,7 +47,7 @@ export const createcoupon = async (
       }
     );
     const result = await res.json();
-    revalidateTag("coupon");
+    revalidateTag("coupon",  "page");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -68,7 +68,7 @@ export const updatecoupon = async (id: string): Promise<any> => {
       }
     );
     const result = await res.json();
-    revalidateTag("coupon");
+    revalidateTag("coupon",  "page");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -90,7 +90,7 @@ export const deletedcoupon = async (id: string): Promise<any> => {
       }
     );
     const result = await res.json();
-    revalidateTag("coupon");
+    revalidateTag("coupon",  "page");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");

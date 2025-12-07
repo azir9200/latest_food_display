@@ -17,7 +17,7 @@ export const updateProfile = async (id: string, payload: any): Promise<any> => {
       }
     );
 
-    revalidateTag("loginUser");
+    revalidateTag("loginUser", "page");
     return res.json();
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong while updating");

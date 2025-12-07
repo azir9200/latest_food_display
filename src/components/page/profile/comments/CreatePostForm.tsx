@@ -32,7 +32,10 @@ interface CreatePostFormProps {
   userImage?: string;
 }
 
-const CreatePostForm: React.FC<CreatePostFormProps> = ({ categories, userImage }) => {
+const CreatePostForm: React.FC<CreatePostFormProps> = ({
+  categories,
+  userImage,
+}) => {
   const [title, setTitle] = useState("");
   const [newPostContent, setNewPostContent] = useState("");
   const [newPostLocation, setNewPostLocation] = useState("");
@@ -107,6 +110,7 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({ categories, userImage }
           uploadedUrls[0] ||
           "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300",
         categoryId: selectedCategoryId,
+        coordinates,
       };
 
       const res = await createPost(payload);
@@ -121,7 +125,7 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({ categories, userImage }
         setImagePreviewUrls([]);
       }
     } catch (e) {
-      // Ignore detailed error to avoid UI change; original behavior was minimal
+      console.log(e);
     } finally {
       setLoading(false);
     }
@@ -167,7 +171,10 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({ categories, userImage }
           onChange={(e) => setPrice(e.target.value)}
         />
 
-        <Select value={selectedCategoryId} onValueChange={setSelectedCategoryId}>
+        <Select
+          value={selectedCategoryId}
+          onValueChange={setSelectedCategoryId}
+        >
           <SelectTrigger className="mb-4 w-full">
             <SelectValue placeholder="Select Category" />
           </SelectTrigger>
@@ -183,7 +190,10 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({ categories, userImage }
         {imagePreviewUrls.length > 0 && (
           <div className="mb-4 grid grid-cols-2 gap-2">
             {imagePreviewUrls.map((url, index) => (
-              <div key={index} className="relative h-32 rounded overflow-hidden">
+              <div
+                key={index}
+                className="relative h-32 rounded overflow-hidden"
+              >
                 <Image
                   height={500}
                   width={500}
@@ -194,8 +204,12 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({ categories, userImage }
                 <button
                   className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full"
                   onClick={() => {
-                    setImagePreviewUrls(imagePreviewUrls.filter((_, i) => i !== index));
-                    setSelectedFiles(selectedFiles.filter((_, i) => i !== index));
+                    setImagePreviewUrls(
+                      imagePreviewUrls.filter((_, i) => i !== index)
+                    );
+                    setSelectedFiles(
+                      selectedFiles.filter((_, i) => i !== index)
+                    );
                   }}
                 >
                   ×
@@ -215,13 +229,22 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({ categories, userImage }
               accept="image/*"
               onChange={handleFileSelect}
             />
-            <Button variant="outline" size="sm" type="button" onClick={() => fileInputRef.current?.click()}>
+            <Button
+              variant="outline"
+              size="sm"
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+            >
               <Upload className="mr-2 h-4 w-4" /> Photo
             </Button>
             <Button variant="outline" size="sm" onClick={getCurrentLocation}>
               📍 Use Current Location
             </Button>
-            <Button variant="outline" size="sm" onClick={() => setLocationDialogOpen(true)}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setLocationDialogOpen(true)}
+            >
               ✍️ Enter Manually
             </Button>
           </div>

@@ -28,22 +28,6 @@ import {
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 
-// interface IUserData {
-//   id: string;
-//   name: string;
-//   email?: string;
-//   image: string;
-//   isPremium: boolean;
-//   createdAt: string;
-//   bio?: string;
-//   phone?: string;
-//   location?: string;
-// }
-
-// interface UserInfoSidebarProps {
-//   userData: IUser;
-// }
-
 const UserInfoSidebar: React.FC<{ userData: IUser }> = ({ userData }) => {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [editName, setEditName] = useState(userData.name);
@@ -136,7 +120,9 @@ const UserInfoSidebar: React.FC<{ userData: IUser }> = ({ userData }) => {
               )}
             </div>
 
-            <h2 className="mt-4 text-2xl font-bold">{userData.name}</h2>
+            <h2 className="mt-4 text-2xl font-bold">
+              {userData?.name ?? "Unknown User"}
+            </h2>
 
             {userData.isPremium && (
               <div className="mt-2 inline-flex items-center gap-1 bg-gradient-to-r from-amber-500 to-yellow-400 text-white px-3 py-1 rounded-full text-sm font-semibold">
@@ -150,19 +136,21 @@ const UserInfoSidebar: React.FC<{ userData: IUser }> = ({ userData }) => {
               {userData.email && (
                 <div className="flex items-center text-sm text-muted-foreground">
                   <Mail className="h-4 w-4 mr-2 text-primary" />
-                  {userData.email}
+                  {userData?.email ?? "No email"}
                 </div>
               )}
               {userData.phone && (
                 <div className="flex items-center text-sm text-muted-foreground">
                   <Phone className="h-4 w-4 mr-2 text-primary" />
                   {userData.phone}
+                  {userData?.phone ?? "+1234567890"}
                 </div>
               )}
               {userData.location && (
                 <div className="flex items-center text-sm text-muted-foreground">
                   <MapPin className="h-4 w-4 mr-2 text-primary" />
                   {userData.location}
+                  {userData?.location ?? "472 North Circular Road, Dublin"}
                 </div>
               )}
               <div className="flex items-center text-sm text-muted-foreground">
@@ -180,6 +168,7 @@ const UserInfoSidebar: React.FC<{ userData: IUser }> = ({ userData }) => {
               <div className="mt-4 w-full">
                 <p className="text-sm text-muted-foreground text-left">
                   {userData.bio}
+                  {userData?.bio ?? "Your BIO is here.."}
                 </p>
               </div>
             )}

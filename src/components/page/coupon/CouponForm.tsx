@@ -33,7 +33,7 @@ const CouponForm: React.FC<CouponFormProps> = ({
 
     fetchCoupons();
   }, []);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const handleApplyCoupon = async (e: any) => {
     e.stopPropagation();
     if (!couponCode.trim()) {
