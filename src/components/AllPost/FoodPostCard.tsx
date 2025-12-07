@@ -36,6 +36,7 @@ import { FoodPostCardProps } from "@/types/foodPost";
 import PremiumLockOverlay from "../premium/PremiumOverlay";
 import PremiumBadge from "../premium/PremiumBage";
 import Link from "next/link";
+import { IComments } from "@/types/comments";
 function safeUser(user: any) {
   if (typeof user === "object" && user !== null) return user;
   return { name: "Unknown", email: "", image: "" };
@@ -70,29 +71,41 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
       toast.error("Failed to register vote");
     }
   };
-
   const handleAddComment = async () => {
     if (!newComment.trim()) return;
+
     const payload = {
       postId: post.id,
       commentText: newComment.trim(),
     };
+
     try {
       await createComment(payload);
-      const optimistic = {
+
+      const optimistic: IComments = {
         id: Math.random().toString(36).slice(2),
         commentText: newComment.trim(),
         createdAt: new Date().toISOString(),
         user: {
           name: user?.name ?? "Unknown User",
           image: (user as any)?.image,
+          email: user?.email ?? "",
+        },
+        onDelete: (id: string) => {
+          setComments((prev) => prev.filter((c) => c.id !== id));
+        },
+        onEdit: (id: any, newContent: any) => {
+          setComments((prev) =>
+            prev.map((c) => (c.id === id ? { ...c, content: newContent } : c))
+          );
         },
       };
+
       setComments((prev) => [...prev, optimistic]);
       setTotalComments((n) => n + 1);
       setNewComment("");
       toast.success("Comment added");
-    } catch (error: any) {
+    } catch (error) {
       console.log(error);
       toast.error("Failed to add comment");
     }
@@ -424,8 +437,10 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
                 <Avatar className="h-9 w-9 ring-2 ring-transparent group-hover/comment:ring-primary/10 transition-all">
                   <AvatarImage
                     src={
-                      post.user?.image ??
-                      `https://api.dicebear.com/7.x/avataaars/svg?seed=${post.user?.email}`
+                      safeUser(post.user).image ||
+                      `https://api.dicebear.com/7.x/avataaars/svg?seed=${
+                        safeUser(post.user).email
+                      }`
                     }
                   />
                   <AvatarFallback className="text-xs bg-primary/10 text-primary font-semibold">
