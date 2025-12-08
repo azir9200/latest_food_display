@@ -7,7 +7,7 @@ export const getAllusers = async () => {
     const res = await fetch(
       // "http://localhost:5000/api/v1/user/all-retreive",
 
-      `https://latest-food-backend.vercel.app/user/all-retreive`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/user/all-retreive`,
 
       {
         method: "GET",
@@ -45,7 +45,7 @@ export const deletedUser = async (id: string): Promise<any> => {
       }
     );
     const result = await res.json();
-    revalidateTag("loginUser");
+    revalidateTag("loginUser", "max");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -67,7 +67,7 @@ export const roleUpdate = async (id: string, role: string): Promise<any> => {
       }
     );
     const result = await res.json();
-    revalidateTag("loginUser");
+    revalidateTag("loginUser", "max");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");

@@ -73,7 +73,7 @@ const Navbar = () => {
             </div>
           </div>
           <span className="text-xl font-poppins font-bold   text-[#333333]">
-            StreetGrub
+            Food Book
           </span>
         </Link>
         <div className="hidden md:flex items-center gap-6">
@@ -137,7 +137,7 @@ const Navbar = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon" className="rounded-full">
-                    <Avatar className="h-8 w-8 border-2 border-streetgrub-orange cursor-pointer">
+                    <Avatar className="h-8 w-8 border-2 border-Food Book-orange cursor-pointer">
                       <AvatarImage src={user?.image || ""} alt="User" />
                       <AvatarFallback>NB </AvatarFallback>
                     </Avatar>

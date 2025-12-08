@@ -4,7 +4,7 @@ const Category = () => {
       <div className="py-16">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-bold text-[#333333] mb-4">
-            How StreetGrub Works
+            How Food Book Works
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Discover, share, and enjoy the best street food experiences around

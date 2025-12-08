@@ -2,14 +2,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { IComments } from "@/types/comments";
 
-
-
 interface IUserData {
   comments: IComments[];
 }
 
 const CommentsTab: React.FC<{ userData: IUserData }> = ({ userData }) => {
-
   return (
     <Card>
       <CardHeader>
@@ -26,7 +23,7 @@ const CommentsTab: React.FC<{ userData: IUserData }> = ({ userData }) => {
                 On:{" "}
                 <a
                   href="#"
-                  className="font-medium text-streetgrub-darkblue hover:text-streetgrub-orange"
+                  className="font-medium text-Food Book-darkblue hover:text-Food Book-orange"
                 >
                   {comment?.post?.title}
                 </a>

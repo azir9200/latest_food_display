@@ -1,4 +1,3 @@
-
 "use server";
 import { jwtDecode } from "jwt-decode";
 import { revalidateTag } from "next/cache";
@@ -6,7 +5,6 @@ import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 
 export const SignUpUser = async (userData: FieldValues) => {
- 
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/user/register`,
@@ -19,8 +17,7 @@ export const SignUpUser = async (userData: FieldValues) => {
       }
     );
     const result = await res.json();
-  
-    
+
     return result;
   } catch (error: any) {
     return Error(error);
@@ -39,12 +36,11 @@ export const loginUser = async (userData: FieldValues) => {
 
     const result = await res.json();
 
-
     if (result?.success) {
       (await cookies()).set("accessToken", result?.data?.accessToken);
       (await cookies()).set("refreshToken", result?.data?.refreshToken);
 
-      revalidateTag("loginUser");
+      revalidateTag("loginUser", "max");
     }
 
     return result;
@@ -99,7 +95,7 @@ export const premiumUser = async (
       }
     );
     const result = await res.json();
-    revalidateTag("loginUser");
+    revalidateTag("loginUser", "max");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -211,7 +207,7 @@ export const getCurrentUser = async () => {
 
   if (accessToken) {
     decodedData = await jwtDecode(accessToken);
-  
+
     return decodedData;
   } else {
     return null;
@@ -220,7 +216,7 @@ export const getCurrentUser = async () => {
 
 export const logout = async () => {
   (await cookies()).delete("accessToken");
-  revalidateTag("loginUser");
+  revalidateTag("loginUser", "max");
 };
 
 export const getNewToken = async () => {

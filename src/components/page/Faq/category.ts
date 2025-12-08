@@ -3,7 +3,7 @@ export const categories = [
   { id: "general", name: "General" },
   { id: "account", name: "Account" },
   { id: "service", name: "Services" },
-  { id: "usage", name: "Using StreetGrub" },
+  { id: "usage", name: "Using Food Book" },
   { id: "membership", name: "Membership" },
   { id: "posting", name: "Posting Content" },
   { id: "content", name: "Premium Content" },

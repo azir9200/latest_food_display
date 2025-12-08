@@ -30,11 +30,11 @@ const FaqPage = () => {
       <div className="container mx-auto px-4 py-12 flex-grow">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
-            <h1 className="text-4xl font-bold text-streetgrub-darkblue mb-4">
+            <h1 className="text-4xl font-bold text-Food Book-darkblue mb-4">
               Frequently Asked Questions
             </h1>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Find answers to common questions about StreetGrub, our services,
+              Find answers to common questions about Food Book, our services,
               and how to make the most of your street food discovery experience.
             </p>
           </div>
@@ -93,7 +93,7 @@ const FaqPage = () => {
                   No matching questions found.
                 </p>
                 <Button
-                  className="mt-4 bg-streetgrub-orange hover:bg-streetgrub-orange/90"
+                  className="mt-4 bg-Food Book-orange hover:bg-Food Book-orange/90"
                   onClick={() => {
                     setSearchQuery("");
                     setActiveCategory("all");
@@ -118,8 +118,8 @@ const FaqPage = () => {
             )}
           </div>
 
-          <div className="mt-12 bg-streetgrub-lightgray p-6 rounded-lg border text-center">
-            <h3 className="text-xl font-semibold text-streetgrub-darkblue mb-2">
+          <div className="mt-12 bg-Food Book-lightgray p-6 rounded-lg border text-center">
+            <h3 className="text-xl font-semibold text-Food Book-darkblue mb-2">
               Still have questions?
             </h3>
             <p className="text-gray-600 mb-4">

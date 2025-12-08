@@ -17,7 +17,7 @@ const heroBackgrounds = [
   },
   {
     url: "https://i.ibb.co/nMGKX7kK/top-view-sliced-cooked-meat-with-greens-cherry-tomatoes-olive-oil-blue-desk.jpg",
-    title: "Explore best taste in StreetGrub",
+    title: "Explore best taste in Food Book",
   },
   {
     url: "https://i.ibb.co/PzDT7TKH/street-food-frame-wooden-background-1.jpg",
@@ -25,20 +25,20 @@ const heroBackgrounds = [
   },
   {
     url: "https://i.ibb.co/S7NbPrJS/fantastic-composition-with-ingredients-italian-pasta.jpg",
-    title: "Find Hidden Food Gems in StreetGrub",
+    title: "Find Hidden Food Gems in Food Book",
   },
   {
     url: "https://i.ibb.co/KzFtLBTk/front-view-delicious-meat-cutlets-baked-with-potatoes-tomatoes-black-plate-cutlery-set-spices-garlic.jpg",
-    title: "Explore best taste in StreetGrub",
+    title: "Explore best taste in Food Book",
   },
 
   {
     url: "https://i.ibb.co/ZzpKvqzC/top-view-yummy-cutlets-with-onion-rings-grey-desk-dish-meat-meal-cuisine.jpg",
-    title: "Try every single way your taste in StreetGrub",
+    title: "Try every single way your taste in Food Book",
   },
   {
     url: "https://i.ibb.co/bMQphKhd/top-view-cooked-eggplant-along-with-fresh-vegetables-inside-black-plate-dark-background.jpg",
-    title: "Explore best taste in StreetGrub",
+    title: "Explore best taste in Food Book",
   },
 ];
 

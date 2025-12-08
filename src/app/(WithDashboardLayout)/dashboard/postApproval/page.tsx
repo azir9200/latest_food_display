@@ -3,9 +3,9 @@ import { getAllCategory } from "@/services/categoryService";
 import { getAllPostForAdmin } from "@/services/postService";
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: " StreetGrub | Dashboard - Post Approval",
+  title: " Food Book | Dashboard - Post Approval",
   description:
-    "Manage and approve submitted posts from users on the StreetGrub dashboard.",
+    "Manage and approve submitted posts from users on the Food Book dashboard.",
 };
 
 const postApproval = async () => {

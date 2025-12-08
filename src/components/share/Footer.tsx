@@ -14,7 +14,7 @@ const Footer = () => {
                 </div>
               </div>
               <span className="text-xl font-poppins font-bold text-white">
-                StreetGrub
+                Food Book
               </span>
             </div>
             <p className="text-gray-400 text-sm">
@@ -125,7 +125,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-6 text-center text-gray-500 text-sm">
-          <p>© {new Date().getFullYear()} StreetGrub. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Food Book. All rights reserved.</p>
         </div>
       </div>
     </footer>

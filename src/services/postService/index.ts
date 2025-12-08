@@ -85,7 +85,7 @@ export const createPost = async (
       body: JSON.stringify(postData),
     });
     const result = await res.json();
-    revalidateTag("post");
+    revalidateTag("post", "max");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -107,7 +107,7 @@ export const premiumAprroved = async (id: string): Promise<any> => {
       }
     );
     const result = await res.json();
-    revalidateTag("post");
+    revalidateTag("post", "max");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -132,7 +132,7 @@ export const postAprroved = async (
       }
     );
     const result = await res.json();
-    revalidateTag("post");
+    revalidateTag("post", "max");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -152,7 +152,7 @@ export const createVote = async (data: Record<string, any>): Promise<any> => {
       body: JSON.stringify(data),
     });
 
-    revalidateTag("post");
+    revalidateTag("post", "max");
     return res.json();
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -174,7 +174,7 @@ export const createRating = async (data: Record<string, any>): Promise<any> => {
       }
     );
 
-    revalidateTag("post");
+    revalidateTag("post", "max");
     return res.json();
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -198,7 +198,7 @@ export const createComment = async (
       }
     );
 
-    revalidateTag("post");
+    revalidateTag("post", "max");
     return res.json();
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -219,7 +219,7 @@ export const deletedPost = async (id: string): Promise<any> => {
       }
     );
 
-    revalidateTag("post");
+    revalidateTag("post", "max");
     return res.json();
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -242,7 +242,7 @@ export const updatePost = async (id: string, payload: any): Promise<any> => {
       }
     );
 
-    revalidateTag("post");
+    revalidateTag("post", "max");
     return res.json();
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong while updating");

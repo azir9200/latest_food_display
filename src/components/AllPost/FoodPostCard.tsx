@@ -274,32 +274,86 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
           </div>
           <Link href="/restaurant">Find Restaurant</Link>
         </div>
-        <div className="relative rounded-2xl overflow-hidden group/image shadow-md">
+        <div
+          className="relative rounded-[22px] overflow-hidden group/image
+  shadow-[0_8px_20px_rgba(0,0,0,0.15)]
+  border border-white/10 backdrop-blur-sm
+  before:absolute before:inset-0 before:bg-[url('/grain.svg')] before:opacity-10
+  after:absolute after:inset-0 after:bg-gradient-to-b 
+  after:from-black/10 after:to-black/60 
+  after:opacity-0 group-hover/image:opacity-100 
+  after:transition-all after:duration-500"
+        >
           <Image
             src={
               post.image ||
-              "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop"
+              "https://i.ibb.co/zV6pgXkF/top-view-delicious-honey-cake-with-candies-honey-peaches-dark-background-cake-tea-candy-honey.jpg"
             }
             height={600}
             width={600}
             alt={post.title}
-            className={`w-full h-[420px] object-cover transition-transform duration-700 group-hover/image:scale-110 ${
-              isContentLocked ? "blur-md" : ""
-            }`}
+            className="w-full h-[420px] object-cover transition-all duration-700 ease-out 
+    group-hover/image:scale-[1.12] group-hover/image:brightness-[1.05]"
+          />
+
+          {!isContentLocked && (
+            <div
+              className="absolute top-4 right-4 
+      bg-white/90 dark:bg-black/40
+      backdrop-blur-md shadow-lg
+      rounded-2xl px-4 py-2 flex items-center gap-2
+      opacity-0 group-hover/image:opacity-100
+      transition-all duration-500 translate-y-2 group-hover/image:translate-y-0"
+            >
+              <DollarSign className="h-4 w-4 text-primary" />
+              <span className="font-bold text-lg text-primary">
+                {post.price}
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* <div
+          className="relative rounded-[22px] overflow-hidden group/image
+  shadow-[0_8px_20px_rgba(0,0,0,0.15)]
+  border border-white/10
+  backdrop-blur-sm
+  before:absolute before:inset-0 before:bg-[url('/grain.svg')] before:opacity-10
+  after:absolute after:inset-0 after:bg-gradient-to-b after:from-black/10 after:to-black/60 
+  after:opacity-0 group-hover/image:opacity-100 after:transition-all after:duration-500"
+        >
+          <Image
+            src={
+              post.image ||
+              "https://i.ibb.co/zV6pgXkF/top-view-delicious-honey-cake-with-candies-honey-peaches-dark-background-cake-tea-candy-honey.jpg"
+            }
+            height={600}
+            width={600}
+            alt={post.title}
+            className="w-full h-[420px] object-cover duration-700 ease-out 
+  group-hover/image:scale-[1.12] group-hover/image:brightness-[1.05]"
           />
           {isContentLocked && (
             <PremiumLockOverlay onUpgrade={() => router.push("/premium")} />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-500" />
           {!isContentLocked && (
-            <div className="absolute top-4 right-4 bg-card/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2 opacity-0 group-hover/image:opacity-100 transition-all duration-300 transform translate-y-2 group-hover/image:translate-y-0">
-              <DollarSign className="h-4 w-4 text-primary" />
-              <span className="font-bold text-lg text-foreground">
+            <div
+              className="absolute top-4 right-4 
+  bg-white/90 dark:bg-black/40
+  backdrop-blur-md shadow-lg
+  rounded-2xl px-4 py-2 flex items-center gap-2
+  opacity-0 group-hover/image:opacity-100
+  transition-all duration-500 translate-y-2 group-hover/image:translate-y-0
+  animate-[slideUp_0.4s_ease]"
+            >
+              <DollarSign className="h-4 w-4 text-primary drop-shadow" />
+              <span className="font-bold text-lg text-primary">
                 {post.price}
               </span>
             </div>
           )}
-        </div>
+        </div> */}
 
         {showRatingPanel && (
           <div className="bg-gradient-to-br from-secondary/50 to-secondary/30 p-5 rounded-2xl border border-border/50 animate-scale-in shadow-inner">
@@ -311,7 +365,8 @@ const FoodPostCard: React.FC<FoodPostCardProps> = ({ post }) => {
                 <button
                   key={star}
                   onClick={() => handleRatePost(star)}
-                  className="focus:outline-none transition-all hover:scale-125 active:scale-95 duration-200"
+                  className="gap-2 rounded-full bg-primary/5 hover:bg-primary/15
+  hover:text-primary transition-all shadow-sm hover:shadow-md"
                 >
                   <Star
                     className={`h-10 w-10 ${

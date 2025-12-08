@@ -75,7 +75,7 @@ const AdminSidebar = () => {
           <div className="w-8 h-8 rounded-full bg-[#FF6b35]/50 flex items-center justify-center">
             <span className="text-white font-bold">SG</span>
           </div>
-          <h1 className="text-xl text-[#FF6b35]/90 font-bold">StreetGrub</h1>
+          <h1 className="text-xl text-[#FF6b35]/90 font-bold">Food Book</h1>
         </div>
       </Link>
 
