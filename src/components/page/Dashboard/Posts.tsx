@@ -255,23 +255,7 @@ const Posts: React.FC<PostsProps> = ({ posts, categories }) => {
         <PostDetail
           open={!!selectedPostId}
           onOpenChange={(open) => !open && setSelectedPostId(null)}
-          //       post={{
-          //         id: selectedPost.id,
-          //         title: selectedPost.title,
-          //         user: selectedPost.user || "Unknown author",
-          //      createdAt: new Date(selectedPost.createdAt),
-          //         category:
-          // typeof selectedPost.category === "string"
-          //   ? { id: "unknown", name: selectedPost.category } as ICategory
-          //   : selectedPost.category ?? { id: "unknown", name: "Food" },
-          //         image: selectedPost.image || "",
-          //         description: selectedPost.description,
-          //         excerpt: selectedPost.excerpt || selectedPost.description || "",
-          //         status: selectedPost.status as PostStatus,
-          //         isPremium: selectedPost.isPremium,
-          //         createdAt: new Date(selectedPost.createdAt ?? "").toLocaleDateString(),
-          //       }}
-
+         
           post={{
             id: selectedPost.id,
             title: selectedPost.title,
