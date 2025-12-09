@@ -19,7 +19,7 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
   const [popularOnly, setPopularOnly] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 10;
+  const postsPerPage = 8;
 
   useEffect(() => {
     setCurrentPage(1);
@@ -63,13 +63,13 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
       })
     : [];
 
-  // PAGINATION
   const totalPages = Math.ceil(filteredSpots.length / postsPerPage);
 
   const paginatedPosts = filteredSpots.slice(
     (currentPage - 1) * postsPerPage,
     currentPage * postsPerPage
   );
+
   return (
     <main className="relative min-h-screen bg-gradient-to-br from-orange-50 via-white to-rose-50 py-10 px-4">
       {/* Floating Background Blobs */}
@@ -119,13 +119,13 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
 
       {/* Posts Feed */}
       <div className="max-w-5xl mx-auto mt-12">
-        <PostsFeed posts={filteredSpots} />
+        <PostsFeed posts={paginatedPosts} />
       </div>
       {/* Pagination */}
       <PaginationHelp
         currentPage={currentPage}
         totalPages={totalPages}
-        onChange={(page) => setCurrentPage(page)}
+        onChange={setCurrentPage}
       />
     </main>
   );
