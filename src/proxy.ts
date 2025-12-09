@@ -4,8 +4,7 @@ import { NextResponse } from "next/server";
 export function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
-  // Read token from cookies (replace with your token name)
-  const token = req.cookies.get("token")?.value;
+  const token = req.cookies.get("accessToken")?.value;
 
   // Routes requiring login
   const authProtectedPaths = ["/premium", "/allpost"];

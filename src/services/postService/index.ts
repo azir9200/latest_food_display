@@ -209,7 +209,7 @@ export const deletedPost = async (id: string): Promise<any> => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/post/deleted/${id}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/post/soft/${id}`,
       {
         method: "DELETE",
         headers: {
