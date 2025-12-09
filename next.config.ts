@@ -4,15 +4,17 @@ import type { NextConfig } from "next";
 const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "**", // allow all https hosts
       },
     ],
+    unoptimized: true, // FIX: prevents “private IP” image errors
   },
 };
-export const bundle = bundleAnalyzer(nextConfig);
-export default nextConfig;
+
+export default bundleAnalyzer(nextConfig);

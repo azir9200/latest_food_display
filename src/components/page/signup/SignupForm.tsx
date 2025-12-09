@@ -59,7 +59,7 @@ const SignupForm = () => {
       };
 
       const res = await SignUpUser(payload);
-
+      
       if (res?.success) {
         setloading(false);
         toast.success(res.message);

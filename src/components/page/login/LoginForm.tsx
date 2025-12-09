@@ -21,7 +21,7 @@ const LoginForm = () => {
   } = useForm<FormData>();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("callbackUrl");
-  // const redirect = false;
+  console.log("rrreeedit fjkl", redirect);
 
   const router = useRouter();
   const { setIsLoading } = useUser();
