@@ -3,7 +3,11 @@ import CommentCard from "@/components/dashboard/CommentCart";
 import NotFoundProudct from "@/components/dashboard/NotFoundProudct";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { deletedComment, updateComment } from "@/services/commentService";
+import {
+  deletedComment,
+  updateComment,
+} from "@/services/commentService/commentDel";
+// import { deletedComment, updateComment } from "@/services/commentService";
 import { IComments } from "@/types/comments";
 import { MessageSquare, Search } from "lucide-react";
 import { useState } from "react";
@@ -17,13 +21,34 @@ const Comments: React.FC<CommentsProps> = ({ postComments }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleDelete = async (id: string) => {
-    await deletedComment(id);
-    toast.error("Comment deleted");
-  };
+    const confirmed = toast("Are you sure you want to delete this comment?");
 
+    if (!confirmed) return;
+
+    try {
+      const res = await deletedComment(id);
+
+      if (res?.success) {
+        toast.success("Comment deleted successfully");
+      } else {
+        toast.error(res?.message || "Failed to delete comment");
+      }
+    } catch (error) {
+      toast.error("Something went wrong while deleting");
+    }
+  };
   const handleEdit = async (id: string, commentText: string) => {
-    await updateComment(id, commentText);
-    toast.success("Comment updated");
+    try {
+      const res = await updateComment(id, commentText);
+
+      if (res?.success) {
+        toast.success("Comment updated successfully");
+      } else {
+        toast.error(res?.message || "Failed to update comment");
+      }
+    } catch (error) {
+      toast.error("Something went wrong while updating");
+    }
   };
 
   const filteredComments: IComments[] =

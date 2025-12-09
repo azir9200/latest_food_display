@@ -22,7 +22,7 @@ export default async function Home() {
         <HeroSection />
         <Hero />
         <Categories />
-        <div className=" max-w-7xl md:mx-auto mx-2 py-12">
+        <div className=" max-w-7xl md:mx-auto mx-2">
           <FeaturedSpots posts={Post?.data} user={res.data} />
           <Category />
 

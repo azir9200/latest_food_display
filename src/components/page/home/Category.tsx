@@ -1,7 +1,7 @@
 const Category = () => {
   return (
     <div>
-      <div className="py-16">
+      <div className="py-4">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-bold text-[#333333] mb-4">
             How Food Book Works

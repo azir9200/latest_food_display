@@ -41,7 +41,7 @@ export const deletedComment = async (id: string): Promise<any> => {
       }
     );
     const result = await res.json();
-    revalidateTag("post",  "page");
+    revalidateTag("post", "max");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -66,7 +66,7 @@ export const updateComment = async (
       }
     );
     const result = await res.json();
-    revalidateTag("post",  "page");
+    revalidateTag("post", "max");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");

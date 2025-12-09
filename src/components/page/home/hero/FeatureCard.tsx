@@ -1,41 +1,40 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { IUser } from "@/types";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import FoodSpotCard from "../foodSpotList/FoodSpotCard";
 import { IPost } from "@/types/foodPost";
+
 interface FeaturedSpotsProps {
   user: IUser;
   posts: IPost[];
 }
+
 const FeaturedSpots: React.FC<FeaturedSpotsProps> = ({ user, posts }) => {
   const safePosts = Array.isArray(posts) ? posts : [];
 
-  const premiumPosts =
-    safePosts
-      .filter((post) => post?.isPremium)
-      .sort((a, b) => (b.upVotes ?? 0) - (a.upVotes ?? 0))
-      .slice(0, 2) || [];
+  const premiumPosts = safePosts
+    ?.filter((post) => post?.isPremium)
+    ?.sort((a, b) => (b.upVotes ?? 0) - (a.upVotes ?? 0))
+    ?.slice(0, 2);
 
-  const nonPremiumPosts =
-    safePosts
-      .filter((post) => !post.isPremium)
-      .sort((a, b) => (b.upVotes ?? 0) - (a.upVotes ?? 0))
-      .slice(0, 3) || [];
+  const nonPremiumPosts = safePosts
+    ?.filter((post) => !post.isPremium)
+    ?.sort((a, b) => (b.upVotes ?? 0) - (a.upVotes ?? 0))
+    ?.slice(0, 3);
 
   return (
-    <div className="">
-      {/* Regular Featured Spots Section */}
-      <div className="mb-16">
+    <div className="max-w-7xl mx-auto px-4 md:px-8  space-y-8">
+      {/* 🔥 Popular Food Spots */}
+      <div>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-street-dark">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
             Popular Food Spots
           </h2>
-          <Link href={"/allpost"}>
-            <Button
-              variant="ghost"
-              className="text-[#FF6B35] hover:text-[#FF6B35]/90 flex items-center gap-2"
-            >
+
+          <Link href="/allpost">
+            <Button className="rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2">
               View All <ArrowRight className="w-4 h-4" />
             </Button>
           </Link>
@@ -64,37 +63,31 @@ const FeaturedSpots: React.FC<FeaturedSpotsProps> = ({ user, posts }) => {
         </div>
       </div>
 
-      {/* Premium Spots Section */}
-      <div
-        className={`relative overflow-hidden  bg-gray-100 rounded-xl p-6 md:p-10`}
-      >
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-40 h-40 bg-street-yellow/20 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-24 h-24 bg-street-orange/20 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+      {/* 🌟 Premium Section */}
+      <div className="relative bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl shadow-md p-8 overflow-hidden">
+        {/* Decorative Circles */}
+        <div className="absolute top-0 right-0 w-40 h-40 bg-orange-300/20 rounded-full translate-x-1/3 -translate-y-1/3"></div>
+        <div className="absolute bottom-0 left-0 w-28 h-28 bg-yellow-400/25 rounded-full -translate-x-1/3 translate-y-1/3"></div>
 
-        <div className="relative">
-          <div className="flex items-center gap-3 mb-6">
-            <h2 className="text-2xl md:text-3xl font-bold text-street-dark">
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
               Premium Spots
             </h2>
-            <span className="bg-gradient-to-r from-yellow-300 to-yellow-500 text-black font-bold rounded-full shadow-md py-1 px-2">
-              {" "}
-              Unlock Now
+            <span className="bg-gradient-to-r from-yellow-300 to-yellow-500 text-black font-semibold rounded-full shadow px-3 py-1 text-sm">
+              Exclusive
             </span>
           </div>
 
-          <p className="text-gray-600 mb-8 max-w-2xl">
-            Discover exclusive, curated street food experiences that are only
-            available to our premium members. Upgrade your account to unlock
-            these hidden gems!
+          <p className="text-gray-700 mb-8 max-w-2xl">
+            Explore exclusive dishes and top-rated food experiences available
+            only to premium members. Upgrade your account to unlock these gems!
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {premiumPosts?.map((spot: IPost) => (
-              <div key={spot.id} className="relative group overflow-hidden">
-                {/* Show the card normally */}
+            {premiumPosts?.map((spot) => (
+              <div key={spot.id} className="relative group">
                 <FoodSpotCard
-                  key={spot.id}
                   spot={{
                     id: spot.id,
                     title: spot.title,
@@ -111,32 +104,17 @@ const FeaturedSpots: React.FC<FeaturedSpotsProps> = ({ user, posts }) => {
                   }}
                 />
 
-                {/* Overlay with blur effect - only covers the card content */}
+                {/* 🔒 Premium Lock Overlay */}
                 {!user?.isPremium && (
-                  <div className="absolute inset-0 bg-black/30 backdrop-blur-sm group-hover:backdrop-blur-md transition-all duration-300 rounded-lg flex flex-col items-center justify-center">
-                    <div className="text-center px-6 py-8 bg-white/10 backdrop-blur rounded-lg max-w-[80%] transform transition-transform duration-300 group-hover:scale-105">
-                      <Link href={"/premium"}>
-                        <div className="bg-white/20 p-3 rounded-full inline-block mb-4">
-                          <svg
-                            className="w-8 h-8 text-white"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                            ></path>
-                          </svg>
-                        </div>
-                        <h3 className="text-white text-lg font-bold mb-2">
-                          Premium Content
-                        </h3>
-                        <Button className="bg-street-yellow text-black hover:bg-street-yellow/90">
-                          Upgrade to Access
+                  <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center rounded-xl transition-all duration-300">
+                    <div className="bg-white/10 backdrop-blur-md px-6 py-6 rounded-2xl shadow-lg text-center max-w-xs mx-auto">
+                      <h3 className="text-white text-xl font-bold mb-3">
+                        Premium Content
+                      </h3>
+
+                      <Link href="/premium">
+                        <Button className="rounded-full bg-gradient-to-r from-yellow-300 to-yellow-500 text-black font-semibold hover:scale-105 transition-all">
+                          Upgrade to Unlock
                         </Button>
                       </Link>
                     </div>

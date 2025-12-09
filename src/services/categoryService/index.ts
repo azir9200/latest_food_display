@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 export const getAllCategory = async () => {
   try {
     const res = await fetch(
-      // `https://latest-food-backend.vercel.app/category/all-retrieve`,
+     
       `${process.env.NEXT_PUBLIC_BASE_API}/category/all-retrieve`,
       {
         method: "GET",

@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 const Comment = async () => {
   const comments = await getComments();
+  console.log("comment page", comments);
 
   if (!comments?.data) {
     return <div>No comments found or failed to load.</div>;

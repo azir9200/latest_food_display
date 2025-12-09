@@ -4,7 +4,7 @@ import Link from "next/link";
 const GoPremium = () => {
   return (
     <div className="bg-[#333333]  rounded-xl overflow-hidden">
-      <div className="relative py-12 px-6 md:p-12">
+      <div className="relative py-8 px-6 md:p-12">
         {/* Decorative elements */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF6B35]/10 rounded-full -translate-y-1/3 translate-x-1/3"></div>
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#FFC15E]/10 rounded-full translate-y-1/3 -translate-x-1/3"></div>

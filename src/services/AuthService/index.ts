@@ -51,7 +51,7 @@ export const loginUser = async (userData: FieldValues) => {
 export const verifyUser = async (id: string) => {
   try {
     const res = await fetch(
-      // `https://latest-food-backend.vercel.app/user/verify?order_id=${id}`,
+      
       `${process.env.NEXT_PUBLIC_BASE_API}/user/verify?order_id=${id}`,
 
       {
