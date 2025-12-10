@@ -1,12 +1,12 @@
 ### 🍽️ Food Book — Frontend (Next.js 16 + TypeScript)
 
-A modern, modular, high-performance frontend application for the Food Book platform — built with Next.js, TypeScript, ShadCN UI, JWT authentication, TailwindCSS, React Hook Form, Zod, and more.
+-A modern, modular, high-performance frontend application for the Food Book platform built with Next.js, TypeScript, ShadCN UI, JWT authentication, TailwindCSS, React Hook Form, Zod, and more.
 
-This frontend communicates with a Node.js/Prisma/PostgreSQL backend to display food posts, categories, user profiles, authentication, admin dashboard, and more.
+-This frontend communicates with a Node.js/Prisma/PostgreSQL backend to display food posts, categories, user profiles, authentication, admin dashboard, and more.
 
 - Food Book is a modern full-stack web application for exploring dishes, restaurants, premium content, posting reviews, rating/voting, and managing content through powerful user and admin dashboards.
 
-The project includes authentication, role-based access, premium subscription, restaurant management, CRUD operations, and secure API integration with clean UI using Next.js + Tailwind.
+-The project includes authentication, role-based access, premium subscription, restaurant management, CRUD operations, and secure API integration with clean UI using Next.js + Tailwind.
 
 ## Tech Stack & Why I Used Them
 
@@ -80,60 +80,62 @@ Works perfectly with Zod.
 
 ### 💎 Premium Features
 
-✔ Access premium-only posts
-✔ Premium dashboard
-✔ After payment, auto premium upgrade
+    ✔ Access premium-only posts
+    ✔ Premium dashboard
+    ✔ After payment, auto premium upgrade
 
 ## 🛠️ Admin Features
 
-✔ Full CRUD for Users, Posts, Restaurants, Categories
-✔ Approve/Reject posts
-✔ Soft delete support
-✔ Dashboard analytics
-✔ Manage premium users
+     ✔ Full CRUD for Users, Posts, Restaurants, Categories
+     ✔ Approve/Reject posts
+     ✔ Soft delete support
+     ✔ Dashboard analytics
+     ✔ Manage premium users
 
 ### 🔗 🔵 Live Deployments & Resources
 
-* Frontend Deployment: https://latest-food-display.vercel.app
+     * Frontend Deployment: https://latest-food-display.vercel.app
 
-* Backend Deployment: https://latest-food-backend.vercel.app
+     * Backend Deployment: https://latest-food-backend.vercel.app
 
-* Client GitHub Repository: https://github.com/azir9200/latest_food_display
+     * Client GitHub Repository: https://github.com/azir9200/latest_food_display
 
-* Server GitHub Repository: https://github.com/azir9200/latest_food_backend
+     * Server GitHub Repository: https://github.com/azir9200/latest_food_backend
 
-* Video Explanation (YouTube): https://youtu.be/8p3lqtS2BKk
+     * Video Explanation (YouTube): https://youtu.be/8p3lqtS2BKk
 
 ### Admin Test Credentials (for Examiner / Recruiter)
 
-: see details in the login page.
+          * see details in the login page.
 
 ### Technology Stack
 
-=> Frontend Next.js, React, Typescript, Tailwind CSS
-=>  Backend Node.js, Express.js, Typescript.
-=> ORM Prisma
-=>  Database PostgreSQL
-=>  Authentication JWT
+      => Frontend Next.js, React, Typescript, Tailwind CSS
+      =>  Backend Node.js, Express.js, Typescript.
+      => ORM Prisma
+      =>  Database PostgreSQL
+      =>  Authentication JWT
 
 ### 🧪 How to Run Locally (Frontend + Backend)
 
-1️⃣ Clone the Repositories
+       1️⃣ Clone the Repositories
 
 # Client:
-- git clone https://github.com/azir9200/latest_food_display
-- cd latest_food_display
-- npm install
+
+         - git clone https://github.com/azir9200/latest_food_display
+         - cd latest_food_display
+         - npm install
 
 # Server:
-- git clone https://github.com/azir9200/latest_food_backend
-- cd latest_food_backend
-- npm install
 
-Food Book is a full production-ready food discovery system with:
-Building modern apps with React, Next.js, TypeScript & Node.js.
+      - git clone https://github.com/azir9200/latest_food_backend
+      - cd latest_food_backend
+      - npm install
 
-👨‍💻 Author:  
-- Azir Uddin
-- Full-Stack Web Developer
-**  Feel free to explore, test, and evaluate the project!
+      =>Food Book is a full production-ready food discovery system with:
+      =>Building modern apps with React, Next.js, TypeScript & Node.js.
+
+👨‍💻 Author:
+- Azir Uddin - Full-Stack Web Developer
+
+  \*\* Feel free to explore, test, and evaluate the project!
