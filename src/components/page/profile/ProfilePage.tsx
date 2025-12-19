@@ -8,6 +8,7 @@ import { ICategory } from "@/types/comments";
 import UserInfoSidebar from "./comments/UserInfoSidebar";
 import { IUser } from "@/types";
 import OverviewTab from "./comments/OverviewTab";
+import CommentsTab from "./comments/CommentsTab";
 
 interface ProfilePageProps {
   userData: IUser;
@@ -113,7 +114,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({
             </TabsContent>
 
             <TabsContent value="comments" className="animate-scale-in">
-              {/* <CommentsTab userData={userData} /> */}
+              <CommentsTab userData={userData} />
             </TabsContent>
           </Tabs>
         </div>

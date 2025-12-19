@@ -10,10 +10,10 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**", // allow all https hosts
+        hostname: "**", 
       },
     ],
-    unoptimized: true, // FIX: prevents “private IP” image errors
+    unoptimized: true, 
   },
 };
 

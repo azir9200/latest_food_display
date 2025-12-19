@@ -1,66 +1,57 @@
 import Link from "next/link";
-import {
-  Facebook,
-  Instagram,
-  InstagramIcon,
-  Twitter,
-  Youtube,
-} from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1f1f1f] text-white mt-16 px-4 md:px-6 lg:px-0">
-      <div className="max-w-7xl mx-auto py-14 space-y-10">
-        {/* Brand + About */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          {/* Brand */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="bg-[#FF6B35] p-2 rounded-full shadow-md shadow-orange-500/20">
-                <div className="w-7 h-7 flex items-center justify-center text-white font-bold">
+    <footer className="relative mt-20 px-5 md:px-8 overflow-hidden">
+      {/* 🔥 Floating Gradient Lights */}
+      <div className="pointer-events-none absolute -top-24 -left-20 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl animate-pulse"></div>
+      <div className="pointer-events-none absolute -bottom-24 -right-20 w-72 h-72 bg-red-500/20 rounded-full blur-3xl animate-pulse"></div>
+
+      {/* 🌫 Glassmorphism Background */}
+      <div className="absolute inset-0 bg-white/5 backdrop-blur-xl border-t border-white/10"></div>
+
+      <div className="relative max-w-7xl mx-auto py-16 space-y-14">
+        {/* TOP SECTION */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
+          {/* BRAND */}
+          <div className="space-y-4 flex flex-col items-center md:items-start animate-fadeIn">
+            <div className="flex items-center gap-3 justify-center md:justify-start">
+              <div className="bg-gradient-to-r from-orange-500 to-red-500 p-2 rounded-xl shadow-lg shadow-orange-500/40 animate-glow">
+                <div className="w-8 h-8 flex items-center justify-center font-bold text-white">
                   FB
                 </div>
               </div>
-              <span className="text-xl font-bold tracking-wide">Food Book</span>
+              <span className="text-xl font-bold tracking-wide text-orange-700 drop-shadow-sm">
+                Food Book
+              </span>
             </div>
 
-            <p className="text-gray-400 leading-relaxed text-sm">
+            <p className="text-white text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
               Discover delicious street food, trending dishes, and hidden gems
               around the world.
             </p>
 
-            {/* Social Icons */}
-            <div className="flex gap-4 mt-4">
-              <Link
-                href="/"
-                className="p-2 bg-white/10 rounded-full hover:bg-[#FF6B35] transition"
-              >
-                <Facebook size={18} />
-              </Link>
-              <Link
-                href="/"
-                className="p-2 bg-white/10 rounded-full hover:bg-[#FF6B35] transition"
-              >
-                <Instagram className="w-5 h-5 text-white" />
-              </Link>
-              <Link
-                href="/"
-                className="p-2 bg-white/10 rounded-full hover:bg-[#FF6B35] transition"
-              >
-                <Twitter size={18} />
-              </Link>
-              <Link
-                href="/"
-                className="p-2 bg-white/10 rounded-full hover:bg-[#FF6B35] transition"
-              >
-                <Youtube size={18} />
-              </Link>
+            <div className="flex gap-4 mt-5 justify-center md:justify-start">
+              {[Facebook, Instagram, Twitter, Youtube].map((Icon, i) => (
+                <Link
+                  key={i}
+                  href="/"
+                  className="p-4 rounded-full bg-orange-600 hover:bg-orange-950 
+                             backdrop-blur-md transition-all hover:scale-110 shadow 
+                             border border-white/10 hover:border-white/30 animate-float"
+                >
+                  <Icon size={24} className="text-white" />
+                </Link>
+              ))}
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Quick Links</h3>
+          {/* QUICK LINKS */}
+          <div className="flex flex-col items-center md:items-start animate-fadeIn delay-100">
+            <h3 className="text-lg font-semibold text-orange-700  mb-4 drop-shadow-sm">
+              Quick Links
+            </h3>
             <ul className="space-y-2">
               {[
                 { name: "Home", link: "/" },
@@ -71,7 +62,7 @@ const Footer = () => {
                 <li key={item.name}>
                   <Link
                     href={item.link}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                    className="text-black hover:text-orange-700  hover:underline text-xl transition-all hover:tracking-wide"
                   >
                     {item.name}
                   </Link>
@@ -80,20 +71,22 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Support */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Support</h3>
+          {/* SUPPORT */}
+          <div className="flex flex-col items-center md:items-start animate-fadeIn delay-200">
+            <h3 className="text-lg font-semibold text-orange-700  mb-4 drop-shadow-sm">
+              Support
+            </h3>
             <ul className="space-y-2">
               {[
                 { name: "Help Center", link: "/contact" },
                 { name: "FAQ", link: "/faq" },
                 { name: "Contact Us", link: "/contact" },
-                { name: "Terms & Conditions", link: "/contact" },
+                { name: "Terms & Conditions", link: "/terms" },
               ].map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.link}
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                    className="text-gray-700  hover:text-orange-600 hover:underline  text-sm transition-all hover:tracking-wide"
                   >
                     {item.name}
                   </Link>
@@ -102,36 +95,76 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Newsletter */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Stay Updated</h3>
-            <p className="text-gray-400 text-sm mb-4">
-              Subscribe for trending dishes and latest food discoveries.
+          {/* NEWSLETTER */}
+          <div className="flex flex-col items-center md:items-start animate-fadeIn delay-300">
+            <h3 className="text-lg font-semibold text-orange-700 mb-4 drop-shadow-sm">
+              Stay Updated
+            </h3>
+
+            <p className="text-gray-700 text-sm mb-4 max-w-xs mx-auto md:mx-0">
+              Subscribe for trending dishes and food discoveries.
             </p>
 
-            <form className="flex items-center bg-white/10 rounded-full overflow-hidden backdrop-blur-sm">
+            <form
+              className="flex items-center bg-white/10 backdrop-blur-xl 
+                         rounded-full overflow-hidden border border-white/10 
+                         hover:border-white/30 transition-all w-full max-w-xs mx-auto md:mx-0"
+            >
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="px-4 py-3 w-full bg-transparent text-sm outline-none placeholder-gray-300"
+                className="px-4 py-3 w-full bg-transparent text-sm outline-none text-white placeholder-gray-600"
               />
-              <Link href="/signup">
-                <button
-                  type="button"
-                  className="bg-gradient-to-r from-orange-500 to-red-500 px-5 py-3 text-sm font-semibold hover:opacity-90 transition"
-                >
-                  Join
-                </button>
-              </Link>
+              <button
+                type="button"
+                className="bg-gradient-to-r from-orange-500 to-red-500 px-6 py-3 text-sm text-white font-semibold hover:opacity-90 transition-all"
+              >
+                Join
+              </button>
             </form>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="border-t border-white/10 pt-6 text-center text-gray-500 text-sm">
+        {/* BOTTOM SECTION */}
+        <div className="border-t border-white/10 text-center text-orange-700 text-sm  pb-2 animate-fadeIn delay-500">
           © {new Date().getFullYear()} Food Book. All Rights Reserved.
         </div>
       </div>
+
+      {/* ANIMATION CSS */}
+      <style>
+        {`
+        .animate-float {
+          animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-6px); }
+        }
+
+        .animate-glow {
+          animation: glow 3s ease-in-out infinite;
+        }
+        @keyframes glow {
+          0%, 100% { box-shadow: 0 0 12px rgba(255, 90, 30, 0.25); }
+          50% { box-shadow: 0 0 22px rgba(255, 90, 30, 0.5); }
+        }
+
+        .animate-fadeIn {
+          opacity: 0;
+          animation: fadeIn 0.8s forwards ease-out;
+        }
+        .animate-fadeIn.delay-100 { animation-delay: 0.1s; }
+        .animate-fadeIn.delay-200 { animation-delay: 0.2s; }
+        .animate-fadeIn.delay-300 { animation-delay: 0.3s; }
+        .animate-fadeIn.delay-500 { animation-delay: 0.5s; }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        `}
+      </style>
     </footer>
   );
 };

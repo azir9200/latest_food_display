@@ -51,7 +51,6 @@ export const loginUser = async (userData: FieldValues) => {
 export const verifyUser = async (id: string) => {
   try {
     const res = await fetch(
-      
       `${process.env.NEXT_PUBLIC_BASE_API}/user/verify?order_id=${id}`,
 
       {
@@ -237,5 +236,29 @@ export const getNewToken = async () => {
     return res.json();
   } catch (error: any) {
     return Error(error);
+  }
+};
+
+export const updateProfile = async (id: string, payload: any): Promise<any> => {
+  const token = (await cookies()).get("accessToken")!.value;
+  console.log("auth service", token);
+  console.log("auth service id,  payload", id, payload);
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/user/user/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    );
+    console.log("update aservice", res);
+    revalidateTag("loginUser", "max");
+    return res.json();
+  } catch (error: any) {
+    throw new Error(error.message || "Something went wrong while updating");
   }
 };

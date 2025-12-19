@@ -33,9 +33,7 @@ export default function PremiumPage() {
 
             <div className="mt-6 flex gap-3">
               <Button className="bg-[#FF6b35]" asChild>
-                <Link href="http://localhost:3000/premium/position">
-                  Get Premium
-                </Link>
+                <Link href="process.env.NEXT_PUBLIC_BASE_API/premium/position"></Link>
               </Button>
               <Button variant="outline" asChild>
                 <Link href="#compare">Compare Plans</Link>

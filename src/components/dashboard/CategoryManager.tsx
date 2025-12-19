@@ -20,17 +20,18 @@ interface CategoryManagerProps {
 const CategoryManager: React.FC<CategoryManagerProps> = ({
   initialCategories,
 }) => {
+  const [category, setCategory] = useState(initialCategories);
   const [categoryName, setCategoryName] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const pageSize = 10;
 
   const handleSubmit = async () => {
-   
     if (!categoryName.trim()) return;
     try {
       if (editingId) {
-        await updateCategory(editingId, categoryName);
+        const catUpdate = await updateCategory(editingId, categoryName);
+        console.log("catUpdate", catUpdate);
         toast.success("Category updated successfully");
       } else {
         await createCategory(categoryName);
@@ -52,6 +53,7 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({
 
   const handleDelete = async (id: string) => {
     const res = await deletedCategory(id);
+    console.log("reee  deketr", res);
     if (res.success) {
       toast.success("User deleted");
     } else {
@@ -104,6 +106,7 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({
                           size="icon"
                           onClick={() => handleEdit(category.id, category.name)}
                         >
+                          Edit
                           <Edit className="h-4 w-4" />
                         </Button>
                         <Button
@@ -122,12 +125,11 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({
           </table>
         </div>
 
-        {initialCategories?.length > 0 && (
+        {category?.length > 0 && (
           <div className="flex items-center justify-between mt-4">
             <div className="text-sm text-muted-foreground">
               {(page - 1) * pageSize + 1}-
-              {Math.min(page * pageSize, initialCategories.length)} of{" "}
-              {initialCategories.length}
+              {Math.min(page * pageSize, category.length)} of {category.length}
             </div>
             <div className="flex gap-2">
               <Button
@@ -139,7 +141,7 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({
                 Previous
               </Button>
               {Array.from({
-                length: Math.ceil(initialCategories.length / pageSize) || 1,
+                length: Math.ceil(category.length / pageSize) || 1,
               }).map((_, idx) => (
                 <Button
                   key={idx}

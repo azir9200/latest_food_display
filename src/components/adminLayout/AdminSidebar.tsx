@@ -66,6 +66,11 @@ const AdminSidebar = () => {
       path: "/dashboard/coupon",
       icon: <Disc2Icon className="h-5 w-5" />,
     },
+    {
+      title: "Deleted-Items",
+      path: "/dashboard/deletedItems",
+      icon: <Disc2Icon className="h-5 w-5" />,
+    },
   ];
 
   return (
@@ -90,7 +95,10 @@ const AdminSidebar = () => {
                     className={isActive(item.path) ? "bg-[#FF6b35]/30" : ""}
                     asChild
                   >
-                    <Link href={item.path}>
+                    <Link
+                      className="text-white  bg-[#FF6b35]/70 underline"
+                      href={item.path}
+                    >
                       {item.icon}
                       <span>{item.title}</span>
                     </Link>

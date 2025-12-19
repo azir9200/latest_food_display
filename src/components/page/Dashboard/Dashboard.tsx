@@ -6,7 +6,6 @@ import StatCard from "@/components/dashboard/StartCard";
 import { mockActivity } from "@/components/data/mockData";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { postAprroved, premiumAprroved } from "@/services/postService";
-// import { PostStatus } from "@/types";
 import { IPost, PostStatus } from "@/types/foodPost";
 
 import { FileText, MessageSquare, Star, Users } from "lucide-react";

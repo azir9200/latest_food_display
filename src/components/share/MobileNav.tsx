@@ -38,7 +38,7 @@ export function MobileNav() {
   );
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-md border-t z-40">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 bg-background/40 backdrop-blur-md border-t z-40">
       <nav className="flex justify-around items-center h-16">
         {filteredRoutes.map((route) => {
           const isActive =
@@ -58,7 +58,7 @@ export function MobileNav() {
               )}
             >
               <route.icon className="h-5 w-5 mb-1" />
-              <span>{route.name}</span>
+              <span className="text-white">{route.name}</span>
             </Link>
           );
         })}

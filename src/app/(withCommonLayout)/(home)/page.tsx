@@ -20,7 +20,7 @@ export default async function Home() {
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow">
         <HeroSection />
-        <Hero />
+        {/* <Hero /> */}
         <Categories />
         <div className=" max-w-7xl md:mx-auto mx-2">
           <FeaturedSpots posts={Post?.data} user={res.data} />

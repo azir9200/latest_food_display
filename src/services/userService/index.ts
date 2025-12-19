@@ -35,11 +35,10 @@ export const deletedUser = async (id: string): Promise<any> => {
 
   try {
     const res = await fetch(
-      // `https://latest-food-backend.vercel.app/api/v1/user/deleted/${id}`,
-
+    
       `${process.env.NEXT_PUBLIC_BASE_API}/user/soft/${id}`,
       {
-        method: "DELETE",
+        method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

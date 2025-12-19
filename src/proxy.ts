@@ -1,17 +1,29 @@
-import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { jwtDecode } from "jwt-decode";
+interface MyJwtPayload {
+  id: string;
+  email: string;
+  role: "ADMIN" | "USER" | "PREMIUM";
+}
 
 export function proxy(req: NextRequest) {
+  const accessToken = req.cookies.get("accessToken")?.value;
+  let user: MyJwtPayload | null = null;
+
+  try {
+    if (accessToken) {
+      user = jwtDecode<MyJwtPayload>(accessToken);
+    }
+  } catch (e) {
+    user = null;
+  }
+ 
   const pathname = req.nextUrl.pathname;
 
-  const token = req.cookies.get("accessToken")?.value;
+  const authProtectedPaths = ["/premium", "/allpost", "/restaurant"];
 
-  // Routes requiring login
-  const authProtectedPaths = ["/premium", "/allpost"];
-
-  // Admin-only routes
   const adminProtectedPaths = ["/dashboard"];
-
   const isAuthProtected = authProtectedPaths.some((path) =>
     pathname.startsWith(path)
   );
@@ -20,24 +32,21 @@ export function proxy(req: NextRequest) {
     pathname.startsWith(path)
   );
 
-  // ❌ Not logged in → redirect to login with callbackUrl
-  if (isAuthProtected && !token) {
+  if (isAuthProtected && !user) {
     const loginUrl = new URL("/login", req.url);
-    loginUrl.searchParams.set("callbackUrl", pathname);
+
+    const redirectPath = req.nextUrl.pathname + req.nextUrl.search;
+    loginUrl.searchParams.set("callbackUrl", redirectPath);
+
     return NextResponse.redirect(loginUrl);
   }
 
-  // ❌ Not admin → redirect to home
-  if (isAdminProtected) {
-    const role = req.cookies.get("role")?.value;
-    if (role !== "ADMIN") {
-      return NextResponse.redirect(new URL("/", req.url));
-    }
+  if (isAdminProtected && (!user || user.role !== "ADMIN")) {
+    return NextResponse.redirect(new URL("/", req.url));
   }
-
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/premium", "/premium/:path*", "/dashboard/:path*", "/allpost"],
+  matcher: ["/premium", "/dashboard/:path*", "/allpost", "/restaurant"],
 };

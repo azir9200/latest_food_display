@@ -6,7 +6,6 @@ import { cookies } from "next/headers";
 export const getAllCategory = async () => {
   try {
     const res = await fetch(
-     
       `${process.env.NEXT_PUBLIC_BASE_API}/category/all-retrieve`,
       {
         method: "GET",
@@ -41,7 +40,7 @@ export const createCategory = async (name: string): Promise<any> => {
       }
     );
     const result = await res.json();
-    revalidateTag("category",  "page");
+    revalidateTag("category", "max");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -66,7 +65,7 @@ export const updateCategory = async (
       }
     );
     const result = await res.json();
-    revalidateTag("category",  "page");
+    revalidateTag("category", "max");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");
@@ -78,9 +77,9 @@ export const deletedCategory = async (id: string): Promise<any> => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/category/deleted/${id}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/category/soft/${id}`,
       {
-        method: "DELETE",
+        method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -88,7 +87,7 @@ export const deletedCategory = async (id: string): Promise<any> => {
       }
     );
     const result = await res.json();
-    revalidateTag("category",  "page");
+    revalidateTag("category", "max");
     return result;
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong");

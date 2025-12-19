@@ -101,7 +101,7 @@ const AllPostPage: React.FC<IAllPostPros> = ({ posts, categoriess }) => {
 
       {/* Filter Bar */}
 
-      <div className="bg-white/70 backdrop-blur-xl rounded-2xl shadow-lg p-6 border border-orange-100 animate-scale-in">
+      <div className="bg-white/70 backdrop-blur-xl rounded-2xl shadow-lg border border-orange-100 animate-scale-in">
         <FilterBar
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}

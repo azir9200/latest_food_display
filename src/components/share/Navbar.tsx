@@ -22,7 +22,6 @@ const Navbar = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMenuAnimating, setIsMenuAnimating] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -128,6 +127,14 @@ const Navbar = () => {
               Dashboard
             </Link>
           )}
+          {user?.role === "USER" && user.isPremium && (
+            <Link
+              href="/manage-restaurant"
+              className=" text-[#333333] hover:text-[#FF6b35] transition-colors"
+            >
+              Manage Restaurant
+            </Link>
+          )}
         </div>
 
         {/* Desktop Search & Auth */}
@@ -201,105 +208,122 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu with Animation */}
+      {/* Mobile Fullscreen Menu */}
       {(isMenuOpen || isMenuAnimating) && (
         <div
-          className={`md:hidden bg-white shadow-lg py-4 px-5 absolute w-full transition-all duration-300 ease-in-out ${
-            isMenuAnimating
-              ? "animate-slide-out opacity-0"
-              : "animate-slide-in opacity-100"
+          className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-300 ${
+            isMenuAnimating ? "opacity-0" : "opacity-100"
           }`}
         >
-          <div className="flex flex-col space-y-4">
-            <Link
-              href="/"
-              className="  text-[#333333] hover:text-[#FF6b35] transition-colors"
-              onClick={toggleMenu}
-            >
-              Home
-            </Link>
-            <Link
-              href="/allpost"
-              className="  text-[#333333] hover:text-[#FF6b35] transition-colors"
-              onClick={toggleMenu}
-            >
-              allpost
-            </Link>
-
-            <Link
-              href="/premium"
-              className="  text-[#333333] hover:text-[#FF6b35] transition-colors"
-              onClick={toggleMenu}
-            >
-              Premium
-            </Link>
-
-            <Link
-              href="/about"
-              className="  text-[#333333] hover:text-[#FF6b35] transition-colors"
-            >
-              About
-            </Link>
-            <Link
-              href="/contact"
-              className="  text-[#333333] hover:text-[#FF6b35] transition-colors"
-            >
-              Contact
-            </Link>
-            {user?.role === "ADMIN" && (
+          {/* Dark Background Overlay */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={toggleMenu}
+          ></div>
+          {/* Menu Panel */}
+          <div
+            className={`absolute right-30 top-50 h-content w-2/4 max-w-sm bg-white rounded-md shadow-xl p-6 transform transition-transform duration-300 ${
+              isMenuAnimating ? "translate-x-full" : "translate-x-0"
+            }`}
+          >
+            <div className="flex flex-col items-center space-y-6 text-center">
               <Link
-                href="/dashboard"
+                href="/"
+                className="text-2xl font-semibold text-[#333333] hover:text-[#FF6b35]"
+                onClick={toggleMenu}
+              >
+                Home
+              </Link>
+
+              <Link
+                href="/allpost"
+                className="text-2xl font-semibold text-[#333333] hover:text-[#FF6b35]"
+                onClick={toggleMenu}
+              >
+                All Posts
+              </Link>
+              <Link
+                href="/restaurant"
                 className="  text-[#333333] hover:text-[#FF6b35] transition-colors"
               >
-                Dashboard
+                Restaurant
               </Link>
-            )}
+              <Link
+                href="/premium"
+                className="text-2xl font-semibold text-[#333333] hover:text-[#FF6b35]"
+                onClick={toggleMenu}
+              >
+                Premium
+              </Link>
 
-            <div className="pt-2 border-t border-gray-100">
-              {user ? (
-                <div className="flex flex-col space-y-3">
-                  <Link
-                    href="/profile"
-                    onClick={toggleMenu}
-                    className="flex items-center gap-2"
-                  >
-                    <div className="w-8 h-8 rounded-full bg-[#FFC15E]   text-[#333333] flex items-center justify-center">
-                      {/* {user.name} */}
-                      NB
-                    </div>
-                  </Link>
+              <Link
+                href="/about"
+                className="text-2xl font-semibold text-[#333333] hover:text-[#FF6b35]"
+                onClick={toggleMenu}
+              >
+                About
+              </Link>
+
+              <Link
+                href="/contact"
+                className="text-2xl font-semibold text-[#333333] hover:text-[#FF6b35]"
+                onClick={toggleMenu}
+              >
+                Contact
+              </Link>
+
+              {user?.role === "ADMIN" && (
+                <Link
+                  href="/dashboard"
+                  className="text-2xl font-semibold text-[#333333] hover:text-[#FF6b35]"
+                  onClick={toggleMenu}
+                >
+                  Dashboard
+                </Link>
+              )}
+
+              {user?.role === "USER" && user.isPremium && (
+                <Link
+                  href="/manage-restaurant"
+                  className=" text-[#333333] hover:text-[#FF6b35] transition-colors"
+                >
+                  Manage Restaurant
+                </Link>
+              )}
+
+              {/* Auth Buttons */}
+              <div className="pt-4 border-t border-gray-200 w-full max-w-xs mx-auto">
+                {user ? (
                   <Button
                     variant="ghost"
                     onClick={() => {
                       handleLogout();
                       toggleMenu();
                     }}
-                    className="justify-start p-0   text-[#333333] hover:text-[#FF6b35]"
+                    className="text-xl text-[#333333] hover:text-[#FF6b35] w-full mt-4"
                   >
                     Logout
                   </Button>
-                </div>
-              ) : (
-                <div className="flex flex-col space-y-3">
-                  <Link href={"login"}>
-                    <Button
-                      variant="ghost"
-                      onClick={() => {
-                        // setIsLoggedIn(true);
-                        toggleMenu();
-                      }}
-                      className="justify-start p-0   text-[#333333] hover:text-[#FF6b35]"
-                    >
-                      Login
-                    </Button>
-                  </Link>
-                  <Link href={"/signup"}>
-                    <Button className="bg-[#FF6b35] text-white hover:bg-[#FF6b35]/90 w-full">
-                      Sign Up
-                    </Button>
-                  </Link>
-                </div>
-              )}
+                ) : (
+                  <>
+                    <Link href="/login" className="w-full">
+                      <Button
+                        variant="ghost"
+                        onClick={toggleMenu}
+                        className="text-xl text-[#333333] hover:text-[#FF6b35] w-full mt-4"
+                      >
+                        Login
+                      </Button>
+                    </Link>
+
+                    <Link href="/signup" className="w-full">
+                      <Button className="bg-[#FF6b35] text-xl text-white hover:bg-[#FF6b35]/90 w-full mt-2">
+                        Sign Up
+                      </Button>
+                    </Link>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>

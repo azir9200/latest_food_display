@@ -2,18 +2,18 @@
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
-//  get all posts
-export const getAllRestaurant = async () => {
+//  get all restaurants
+export const getRestaurant = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/restaurant/`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      next: {
-        tags: ["restaurant"],
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/restaurant/all`,
+      {
+        method: "GET",
+        next: {
+          tags: ["restaurant"], // Optional Next.js cache control
+        },
+      }
+    );
 
     const data = await res.json();
     return data;
@@ -21,81 +21,57 @@ export const getAllRestaurant = async () => {
     return Error(error.message);
   }
 };
+export const getSingleRestaurant = async (id: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/restaurant/single/${id}`,
+      {
+        method: "GET",
+        next: {
+          tags: ["restaurant"],
+        },
+      }
+    );
 
-// create post
-export const createPost = async (
-  postData: Record<string, any>
+    const data = await res.json();
+    return data;
+  } catch (error: any) {
+    return Error(error.message);
+  }
+};
+export const getSingleRestaurantForAuthor = async () => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/restaurant/single`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${
+            (await cookies()).get("accessToken")!.value
+          }`,
+          "Content-Type": "application/json",
+        },
+        next: {
+          tags: ["restaurant"],
+        },
+      }
+    );
+
+    const data = await res.json();
+    return data;
+  } catch (error: any) {
+    return Error(error.message);
+  }
+};
+export const updateRestaurant = async (
+  id: string,
+  payload: any
 ): Promise<any> => {
   const token = (await cookies()).get("accessToken")!.value;
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/post/create`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postData),
-    });
-    const result = await res.json();
-    revalidateTag("post", "max");
-    return result;
-  } catch (error: any) {
-    throw new Error(error.message || "Something went wrong");
-  }
-};
-
-export const createRating = async (data: Record<string, any>): Promise<any> => {
-  const token = (await cookies()).get("accessToken")!.value;
-
-  try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/rating/create`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
-
-    revalidateTag("post", "max");
-    return res.json();
-  } catch (error: any) {
-    throw new Error(error.message || "Something went wrong");
-  }
-};
-
-export const deletedPost = async (id: string): Promise<any> => {
-  const token = (await cookies()).get("accessToken")!.value;
-
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/post/deleted/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    revalidateTag("post", "max");
-    return res.json();
-  } catch (error: any) {
-    throw new Error(error.message || "Something went wrong");
-  }
-};
-
-export const updatePost = async (id: string, payload: any): Promise<any> => {
-  const token = (await cookies()).get("accessToken")!.value;
-
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/post/update/${id}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/restaurant/update/${id}`,
       {
         method: "PATCH",
         headers: {
@@ -106,7 +82,125 @@ export const updatePost = async (id: string, payload: any): Promise<any> => {
       }
     );
 
-    revalidateTag("post", "max");
+    revalidateTag("restaurant", "max");
+    return res.json();
+  } catch (error: any) {
+    throw new Error(error.message || "Something went wrong while updating");
+  }
+};
+export const deletedRestaurant = async (id: string): Promise<any> => {
+  const token = (await cookies()).get("accessToken")!.value;
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/restaurant/delete/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    revalidateTag("restaurant", "max");
+    return res.json();
+  } catch (error: any) {
+    throw new Error(error.message || "Something went wrong");
+  }
+};
+// create restaurant
+export const createRestaurant = async (
+  restaurantData: Record<string, any>
+): Promise<any> => {
+  const token = (await cookies()).get("accessToken")!.value;
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/restaurant/create`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(restaurantData),
+      }
+    );
+    const result = await res.json();
+    revalidateTag("restaurant", "max");
+    return result;
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message || "Something went wrong");
+  }
+};
+
+export const createMenu = async (
+  id: string,
+  data: Record<string, any>
+): Promise<any> => {
+  const token = (await cookies()).get("accessToken")!.value;
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/restaurant/menu/${id}/create`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    revalidateTag("restaurant", "max");
+    return res.json();
+  } catch (error: any) {
+    throw new Error(error.message || "Something went wrong");
+  }
+};
+
+export const deletedMenu = async (id: string): Promise<any> => {
+  const token = (await cookies()).get("accessToken")!.value;
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/restaurant/menu/${id}/delete`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    revalidateTag("restaurant", "max");
+    return res.json();
+  } catch (error: any) {
+    throw new Error(error.message || "Something went wrong");
+  }
+};
+
+export const updateMenu = async (id: string, payload: any): Promise<any> => {
+  const token = (await cookies()).get("accessToken")!.value;
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/restaurant/menu/${id}/update`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    revalidateTag("restaurant", "max");
     return res.json();
   } catch (error: any) {
     throw new Error(error.message || "Something went wrong while updating");

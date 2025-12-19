@@ -21,9 +21,9 @@ const LoginForm = () => {
   } = useForm<FormData>();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("callbackUrl");
-  console.log("rrreeedit fjkl", redirect);
 
   const router = useRouter();
+
   const { setIsLoading } = useUser();
 
   const onSubmit = async (data: FormData) => {
@@ -33,10 +33,10 @@ const LoginForm = () => {
 
       if (res?.success) {
         if (redirect) {
-          router.push(redirect);
+          window.location.href = redirect;
           toast.success(res?.message);
         } else {
-          router.push("/");
+          window.location.href = "/";
           toast.success(res?.message);
         }
       } else {
@@ -53,7 +53,7 @@ const LoginForm = () => {
     const presets = {
       admin: { email: "admin99@gmail.com", password: "123456" },
       user: { email: "user1@gmail.com", password: "123456" },
-      premium: { email: "premium@gmail.com", password: "123456" },
+      premium: { email: "user71@gmail.com", password: "123456" },
     };
 
     const selected = presets[type];

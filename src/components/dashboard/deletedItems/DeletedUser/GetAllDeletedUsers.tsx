@@ -1,3 +1,5 @@
+// import Users from "@/components/page/Dashboard/Users";
+
 "use client";
 import NotFoundProudct from "@/components/dashboard/NotFoundProudct";
 import UserTable from "@/components/dashboard/UserTable";
@@ -9,12 +11,12 @@ import { IUser, UserRole } from "@/types";
 import { Search, ShieldCheck, Star, User as UserIcon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import DeletedUserTable from "./deletedUserTable";
 
 interface IusersProps {
   users: IUser[];
 }
-
-const Users: React.FC<IusersProps> = ({ users }) => {
+const GetAllDeletedUsers: React.FC<IusersProps> = async ({ users }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPagePremium, setCurrentPagePremium] = useState(1);
@@ -145,7 +147,7 @@ const Users: React.FC<IusersProps> = ({ users }) => {
           <TabsContent value="all" className="mt-6">
             {paginatedUsers?.length > 0 ? (
               <>
-                <UserTable
+                <DeletedUserTable
                   users={paginatedUsers}
                   onDeleteUser={handleDeleteUser}
                   onUpdateRole={handleUpdateRole}
@@ -325,76 +327,11 @@ const Users: React.FC<IusersProps> = ({ users }) => {
               />
             )}
           </TabsContent>
-
-          {/* Normal Users */}
-          <TabsContent value="user" className="mt-6">
-            {paginatedNormal?.length > 0 ? (
-              <>
-                <UserTable
-                  users={paginatedNormal}
-                  onDeleteUser={handleDeleteUser}
-                  onUpdateRole={handleUpdateRole}
-                />
-                {NormalUser?.length > 0 && userTotalPages > 1 && (
-                  <div className="mt-4 flex items-center justify-between">
-                    <div className="text-sm text-muted-foreground">
-                      {(currentPageUser - 1) * usersPerPage + 1}-
-                      {Math.min(
-                        currentPageUser * usersPerPage,
-                        NormalUser.length
-                      )}{" "}
-                      of {NormalUser.length}
-                    </div>
-                    <div className="flex justify-center gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() =>
-                          setCurrentPageUser((p) => Math.max(1, p - 1))
-                        }
-                        disabled={currentPageUser === 1}
-                      >
-                        Previous
-                      </Button>
-                      {Array.from({ length: userTotalPages }, (_, i) => (
-                        <Button
-                          key={i + 1}
-                          variant={
-                            currentPageUser === i + 1 ? "default" : "outline"
-                          }
-                          size="sm"
-                          onClick={() => setCurrentPageUser(i + 1)}
-                        >
-                          {i + 1}
-                        </Button>
-                      ))}
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() =>
-                          setCurrentPageUser((p) =>
-                            Math.min(userTotalPages, p + 1)
-                          )
-                        }
-                        disabled={currentPageUser === userTotalPages}
-                      >
-                        Next
-                      </Button>
-                    </div>
-                  </div>
-                )}
-              </>
-            ) : (
-              <NotFoundProudct
-                title="No regular users"
-                details="Try adding more users or removing filters."
-              />
-            )}
-          </TabsContent>
         </Tabs>
       </div>
     </div>
   );
 };
 
-export default Users;
+// export default Users;
+export default GetAllDeletedUsers;
