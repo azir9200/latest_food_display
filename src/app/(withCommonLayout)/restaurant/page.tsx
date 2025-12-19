@@ -1,12 +1,14 @@
-import RestaurantPage from "@/components/page/restaurant/RestaurantPage";
-import React from "react";
+// import RestaurantPage from "@/components/page/restaurant/RestaurantPage";
+import Restaurants from "@/components/page/restaurants/Restaurants";
+import { getRestaurant } from "@/services/restaurantService";
 
-const page = () => {
+const RestaurantPage = async () => {
+  const res = await getRestaurant();
   return (
     <div>
-      <RestaurantPage />
+      <Restaurants  restaurants={res?.data} />
     </div>
   );
 };
 
-export default page;
+export default RestaurantPage;
