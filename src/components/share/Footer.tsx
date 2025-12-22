@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { getCurrentUser } from "@/services/AuthService";
 
-const Footer = () => {
+const Footer = async () => {
+  const user = await getCurrentUser();
   return (
     <footer className="relative mt-20 px-5 md:px-8 overflow-hidden">
       {/* 🔥 Floating Gradient Lights */}
@@ -110,17 +112,44 @@ const Footer = () => {
                          rounded-full overflow-hidden border border-white/10 
                          hover:border-white/30 transition-all w-full max-w-xs mx-auto md:mx-0"
             >
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="px-4 py-3 w-full bg-transparent text-sm outline-none text-white placeholder-gray-600"
-              />
-              <button
-                type="button"
-                className="bg-gradient-to-r from-orange-500 to-red-500 px-6 py-3 text-sm text-white font-semibold hover:opacity-90 transition-all"
-              >
-                Join
-              </button>
+              {user ? (
+                <Link
+                  href="/profile"
+                  className="flex items-center cursor-pointer"
+                >
+                  {" "}
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="px-4 py-3 w-full bg-transparent text-sm outline-none text-white placeholder-gray-600"
+                  />
+                  <button
+                    type="button"
+                    className="bg-gradient-to-r from-orange-500 to-red-500 px-6 py-3 text-sm text-white font-semibold hover:opacity-90 transition-all"
+                  >
+                    Join
+                  </button>{" "}
+                </Link>
+              ) : (
+                <Link
+                  href={"/signup"}
+                  className="flex items-center cursor-pointer"
+                >
+                  {" "}
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="px-4 py-3 w-full bg-transparent text-sm outline-none text-white placeholder-gray-600"
+                  />
+                  <button
+                    type="button"
+                    className="bg-gradient-to-r from-orange-500 to-red-500 px-6 py-3 text-sm text-white font-semibold hover:opacity-90 transition-all"
+                  >
+                    Join
+                  </button>{" "}
+                </Link>
+              )}
+              
             </form>
           </div>
         </div>

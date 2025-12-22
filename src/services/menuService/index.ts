@@ -10,7 +10,7 @@ export const createMenu = async (
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/restaurant/menu/${id}/create`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/menu/${id}/create`,
       {
         method: "POST",
         headers: {
@@ -33,7 +33,7 @@ export const deletedMenu = async (id: string): Promise<any> => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/restaurant/menu/${id}/delete`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/menu/${id}/delete`,
       {
         method: "DELETE",
         headers: {
@@ -55,7 +55,7 @@ export const updateMenu = async (id: string, payload: any): Promise<any> => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/restaurant/menu/${id}/update`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/menu/${id}/update`,
       {
         method: "PATCH",
         headers: {

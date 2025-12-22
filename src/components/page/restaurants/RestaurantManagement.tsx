@@ -41,6 +41,14 @@ type RestaurantsProps = {
   restaurant?: IRestaurant;
 };
 const RestaurantManagement = ({ restaurant }: RestaurantsProps) => {
+  // if (!restaurant) {
+  //   return (
+  //     <div className="p-6 text-center text-muted-foreground">
+  //       No restaurant found. Please create one.
+  //     </div>
+  //   );
+  // }
+
   const [activeTab, setActiveTab] = useState("overview");
   const [isEditing, setIsEditing] = useState(false);
   const [menuFormOpen, setMenuFormOpen] = useState(false);
@@ -49,10 +57,6 @@ const RestaurantManagement = ({ restaurant }: RestaurantsProps) => {
   >();
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  if (!restaurant) {
-    return null;
-  }
 
   const handleCreateRestaurant = async (
     data: Omit<
@@ -68,7 +72,7 @@ const RestaurantManagement = ({ restaurant }: RestaurantsProps) => {
   ) => {
     setLoading(true);
     const res = await createRestaurant(data);
-    console.log(res);
+    console.log(" cre resta", res);
     toast.success("Restaurant created successfully!");
     setLoading(false);
     setActiveTab("overview");
@@ -87,7 +91,8 @@ const RestaurantManagement = ({ restaurant }: RestaurantsProps) => {
     >
   ) => {
     setLoading(true);
-    const res = await updateRestaurant(restaurant.id, data);
+    if (!restaurant?.id) return;
+    const res = await updateRestaurant(restaurant?.id, data);
     toast.success("Restaurant updated successfully!");
     setActiveTab("overview");
     setLoading(false);
@@ -95,7 +100,8 @@ const RestaurantManagement = ({ restaurant }: RestaurantsProps) => {
   };
 
   const handleDeleteRestaurant = async () => {
-    const res = await deletedRestaurant(restaurant.id);
+    if (!restaurant?.id) return;
+    const res = await deletedRestaurant(restaurant?.id);
     console.log(res);
     toast.success("Restaurant deleted successfully!");
     setDeleteDialogOpen(false);
@@ -103,7 +109,9 @@ const RestaurantManagement = ({ restaurant }: RestaurantsProps) => {
   };
 
   const handleAddMenuItem = async (data: Omit<IMenuItem, "id">) => {
-    const menu = await createMenu(restaurant.id, data);
+    if (!restaurant?.id) return;
+    const menu = await createMenu(restaurant?.id, data);
+    console.log("menuuuuuu", menu);
     toast.success("Menu item added!");
   };
 
@@ -304,9 +312,9 @@ const RestaurantManagement = ({ restaurant }: RestaurantsProps) => {
             </Button>
           </div>
 
-          {restaurant.menuItems ? (
+          {restaurant?.menuItems ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {restaurant?.menuItems.map((item) => (
+              {restaurant?.menuItems?.map((item) => (
                 <MenuItemCard
                   key={item.id}
                   item={item}

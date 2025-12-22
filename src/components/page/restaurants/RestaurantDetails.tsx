@@ -19,7 +19,7 @@ import {
 import Link from "next/link";
 import ImageGallery from "./ImageGallery";
 import MenuItemCard from "./MenuItemCard";
-import { IRestaurant } from "@/types/restaurant";
+import { IMenuItem, IRestaurant } from "@/types/restaurant";
 type RestaurantsProps = {
   restaurant: IRestaurant;
 };
@@ -52,13 +52,12 @@ const RestaurantDetails = ({ restaurant }: RestaurantsProps) => {
   };
 
   // Group menu items by category
-  const menuByCategory = restaurant?.menuItems?.reduce((acc, item) => {
-    const cat = item.category || "Other";
-    if (!acc[cat]) acc[cat] = [];
-    acc[cat].push(item);
+  const menuByCategory = (restaurant.menuItems ?? []).reduce((acc, item) => {
+    const category = item.category || "Other";
+    if (!acc[category]) acc[category] = [];
+    acc[category].push(item);
     return acc;
-  }, {} as Record<string, typeof restaurant.menuItems>);
-
+  }, {} as Record<string, IMenuItem[]>);
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-7xl mx-auto py-6 space-y-8">
@@ -230,10 +229,9 @@ const RestaurantDetails = ({ restaurant }: RestaurantsProps) => {
             <div key={category} className="space-y-4">
               <h3 className="text-lg font-semibold text-primary">{category}</h3>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                <p>my res</p>
-                {/* {items?.map((item) => (
+                {items?.map((item) => (
                   <MenuItemCard key={item.id} item={item} />
-                ))} */}
+                ))}
               </div>
             </div>
           ))}

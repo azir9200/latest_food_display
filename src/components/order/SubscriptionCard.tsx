@@ -54,7 +54,7 @@ const SubscriptionCard = ({ subscription }: SubscriptionProps) => {
               <h2 className="font-semibold text-lg">
                 {subscription?.plan || "Premium Plan"}
               </h2>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xl text-muted-foreground">
                 {subscription?.user?.email}
               </p>
             </div>
@@ -64,8 +64,8 @@ const SubscriptionCard = ({ subscription }: SubscriptionProps) => {
             variant={isPaid ? "outline" : "secondary"}
             className={`${
               isPaid
-                ? "border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
-                : "border-amber-200 bg-amber-50 text-amber-700 hover:bg-amber-100"
+                ? "border-emerald-200 bg-emerald-50 text-2xl text-emerald-700 hover:bg-emerald-100"
+                : "border-amber-200 bg-amber-50 text-amber-700 text-xl hover:bg-amber-100"
             }`}
           >
             {isPaid ? "Payment Successful" : "Payment Pending"}

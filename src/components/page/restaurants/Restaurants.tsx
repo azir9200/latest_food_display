@@ -11,7 +11,7 @@ type RestaurantsProps = {
 };
 
 const Restaurants = ({ restaurants = [] }: RestaurantsProps) => {
-  // console.log("restaurnt", restaurants);
+  console.log("restaurnt", restaurants);
   const [searchQuery, setSearchQuery] = useState("");
   const { user } = useUser();
   const filteredRestaurants = restaurants?.filter(

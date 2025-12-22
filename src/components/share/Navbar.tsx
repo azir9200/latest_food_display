@@ -144,7 +144,7 @@ const Navbar = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon" className="rounded-full">
-                    <Avatar className="h-8 w-8 border-2 border-Food Book-orange cursor-pointer">
+                    <Avatar className="h-12 w-12 border-2 border-Food Book-orange cursor-pointer">
                       <AvatarImage src={user?.image || ""} alt="User" />
                       <AvatarFallback>NB </AvatarFallback>
                     </Avatar>

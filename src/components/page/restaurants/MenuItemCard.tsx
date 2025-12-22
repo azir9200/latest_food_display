@@ -1,14 +1,14 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { MenuItem } from "@/types/restaurant";
+import { IMenuItem } from "@/types/restaurant";
 import { DollarSign, Edit, Trash2 } from "lucide-react";
 import Image from "next/image";
 
 interface MenuItemCardProps {
-  item: MenuItem;
+  item: IMenuItem;
   editable?: boolean;
-  onEdit?: (item: MenuItem) => void;
+  onEdit?: (item: IMenuItem) => void;
   onDelete?: (itemId: string) => void;
 }
 

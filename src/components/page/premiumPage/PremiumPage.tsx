@@ -13,8 +13,8 @@ import { benefits, features } from "./helper";
 
 export default function PremiumPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-900 py-16">
-      <div className="container mx-auto px-6">
+    <main className="min-h-screen max-w-7xl mx-auto bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-900 py-16">
+      <div className=" px-6">
         <motion.header
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ export default function PremiumPage() {
 
             <div className="mt-6 flex gap-3">
               <Button className="bg-[#FF6b35]" asChild>
-                <Link href="process.env.NEXT_PUBLIC_BASE_API/premium/position"></Link>
+                <Link href="/premium/position">Get Premium </Link>
               </Button>
               <Button variant="outline" asChild>
                 <Link href="#compare">Compare Plans</Link>
@@ -113,7 +113,7 @@ export default function PremiumPage() {
             />
             <MotionCard
               title="Premium"
-              price="$6.99 / month"
+              price="$8.99 / month"
               features={[...features.slice(0, 4), "Priority features"]}
               highlight={true}
             />

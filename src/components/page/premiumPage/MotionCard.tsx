@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 export interface MotionCardProps {
   title: string;
   price: string;
@@ -76,7 +77,11 @@ export function MotionCard({
 
       <div className="mt-6 ">
         <Button className="bg-slate-50 text-[#FF6b35]">
-          {highlight ? "Get Premium" : "Choose"}
+          {highlight ? (
+            <Link href="/premium/position">Get Premium </Link>
+          ) : (
+            "Choose"
+          )}
         </Button>
       </div>
     </motion.div>

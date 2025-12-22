@@ -8,9 +8,6 @@ const YourPremium = async () => {
   return (
     <div>
       <Subscription payment={payment.data} />
-      <p>
-        Developer is working on it. Please come back later to visit this page
-      </p>
     </div>
   );
 };
