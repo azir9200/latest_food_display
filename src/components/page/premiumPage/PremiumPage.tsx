@@ -233,7 +233,7 @@ export default function PremiumPage() {
             </div>
             <div className="flex gap-4">
               <Button className="bg-[#FF6b35] ">
-                <Link href="/signup">Start free trial</Link>
+                <Link href="/premium/position">Start free trial</Link>
               </Button>
               <Button className="text-[#FF6b35]" variant="outline">
                 <Link href="/contact">Contact sales</Link>

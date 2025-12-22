@@ -25,9 +25,9 @@ const FeaturedSpots: React.FC<FeaturedSpotsProps> = ({ user, posts }) => {
       .slice(0, 3) || [];
 
   return (
-    <div className="py-16">
+    <div className="py-8">
       {/* Regular Featured Spots Section */}
-      <div className="mb-16">
+      <div className="mb-6">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl md:text-3xl font-bold text-street-dark">
             Popular Food Spots

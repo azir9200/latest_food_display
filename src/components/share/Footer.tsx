@@ -5,7 +5,7 @@ import { getCurrentUser } from "@/services/AuthService";
 const Footer = async () => {
   const user = await getCurrentUser();
   return (
-    <footer className="relative mt-20 px-5 md:px-8 overflow-hidden">
+    <footer className="relative mt-12 px-5 md:px-8 overflow-hidden">
       {/* 🔥 Floating Gradient Lights */}
       <div className="pointer-events-none absolute -top-24 -left-20 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl animate-pulse"></div>
       <div className="pointer-events-none absolute -bottom-24 -right-20 w-72 h-72 bg-red-500/20 rounded-full blur-3xl animate-pulse"></div>
@@ -149,7 +149,6 @@ const Footer = async () => {
                   </button>{" "}
                 </Link>
               )}
-              
             </form>
           </div>
         </div>

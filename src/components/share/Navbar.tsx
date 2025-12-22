@@ -127,14 +127,15 @@ const Navbar = () => {
               Dashboard
             </Link>
           )}
-          {user?.role === "USER" && user.isPremium && (
-            <Link
-              href="/manage-restaurant"
-              className=" text-[#333333] hover:text-[#FF6b35] transition-colors"
-            >
-              Manage Restaurant
-            </Link>
-          )}
+          {user?.role === "USER" ||
+            (user?.role === "ADMIN" && user.isPremium && (
+              <Link
+                href="/manage-restaurant"
+                className=" text-[#333333] hover:text-[#FF6b35] transition-colors"
+              >
+                Manage Restaurant
+              </Link>
+            ))}
         </div>
 
         {/* Desktop Search & Auth */}
@@ -243,8 +244,9 @@ const Navbar = () => {
                 All Posts
               </Link>
               <Link
-                href="/restaurant"
-                className="  text-[#333333] hover:text-[#FF6b35] transition-colors"
+                href="/allpost"
+                className="text-2xl font-semibold text-[#333333] hover:text-[#FF6b35]"
+                onClick={toggleMenu}
               >
                 Restaurant
               </Link>
@@ -282,14 +284,15 @@ const Navbar = () => {
                 </Link>
               )}
 
-              {user?.role === "USER" && user.isPremium && (
-                <Link
-                  href="/manage-restaurant"
-                  className=" text-[#333333] hover:text-[#FF6b35] transition-colors"
-                >
-                  Manage Restaurant
-                </Link>
-              )}
+              {user?.role === "USER" ||
+                (user?.role === "ADMIN" && user.isPremium && (
+                  <Link
+                    href="/manage-restaurant"
+                    className=" text-2xl font-semibold text-[#333333] hover:text-[#FF6b35] transition-colors"
+                  >
+                    Manage Restaurant
+                  </Link>
+                ))}
 
               {/* Auth Buttons */}
               <div className="pt-4 border-t border-gray-200 w-full max-w-xs mx-auto">
