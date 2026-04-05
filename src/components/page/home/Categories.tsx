@@ -31,11 +31,11 @@ const Categories = () => {
   const skeletons = Array.from({ length: 8 });
 
   return (
-    <div className="py-8 bg-gradient-to-b from-orange-50 to-orange-100">
-      <div className="max-w-7xl mx-auto px-4 md:px-0">
+    <section className="py-10 md:py-12">
+      <div className="max-w-7xl mx-auto rounded-3xl border border-orange-100/70 bg-white/80 px-4 py-8 md:px-8 md:py-10 shadow-xl shadow-orange-100/40 backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/50 dark:shadow-none">
         {/* Header */}
         <div className="flex items-center justify-between mb-10">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 flex items-center gap-2">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
             Explore by Category
             <Sparkles className="text-orange-500 h-6 w-6" />
           </h2>
@@ -43,7 +43,7 @@ const Categories = () => {
           <Link href="/allpost">
             <Button
               className="rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white 
-             hover:from-white hover:to-white hover:text-orange-600 
+             hover:from-orange-600 hover:to-red-600 
              font-semibold shadow-md hover:shadow-lg 
              transition-all duration-300 flex items-center gap-2 px-4 py-2"
             >
@@ -64,7 +64,7 @@ const Categories = () => {
             : categories?.slice(0, 8).map((category: CategoryType) => (
                 <div
                   key={category.id}
-                  className="relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all border border-orange-200 hover:border-orange-400"
+                  className="relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all border border-orange-200 hover:border-orange-400 hover:-translate-y-1"
                 >
                   {/* Category Image */}
                   <Image
@@ -99,7 +99,7 @@ const Categories = () => {
               ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -83,13 +83,13 @@ const HeroSection: React.FC = () => {
         }, 7000);
       }, 1000);
     },
-    [setCurrentTitle, setCurrentBg]
+    [setCurrentTitle, setCurrentBg],
   );
   useEffect(() => {
     const autoRotate = () => {
       timerRef.current = setTimeout(() => {
         handleSlideChange(
-          currentBg + 1 >= heroBackgrounds.length ? 0 : currentBg + 1
+          currentBg + 1 >= heroBackgrounds.length ? 0 : currentBg + 1,
         );
       }, 7000);
     };
@@ -125,7 +125,8 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
         ))}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-black/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-600/20 via-transparent to-cyan-500/20"></div>
       </div>
 
       {/* Carousel Navigation */}
@@ -146,10 +147,10 @@ const HeroSection: React.FC = () => {
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col justify-center items-center py-0 xl:py-32 px-4 container mx-auto min-h-screen">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center rounded-3xl border border-white/15 bg-black/20 px-4 py-8 md:px-8 md:py-10 backdrop-blur-sm">
           {/* Logo Animation */}
           <div className="flex justify-center xl:mb-8 mb-6 animate-float">
-            <div className="bg-white/10 backdrop-blur-md rounded-full p-4 border border-orange-500/30">
+            <div className="bg-white/10 backdrop-blur-md rounded-full p-4 border border-orange-400/40 shadow-[0_0_40px_rgba(251,146,60,0.25)]">
               <div className="xl:text-5xl text-3xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
                 Food Fusion
               </div>
@@ -177,7 +178,7 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* Description */}
-          <p className="text-lg md:text-xl text-gray-200 xl:mb-10 mb-6  max-w-2xl mx-auto ">
+          <p className="text-lg md:text-xl text-gray-100 xl:mb-10 mb-6 max-w-2xl mx-auto">
             Find the best hidden food gems, share your discoveries, and unlock
             premium spots with our community of food lovers around the world.
           </p>
@@ -192,7 +193,7 @@ const HeroSection: React.FC = () => {
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   router.push(
-                    `/allpost?search=${encodeURIComponent(searchTerm)}`
+                    `/allpost?search=${encodeURIComponent(searchTerm)}`,
                   );
                 }
               }}
@@ -204,7 +205,7 @@ const HeroSection: React.FC = () => {
               onClick={() => {
                 if (searchTerm.trim()) {
                   router.push(
-                    `/allpost?search=${encodeURIComponent(searchTerm)}`
+                    `/allpost?search=${encodeURIComponent(searchTerm)}`,
                   );
                 }
               }}

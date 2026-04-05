@@ -19,12 +19,16 @@ export default function AnimatedCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.08, duration: 0.45 }}
-      className="rounded-xl border border-slate-100 dark:border-slate-800 p-5 bg-white/60 dark:bg-[#071018]/60 shadow-sm"
+      className="rounded-2xl border border-orange-100 p-5 bg-gradient-to-br from-white via-white to-amber-50 shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-700 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800"
     >
       <div className="flex items-start gap-4">
-        <div className="text-2xl">{emoji}</div>
+        <div className="text-2xl rounded-xl bg-orange-100 px-3 py-2 dark:bg-slate-700">
+          {emoji}
+        </div>
         <div>
-          <h4 className="font-semibold">{title}</h4>
+          <h4 className="font-semibold text-slate-900 dark:text-slate-100">
+            {title}
+          </h4>
           <p className="text-sm text-slate-600 dark:text-slate-300 mt-2">
             {desc}
           </p>

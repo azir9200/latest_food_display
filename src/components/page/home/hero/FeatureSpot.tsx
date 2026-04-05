@@ -25,11 +25,11 @@ const FeaturedSpots: React.FC<FeaturedSpotsProps> = ({ user, posts }) => {
       .slice(0, 3) || [];
 
   return (
-    <div className="py-8">
+    <div className="py-8 md:py-10">
       {/* Regular Featured Spots Section */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-street-dark">
+          <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-orange-500 to-cyan-500 bg-clip-text text-transparent">
             Popular Food Spots
           </h2>
           <Link href={"/allpost"}>
@@ -67,15 +67,15 @@ const FeaturedSpots: React.FC<FeaturedSpotsProps> = ({ user, posts }) => {
 
       {/* Premium Spots Section */}
       <div
-        className={`relative overflow-hidden  bg-gray-100 rounded-xl p-6 md:p-10`}
+        className={`relative overflow-hidden rounded-2xl border border-amber-200/70 bg-gradient-to-br from-amber-50 via-orange-50 to-cyan-50 p-6 md:p-10 shadow-xl shadow-amber-100/40 dark:border-slate-700 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 dark:shadow-none`}
       >
         {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-40 h-40 bg-street-yellow/20 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-24 h-24 bg-street-orange/20 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+        <div className="absolute top-0 right-0 w-40 h-40 bg-yellow-300/35 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-24 h-24 bg-orange-300/35 rounded-full translate-y-1/2 -translate-x-1/2"></div>
 
         <div className="relative">
           <div className="flex items-center gap-3 mb-6">
-            <h2 className="text-2xl md:text-3xl font-bold text-street-dark">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100">
               Premium Spots
             </h2>
             <span className="bg-gradient-to-r from-yellow-300 to-yellow-500 text-black font-bold rounded-full shadow-md py-1 px-2">
@@ -84,7 +84,7 @@ const FeaturedSpots: React.FC<FeaturedSpotsProps> = ({ user, posts }) => {
             </span>
           </div>
 
-          <p className="text-gray-600 mb-8 max-w-2xl">
+          <p className="text-slate-600 dark:text-slate-300 mb-8 max-w-2xl">
             Discover exclusive, curated street food experiences that are only
             available to our premium members. Upgrade your account to unlock
             these hidden gems!

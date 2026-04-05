@@ -17,12 +17,14 @@ export default async function Home() {
   const res = await singleUserget();
   const Post = await getAllPostForGest();
   return (
-    <div className="min-h-screen flex flex-col">
-      <main className="flex-grow">
+    <div className="relative min-h-screen flex flex-col overflow-hidden bg-gradient-to-b from-amber-50 via-white to-cyan-50 dark:from-[#0b0f12] dark:via-[#0b0f12] dark:to-[#0f1720]">
+      <div className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 rounded-full bg-orange-300/25 blur-3xl dark:bg-orange-500/15" />
+      <div className="pointer-events-none absolute top-[38%] -right-20 h-80 w-80 rounded-full bg-cyan-300/25 blur-3xl dark:bg-cyan-500/15" />
+      <main className="relative flex-grow">
         <HeroSection />
         {/* <Hero /> */}
         <Categories />
-        <div className=" max-w-7xl md:mx-auto mx-2">
+        <div className="max-w-7xl md:mx-auto mx-2 md:px-4">
           <FeaturedSpots posts={Post?.data} user={res.data} />
           <Category />
 
